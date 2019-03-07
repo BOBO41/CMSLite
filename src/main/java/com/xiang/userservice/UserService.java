@@ -1,6 +1,6 @@
 package com.xiang.userservice;
 
-import com.xiang.bean.dto.User;
+import com.xiang.bean.po.User;
 
 /**
 * @author xiang

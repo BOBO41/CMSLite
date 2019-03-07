@@ -86,15 +86,15 @@ public class JwtAuthFilter extends AuthenticatingFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-		httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
+		httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
 		httpServletResponse.setCharacterEncoding("UTF-8");
-		httpServletResponse.setContentType("application/json");
-		Response res = new Response();
-		ErrorCodes errorCodes = ErrorCodes.FORBIDDEN;
-		res.setSuccess(false);
-		res.setErrorCode(errorCodes.getErrorCode());
-		res.setMessage(errorCodes.getErrorMessage());
-		httpServletResponse.getWriter().write(JSONObject.toJSON(res).toString());
+//		httpServletResponse.setContentType("application/json");
+//		Response res = new Response();
+//		ErrorCodes errorCodes = ErrorCodes.FORBIDDEN;
+//		res.setSuccess(false);
+//		res.setErrorCode(errorCodes.getErrorCode());
+//		res.setMessage(errorCodes.getErrorMessage());
+//		httpServletResponse.getWriter().write(JSONObject.toJSON(res).toString());
 		return false;
 	}
 

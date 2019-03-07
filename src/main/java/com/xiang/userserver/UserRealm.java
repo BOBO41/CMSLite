@@ -17,7 +17,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.util.ObjectUtils;
 
 import com.mysql.jdbc.StringUtils;
-import com.xiang.bean.dto.User;
+import com.xiang.bean.po.User;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.userservice.UserService;
@@ -48,7 +48,6 @@ public class UserRealm extends AuthorizingRealm {
 
 	@Override
 	public boolean supports(AuthenticationToken token) {
-		System.out.println("user supports");
 		return token instanceof UsernamePasswordToken;
 	}
 

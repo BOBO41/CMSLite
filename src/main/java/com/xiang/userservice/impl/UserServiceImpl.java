@@ -1,9 +1,11 @@
 package com.xiang.userservice.impl;
 
+import java.util.Date;
+
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.xiang.bean.dto.User;
+import com.xiang.bean.po.User;
 import com.xiang.userservice.UserService;
 
 /**
@@ -19,9 +21,11 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		User user = new User();
 		user.setUserName("admin");
+		user.setNick("管理员");
 		user.setPassword("e10adc3949ba59abbe56e057f20f883e");
 		user.setPermission("user");
 		user.setRoles("admin");
+		user.setAddTime(new Date());
 		return user;
 	}
 }

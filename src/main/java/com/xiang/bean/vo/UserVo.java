@@ -1,13 +1,21 @@
 package com.xiang.bean.vo;
+
 /**
 * @author xiang
 * @createDate 2018年12月20日 下午2:12:19
 */
-public class User{
+public class UserVo extends BaseVo{
 	private String userName;
-	private String roles;
+	private String[] roles;
 	private String permission;
 	private String avatar;
+	private String nick;
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public String getAvatar() {
 		return avatar;
 	}
@@ -26,10 +34,10 @@ public class User{
 	public void setPermission(String permission) {
 		this.permission = permission;
 	}
-	public String getRoles() {
+	public String[] getRoles() {
 		return roles;
 	}
-	public void setRoles(String roles) {
+	public void setRoles(String[] roles) {
 		this.roles = roles;
 	}
 	

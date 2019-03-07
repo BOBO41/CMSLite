@@ -16,7 +16,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.mysql.jdbc.StringUtils;
-import com.xiang.bean.dto.User;
+import com.xiang.bean.po.User;
 import com.xiang.userservice.UserService;
 
 /**

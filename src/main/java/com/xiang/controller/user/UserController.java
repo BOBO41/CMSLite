@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xiang.bean.dto.User;
+import com.xiang.bean.bo.UserBo;
+import com.xiang.bean.vo.UserVo;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.userserver.JWTAuth;
@@ -36,14 +38,14 @@ public class UserController {
 	@RequestMapping(value = "/login",method =RequestMethod.GET)
 	public Object login(@RequestParam("userName") String userName,
 			@RequestParam("password") String password) {
-		User user = new User();
+		UserBo user = new UserBo();
 		user.setUserName(userName);
 		user.setPassword(password);
 		return login(user);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Object login(@RequestBody User user) {
+	public Object login(@RequestBody UserBo user) {
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
 		try {
@@ -68,5 +70,15 @@ public class UserController {
 		}else {
 			return userServer.getUser(userName);
 		}
+	}
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public Object add(@RequestBody UserBo user) {
+		UserVo userVo = new UserVo();
+		BeanUtils.copyProperties(user, userVo);
+		return userVo;
+	}
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	public Object add(@RequestBody(required=false) Map<String,Object> querys) {
+		return userServer.queryList(querys);
 	}
 }
