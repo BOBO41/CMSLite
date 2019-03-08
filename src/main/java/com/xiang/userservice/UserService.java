@@ -8,4 +8,5 @@ import com.xiang.bean.po.User;
 */
 public interface UserService {
 	public User getUser(String userName);
+	public void saveUser(User user);
 }

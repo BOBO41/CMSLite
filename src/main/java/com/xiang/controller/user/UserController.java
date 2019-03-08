@@ -73,12 +73,23 @@ public class UserController {
 	}
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Object add(@RequestBody UserBo user) {
-		UserVo userVo = new UserVo();
-		BeanUtils.copyProperties(user, userVo);
-		return userVo;
+		return userServer.addUser(user);
+	}
+	@RequestMapping(value = "/del", method = RequestMethod.POST)
+	public Object del(@RequestBody long[] ids) {
+		return ErrorCodes.OK;
+	}
+	@RequestMapping(value = "/undel", method = RequestMethod.POST)
+	public Object unDel(@RequestBody long[] ids) {
+		return ErrorCodes.OK;
+	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public Object update(@RequestBody UserBo user) {
+		return ErrorCodes.OK;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Object add(@RequestBody(required=false) Map<String,Object> querys) {
+	public Object list(@RequestBody(required=false) Map<String,Object> querys) {
 		return userServer.queryList(querys);
 	}
+	
 }

@@ -2,10 +2,12 @@ package com.xiang.userservice.impl;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.xiang.bean.po.User;
+import com.xiang.inventoryserver.mapper.UserMapper;
 import com.xiang.userservice.UserService;
 
 /**
@@ -14,7 +16,8 @@ import com.xiang.userservice.UserService;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService{
-
+	@Autowired
+	private UserMapper userMapper;
 	@Override
 	@Cacheable(value = "userCache", sync = true, key="#userName")
 	public User getUser(String userName) {
@@ -24,8 +27,12 @@ public class UserServiceImpl implements UserService{
 		user.setNick("管理员");
 		user.setPassword("e10adc3949ba59abbe56e057f20f883e");
 		user.setPermission("user");
-		user.setRoles("admin");
+		user.setRoles("admin,user");
 		user.setAddTime(new Date());
 		return user;
+	}
+	@Override
+	public void saveUser(User user) {
+		userMapper.saveUser(user);
 	}
 }
