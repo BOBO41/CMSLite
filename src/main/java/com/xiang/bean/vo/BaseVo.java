@@ -3,13 +3,13 @@ package com.xiang.bean.vo;
 import java.util.Date;
 
 public class BaseVo {
-	private long id;
+	private Long id;
 	private Date addTime;
-	private boolean del;
-	public long getId() {
+	private Boolean del;
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Date getAddTime() {
@@ -18,10 +18,10 @@ public class BaseVo {
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
-	public boolean isDel() {
+	public Boolean getDel() {
 		return del;
 	}
-	public void setDel(boolean del) {
+	public void setDel(Boolean del) {
 		this.del = del;
 	}
 }

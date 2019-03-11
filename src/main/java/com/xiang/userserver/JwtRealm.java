@@ -57,10 +57,10 @@ public class JwtRealm extends AuthorizingRealm {
 			Set<String> roles = new HashSet<>(Arrays.asList(user.getRoles().split(",")));
 			simpleAuthorizationInfo.setRoles(roles);
 		}
-		if (!StringUtils.isNullOrEmpty(user.getPermission())) {
-			Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
-			simpleAuthorizationInfo.addStringPermissions(permission);
-		}
+//		if (!StringUtils.isNullOrEmpty(user.getPermission())) {
+//			Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
+//			simpleAuthorizationInfo.addStringPermissions(permission);
+//		}
 		return simpleAuthorizationInfo;
 	
 	}

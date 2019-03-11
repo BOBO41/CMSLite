@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.UserBo;
@@ -38,12 +39,6 @@ public class UserServerImpl implements UserServer{
 		User user=userService.getUser(userName);
 		return getUserVo(user);
 	}
-	@Override
-	public List<UserVo> getList(Map<String, Object> querys) {
-		List<UserVo> list=new ArrayList<>();
-		list.add(getUser("admin"));
-		return list;
-	}
 	private UserVo getUserVo(User user)
 	{
 		UserVo userVo = new UserVo();
@@ -59,16 +54,29 @@ public class UserServerImpl implements UserServer{
 		return user;
 	}
 	@Override
+	public List<UserVo> getList(Map<String, Object> querys) {
+		List<User> users=userService.getList(querys);
+		List<UserVo> list=new ArrayList<>();
+		if(!ObjectUtils.isEmpty(users))
+		{
+			for(User user : users)
+			{
+				list.add(getUserVo(user));
+			}
+		}
+		return list;
+	}
+	@Override
 	public BaseListVo<UserVo> queryList(Map<String, Object> querys) {
 		List<UserVo> list=getList(querys);
 		BaseListVo<UserVo> baseListVo=new BaseListVo<UserVo>();
 		baseListVo.setResult(list);
-		baseListVo.setTotal(10);
+		baseListVo.setTotal(userService.getCount(querys));
 		return baseListVo;
 	}
 	@Transactional
 	@Override
-	public UserVo addUser(UserBo userBo) {
+	public UserVo addUser(UserBo userBo){
 		try {
 			User user =getUser(userBo);
 			user.setPassword(DigestUtils.md5Hex(userBo.getPassword()));
@@ -82,6 +90,5 @@ public class UserServerImpl implements UserServer{
 			ex.printStackTrace();
 			throw new APIException(ErrorCodes.ERROR);
 		}
-		
 	}
 }

@@ -3,14 +3,14 @@ package com.xiang.bean.vo;
 import java.util.List;
 
 public class BaseListVo<E> {
-	private int total;
+	private Long total;
 	private int page=1;
 	private int limit=20;
 	private List<E> result;
-	public int getTotal() {
+	public Long getTotal() {
 		return total;
 	}
-	public void setTotal(int total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 	public int getPage() {

@@ -54,13 +54,22 @@
 		<property name="user" value="${jdbc.user.master}" />
 		<property name="password" value="${jdbc.password.master}" />
 	</bean>
+	
+
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  <property name="dataSource" ref="dataSource" />
+</bean>
+ <tx:annotation-driven transaction-manager="transactionManager"
+        proxy-target-class="true" />
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="typeHandlersPackage" value="com.xiang.mybatis.typehandler"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage"
-			value="com.xiang.inventoryserver.mapper" />
+			value="com.xiang.inventoryserver.exmapper,com.xiang.inventoryserver.mapper" />
 	</bean>
 	<!-- 开发生产环境配置 -->
 	<beans profile="development">
