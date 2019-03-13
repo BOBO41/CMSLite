@@ -84,7 +84,7 @@ public class UserServerImpl extends BaseServerImpl implements UserServer{
 	public UserVo addUser(UserBo userBo){
 		try {
 			User user =getUser(userBo);
-			if(!Objects.isNull(userService.getUser(user.getUserName())))
+			if(userService.existUser(userBo.getUserName()))
 			{
 				throw new APIException(ErrorCodes.USER_EXIST);
 			}

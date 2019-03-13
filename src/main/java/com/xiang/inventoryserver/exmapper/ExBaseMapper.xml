@@ -8,6 +8,7 @@
 		del = #{del,jdbcType=BIT},
 		</set>
 		<where>
+		id in
 			<foreach close=")" collection="ids" item="listItem" open="("
 				separator=",">
 				#{listItem,jdbcType=BIGINT}

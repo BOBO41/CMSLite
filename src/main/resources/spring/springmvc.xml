@@ -31,7 +31,7 @@
 			value="com.alibaba.fastjson.serializer.SerializerFeature.BrowserSecure"></property>
 	</bean>
 	<bean id="dcrdFastJsonConfig"
-		class="com.alibaba.fastjson.support.config.FastJsonConfig">
+		class="com.xiang.restserver.FastJsonConfigExt">
 		<property name="serializerFeatures">
 			<list>
 				<value>BrowserSecure</value>

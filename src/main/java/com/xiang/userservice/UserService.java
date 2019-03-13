@@ -10,6 +10,7 @@ import com.xiang.inventoryserver.service.BaseService;
 public interface UserService extends BaseService<User>{
 	public User getUser(Long id);
 	public User getUser(String userName);
+	public boolean existUser(String userName);
 	public void saveUser(User user);
 	public void update(User user);
 }

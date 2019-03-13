@@ -24,46 +24,46 @@ import com.xiang.userservice.UserService;
  * @createDate 2018年12月20日 下午2:18:51
  */
 @Service("userService")
-public class UserServiceImpl extends BaseServiceImpl<User> implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 	@Autowired
 	private UserMapper userMapper;
+
 	@Override
-	@Cacheable(value = "userCache", sync = true, key="#userName")
+	@Cacheable(value = "userCache", sync = true, key = "#userName")
 	public User getUser(String userName) {
-		UserExample userExample=new UserExample();
+		UserExample userExample = new UserExample();
 		userExample.createCriteria().andUserNameEqualTo(userName);
-		List<User> list=userMapper.selectByExample(userExample);
-		if(!ObjectUtils.isEmpty(list))
-		{
+		List<User> list = userMapper.selectByExample(userExample);
+		if (!ObjectUtils.isEmpty(list)) {
 			return list.get(0);
 		}
 		throw new APIException(ErrorCodes.USER_NO_EXIST);
 	}
+
 	@Override
 	public void saveUser(User user) {
 		userMapper.save(user);
 	}
+
 	@Override
 	public List<User> getList(Map<String, Object> querys) {
-		Page page=this.getPage(querys);
-		UserExample example=getUserExample(querys);
+		Page page = this.getPage(querys);
+		UserExample example = getUserExample(querys);
 		return userMapper.getList(example, page);
 	}
+
 	@Override
 	public Long getCount(Map<String, Object> querys) {
-		UserExample example=getUserExample(querys);
+		UserExample example = getUserExample(querys);
 		return userMapper.countByExample(example);
 	}
-	private UserExample getUserExample(Map<String, Object> querys)
-	{
-		if(!ObjectUtils.isEmpty(querys))
-		{
-			if(querys.containsKey("search"))
-			{
-				String userName=(String)querys.get("search");
-				if(!StringUtils.isEmpty(userName))
-				{
-					UserExample userExample=new UserExample();
+
+	private UserExample getUserExample(Map<String, Object> querys) {
+		if (!ObjectUtils.isEmpty(querys)) {
+			if (querys.containsKey("search")) {
+				String userName = (String) querys.get("search");
+				if (!StringUtils.isEmpty(userName)) {
+					UserExample userExample = new UserExample();
 					userExample.createCriteria().andUserNameEqualTo(userName);
 					return userExample;
 				}
@@ -71,15 +71,31 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		}
 		return null;
 	}
+
 	@Override
 	public void update(User user) {
 		userMapper.updateByPrimaryKeySelective(user);
 	}
+
 	@Override
 	public User getUser(Long id) {
-		User user=userMapper.selectByPrimaryKey(id);
-		if(Objects.isNull(user))
+		User user = userMapper.selectByPrimaryKey(id);
+		if (Objects.isNull(user))
 			throw new APIException(ErrorCodes.USER_NO_EXIST);
 		return user;
+	}
+
+	@Override
+	public boolean existUser(String userName) {
+		try {
+			getUser(userName);
+		} catch (APIException ex) {
+			if (ex.getErr() == ErrorCodes.USER_NO_EXIST) {
+				return false;
+			} else {
+				throw ex;
+			}
+		}
+		return true;
 	}
 }
