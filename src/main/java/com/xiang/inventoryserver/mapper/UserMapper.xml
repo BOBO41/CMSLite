@@ -85,12 +85,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.xiang.bean.po.UserExample">
-    delete from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
   <insert id="insertSelective" parameterType="com.xiang.bean.po.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">

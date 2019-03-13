@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xiang.bean.bo.UserBo;
 import com.xiang.bean.vo.UserVo;
+import com.xiang.bean.vo.XAuthToken;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
+import com.xiang.restserver.LoginToken;
 import com.xiang.userserver.JWTAuth;
 import com.xiang.userserver.UserServer;
 
@@ -51,8 +52,11 @@ public class UserController {
 		try {
 			subject.login(token);
 			if (subject.isAuthenticated()) {
+				UserVo userVo=userServer.getUser(user.getUserName());
 				Map<String, String> claims = new HashMap<String, String>();
-				claims.put(JWTAuth.USERNAME, user.getUserName());
+				claims.put(JWTAuth.USERNAME, userVo.getUserName());
+				claims.put(JWTAuth.USERID, userVo.getId().toString());
+				claims.put(JWTAuth.NICK, userVo.getNick());
 				return JWTAuth.createToken(claims);
 			}
 		} catch (Exception ex) {
@@ -76,20 +80,27 @@ public class UserController {
 		return userServer.addUser(user);
 	}
 	@RequestMapping(value = "/del", method = RequestMethod.POST)
-	public Object del(@RequestBody long[] ids) {
+	public Object del(@RequestBody Long[] ids) {
+		userServer.setDelById("user", ids, true);
 		return ErrorCodes.OK;
 	}
 	@RequestMapping(value = "/undel", method = RequestMethod.POST)
-	public Object unDel(@RequestBody long[] ids) {
+	public Object unDel(@RequestBody Long[] ids) {
+		userServer.setDelById("user", ids, false);
 		return ErrorCodes.OK;
 	}
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Object update(@RequestBody UserBo user) {
+		userServer.updateUser(user);
 		return ErrorCodes.OK;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public Object list(@RequestBody(required=false) Map<String,Object> querys) {
 		return userServer.queryList(querys);
 	}
-	
+	@RequestMapping(value = "/changepassword",method =RequestMethod.POST)
+	public Object changePassword(@LoginToken XAuthToken loginToken, @RequestBody(required=true) Map<String,Object> map) {
+		userServer.changePassword(loginToken.getId(), (String)map.get("originPassword"), (String)map.get("password"));
+		return ErrorCodes.OK;
+	}
 }

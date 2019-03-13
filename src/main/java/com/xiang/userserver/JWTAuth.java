@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import com.auth0.jwt.JWT;
@@ -26,6 +27,8 @@ public class JWTAuth {
 	private static final String ISSUER = "com.auth0";
 	public static final String USERNAME="username";
 	public static final String TOKENHEADER="XAuthToken";
+	public static final String USERID="id";
+	public static final String NICK="nick";
 	/**
 	 * token过期时间，默认7天，单位天
 	 */
@@ -49,14 +52,26 @@ public class JWTAuth {
 					.withExpiresAt(expireAt);
 			claims.forEach(builder::withClaim);
 			String token=builder.sign(algorithm);
-			XAuthToken xAuthToken=new XAuthToken();
+			XAuthToken xAuthToken=getXAuthToken(claims);
 			xAuthToken.setExpireAt(expireAt);
 			xAuthToken.setToken(token);
-			xAuthToken.setUserName(claims.get(USERNAME));
 			return xAuthToken;
 		} catch (IllegalArgumentException e) {
 			throw new APIException(ErrorCodes.createErrorCode("生成token失败"));
 		}
+	}
+	public static XAuthToken getXAuthToken(Map<String, String> claims)
+	{
+		XAuthToken xAuthToken=new XAuthToken();
+		String id=claims.get(USERID);
+		if(!StringUtils.isEmpty(id))
+		{
+			xAuthToken.setId(Long.parseLong(id));
+		}
+		xAuthToken.setNick(claims.get(NICK));
+		xAuthToken.setToken(claims.get(TOKENHEADER));
+		xAuthToken.setUserName(claims.get(USERNAME));
+		return xAuthToken;
 	}
 	public static String refreshToken(String token) throws APIException {
 		return refreshToken(verifyToken(token));

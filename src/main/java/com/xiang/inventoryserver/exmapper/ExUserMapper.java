@@ -9,6 +9,6 @@ import com.xiang.bean.po.UserExample;
 import com.xiang.restserver.Page;
 
 public interface ExUserMapper {
-	int save(User record);
-	List<User> getList(@Param("example") UserExample example,@Param("page")Page page);
+	public int save(User record);
+	public List<User> getList(@Param("example") UserExample example,@Param("page")Page page);
 }

@@ -2,6 +2,7 @@ package com.xiang.userservice.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 			}
 		}
 		return null;
+	}
+	@Override
+	public void update(User user) {
+		userMapper.updateByPrimaryKeySelective(user);
+	}
+	@Override
+	public User getUser(Long id) {
+		User user=userMapper.selectByPrimaryKey(id);
+		if(Objects.isNull(user))
+			throw new APIException(ErrorCodes.USER_NO_EXIST);
+		return user;
 	}
 }

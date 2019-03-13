@@ -12,7 +12,7 @@ public class JWTCredentialsMatcher implements CredentialsMatcher{
 	public boolean doCredentialsMatch(AuthenticationToken authenticationToken, AuthenticationInfo authenticationInfo) {
 		String token = (String) authenticationToken.getCredentials();
 			Map<String, String> userMap = JWTAuth.verifyToken(token);
-			if (userMap.containsKey(JWTAuth.USERNAME)) {
+			if (userMap.containsKey(JWTAuth.USERNAME) && userMap.containsKey(JWTAuth.USERID)) {
 				return true;
 			}
         return false;

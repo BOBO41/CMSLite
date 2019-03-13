@@ -4,7 +4,6 @@ import com.xiang.bean.po.User;
 import com.xiang.bean.po.UserExample;
 import com.xiang.inventoryserver.exmapper.ExUserMapper;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
@@ -13,14 +12,6 @@ import org.apache.ibatis.annotations.Update;
 
 public interface UserMapper extends ExUserMapper {
     long countByExample(UserExample example);
-
-    int deleteByExample(UserExample example);
-
-    @Delete({
-        "delete from user",
-        "where id = #{id,jdbcType=BIGINT}"
-    })
-    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into user (id, user_name, ",

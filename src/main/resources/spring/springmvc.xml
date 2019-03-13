@@ -53,6 +53,9 @@
 				<property name="fastJsonConfig" ref="dcrdFastJsonConfig"></property>
 			</bean>
 		</mvc:message-converters>
+		 <mvc:argument-resolvers>
+        <bean class="com.xiang.restserver.LoginTokenArgumentResolver"/>
+      </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<bean id="reportViewResolver"
 		class="org.springframework.web.servlet.view.XmlViewResolver">
