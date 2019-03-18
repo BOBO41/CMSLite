@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import org.springframework.util.ObjectUtils;
 
 import com.xiang.bean.po.User;
 import com.xiang.bean.po.UserExample;
+import com.xiang.bean.po.UserExample.Criteria;
 import com.xiang.inventoryserver.mapper.UserMapper;
 import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
 import com.xiang.restserver.APIException;
@@ -48,26 +48,22 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	@Override
 	public List<User> getList(Map<String, Object> querys) {
 		Page page = this.getPage(querys);
-		UserExample example = getUserExample(querys);
+		UserExample example = getExample(querys);
 		return userMapper.getList(example, page);
 	}
 
 	@Override
 	public Long getCount(Map<String, Object> querys) {
-		UserExample example = getUserExample(querys);
+		UserExample example = getExample(querys);
 		return userMapper.countByExample(example);
 	}
-
-	private UserExample getUserExample(Map<String, Object> querys) {
+	
+	private UserExample getExample(Map<String, Object> querys){
 		if (!ObjectUtils.isEmpty(querys)) {
-			if (querys.containsKey("search")) {
-				String userName = (String) querys.get("search");
-				if (!StringUtils.isEmpty(userName)) {
-					UserExample userExample = new UserExample();
-					userExample.createCriteria().andUserNameEqualTo(userName);
-					return userExample;
-				}
-			}
+			UserExample example = new UserExample();
+			Criteria criteria = example.createCriteria();
+			setCriteria(criteria,querys);
+			return example;
 		}
 		return null;
 	}

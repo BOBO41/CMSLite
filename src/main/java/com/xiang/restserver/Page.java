@@ -6,8 +6,9 @@ public class Page {
 	public final static String PAGE="page";
 	public final static String LIMIT="limit";
 	public final static String SORT="sort";
-	private Integer cursor=0;
-	private Integer limit=20;
+	private Integer page;
+	private Integer cursor;
+	private Integer limit;
 	private String sort;
 	public Integer getCursor() {
 		return cursor;
@@ -23,6 +24,12 @@ public class Page {
 	}
 	public String getSort() {
 		return sort;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
 	}
 	public void setSort(String sort) {
 		this.sort = sort;

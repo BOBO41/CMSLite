@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -23,6 +22,7 @@ import com.xiang.bean.vo.UserVo;
 import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
+import com.xiang.restserver.Page;
 import com.xiang.userserver.UserServer;
 import com.xiang.userservice.UserService;
 
@@ -74,9 +74,13 @@ public class UserServerImpl extends BaseServerImpl implements UserServer{
 	@Override
 	public BaseListVo<UserVo> queryList(Map<String, Object> querys) {
 		List<UserVo> list=getList(querys);
+		Page page=userService.getPage(querys);
 		BaseListVo<UserVo> baseListVo=new BaseListVo<UserVo>();
+		baseListVo.setPage(page);
 		baseListVo.setResult(list);
-		baseListVo.setTotal(userService.getCount(querys));
+		if(!ObjectUtils.isEmpty(list)) {
+			baseListVo.setTotal(userService.getCount(querys).intValue());
+		}
 		return baseListVo;
 	}
 	@Transactional

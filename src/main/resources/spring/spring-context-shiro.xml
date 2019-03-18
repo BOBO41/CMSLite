@@ -49,6 +49,7 @@
 			<value>
 				/user/login = anon
 				/report/** = anon
+				/catalog/** = roles["admin","user"]
 				/user/** = roles["admin","user"]
 				/** = authc
 			</value>

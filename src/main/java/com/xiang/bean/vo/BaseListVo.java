@@ -1,16 +1,19 @@
 package com.xiang.bean.vo;
 
 import java.util.List;
+import java.util.Objects;
+
+import com.xiang.restserver.Page;
 
 public class BaseListVo<E> {
-	private Long total;
+	private int total=0;
 	private int page=1;
 	private int limit=20;
 	private List<E> result;
-	public Long getTotal() {
+	public int getTotal() {
 		return total;
 	}
-	public void setTotal(Long total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 	public int getPage() {
@@ -30,5 +33,15 @@ public class BaseListVo<E> {
 	}
 	public void setResult(List<E> result) {
 		this.result = result;
+	}
+	public void setPage(Page pageBo) {
+		if(!Objects.isNull(pageBo)) {
+			if(!Objects.isNull(pageBo.getLimit())) {
+				this.limit=pageBo.getLimit();
+			}
+			if(!Objects.isNull(pageBo.getPage())) {
+				this.page=pageBo.getPage();
+			}
+		}
 	}
 }
