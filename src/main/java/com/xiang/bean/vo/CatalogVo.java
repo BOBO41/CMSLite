@@ -13,9 +13,9 @@ public class CatalogVo extends BaseVo{
 	private Long leftId;
 	private Long rightId;
 	private List<CatalogVo> children;
-	public CatalogVo()
-	{
-		children=new ArrayList<>();
+	
+	public void setChildren(List<CatalogVo> children) {
+		this.children = children;
 	}
 	public List<CatalogVo> getChildren() {
 		return children;

@@ -62,7 +62,11 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 				if (leftVo.getParentId().compareTo(0l) == 0) {
 					children = result;
 				} else {
-					children = map.get(leftVo.getParentId()).getChildren();
+					CatalogVo vo = map.get(leftVo.getParentId());
+					if (Objects.isNull(vo.getChildren())) {
+						vo.setChildren(new ArrayList<CatalogVo>());
+					}
+					children = vo.getChildren();
 				}
 				children.add(leftVo);
 				while (leftVo.getRightId().compareTo(0l) != 0) {
@@ -155,24 +159,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 			}
 			if (del) {
 				// 删除操作
-				if (catalog.getLeftId().compareTo(0l) != 0) {
-					// 将左节点的右指针指到当前节点右指针
-					if (catalogService.updateRight(catalog.getLeftId(), catalog.getId(), catalog.getRightId()) == 0) {
-						Catalog leftNode = catalogService.get(catalog.getLeftId());
-						if (leftNode.getRightId().compareTo(catalog.getRightId()) != 0) {
-							throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
-						}
-					}
-				}
-				if (catalog.getRightId().compareTo(0l) != 0) {
-					// 将右节点的左指针指到当前节点左指针
-					if (catalogService.updateLeft(catalog.getRightId(), catalog.getId(), catalog.getLeftId()) == 0) {
-						Catalog rightNode = catalogService.get(catalog.getRightId());
-						if (rightNode.getLeftId().compareTo(catalog.getLeftId()) != 0) {
-							throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
-						}
-					}
-				}
+				deleteMiddle(null, catalog, null);
 			}
 		}
 		catalogService.setDelById("catalog", ids, del);
@@ -212,9 +199,9 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 							}
 						}
 					}
-					
-					insertMiddle(leftNode,catalog,parent);
-					Catalog updateCatalog=new Catalog();
+
+					insertMiddle(leftNode, catalog, parent);
+					Catalog updateCatalog = new Catalog();
 					updateCatalog.setId(catalog.getId());
 					updateCatalog.setParentId(parent.getParentId());
 					catalogService.update(updateCatalog);
@@ -231,6 +218,38 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 					rightNode = catalogService.get(catalog.getRightId());
 				}
 				moveLeft(leftNode, catalog, rightNode);
+			}
+		}
+	}
+
+	/**
+	 * 删除中间节点
+	 * 
+	 * @param leftNode
+	 * @param middleNode
+	 * @param rightNode
+	 */
+	private void deleteMiddle(Catalog leftNode, Catalog middleNode, Catalog rightNode) {
+		if (middleNode.getLeftId().compareTo(0l) != 0) {
+			// 将左节点的右指针指到当前节点右指针
+			if (catalogService.updateRight(middleNode.getLeftId(), middleNode.getId(), middleNode.getRightId()) == 0) {
+				if (Objects.isNull(leftNode)) {
+					leftNode = catalogService.get(middleNode.getLeftId());
+				}
+				if (leftNode.getRightId().compareTo(middleNode.getRightId()) != 0) {
+					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+				}
+			}
+		}
+		if (middleNode.getRightId().compareTo(0l) != 0) {
+			// 将右节点的左指针指到当前节点左指针
+			if (catalogService.updateLeft(middleNode.getRightId(), middleNode.getId(), middleNode.getLeftId()) == 0) {
+				if (Objects.isNull(rightNode)) {
+					rightNode = catalogService.get(middleNode.getRightId());
+				}
+				if (rightNode.getLeftId().compareTo(middleNode.getLeftId()) != 0) {
+					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+				}
 			}
 		}
 	}
@@ -345,7 +364,78 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 	@Transactional
 	@Override
 	public void down(Long id) {
-		// TODO Auto-generated method stub
+		if (!Objects.isNull(id)) {
+			Catalog catalog = catalogService.get(id);
+			if (catalog.getDel()) {
+				throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+			}
+			// 底部节点
+			if (catalog.getRightId().compareTo(0l) == 0) {
+				if (catalog.getParentId().compareTo(0l) == 0) {
+					throw new APIException(ErrorCodes.CATALOG_SORT_BOTTOM);
+				}
+				// 往下一层节点排序
+				else {
+					Catalog parent = catalogService.get(catalog.getParentId());
+					Catalog rightNode = null;
+					if (parent.getRightId().compareTo(0l) != 0) {
+						rightNode = catalogService.get(parent.getRightId());
+					}
+					// 将当前节点的左节点的右指针更新为0
+					if (catalog.getLeftId().compareTo(0l) != 0) {
+						if (catalogService.updateRight(catalog.getLeftId(), catalog.getId(), 0l) == 0) {
+							Catalog node = catalogService.get(catalog.getLeftId());
+							if (node.getRightId().compareTo(0l) != 0) {
+								throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+							}
+						}
+					}
+					insertMiddle(parent, catalog, rightNode);
+					Catalog updateCatalog = new Catalog();
+					updateCatalog.setId(catalog.getId());
+					updateCatalog.setParentId(parent.getParentId());
+					catalogService.update(updateCatalog);
+				}
+			}
+			// 兄弟节点
+			else {
+				Catalog middleNode = null;
+				if (catalog.getRightId().compareTo(0l) != 0) {
+					middleNode = catalogService.get(catalog.getRightId());
+				}
+				Catalog rightNode = null;
+				if (!Objects.isNull(middleNode) && middleNode.getRightId().compareTo(0l) != 0) {
+					rightNode = catalogService.get(middleNode.getRightId());
+				}
+				moveLeft(catalog, middleNode, rightNode);
+			}
+		}
 
+	}
+
+	@Transactional
+	@Override
+	public CatalogVo update(CatalogBo bo) {
+		Catalog catalog = this.getPo(bo);
+		catalog.setLeftId(null);
+		catalog.setRightId(null);
+		if (!Objects.isNull(catalog.getParentId())) {
+			Catalog orignCatalog = catalogService.get(catalog.getId());
+			if (orignCatalog.getParentId().compareTo(catalog.getParentId()) != 0) {
+			if (!ObjectUtils.isEmpty(bo.getParentIds())) {
+				for (int i = 0; i < bo.getParentIds().length; i++) {
+					Long p = bo.getParentIds()[i];
+					if (orignCatalog.getParentId().compareTo(p) == 0) {
+						throw new APIException(ErrorCodes.CATALOG_UPDATE_PARENT);
+					}
+				}
+			}
+				this.deleteMiddle(null, orignCatalog, null);
+				Catalog last = catalogService.getLastChildren(catalog.getParentId());
+				this.insertMiddle(last, orignCatalog, null);
+			}
+		}
+		catalogService.update(catalog);
+		return this.getVo(catalog);
 	}
 }
