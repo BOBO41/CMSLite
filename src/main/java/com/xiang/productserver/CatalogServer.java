@@ -9,6 +9,7 @@ import com.xiang.inventoryserver.server.BaseServer;
 
 public interface CatalogServer extends BaseServer{
 	public List<CatalogVo> getCatologTree(Map<String,Object> querys);
+	public List<CatalogVo> getCatologTree();
 	public CatalogVo add(CatalogBo bo);
 	public CatalogVo update(CatalogBo bo);
 	public void setDelById(Long[] ids, Boolean del);

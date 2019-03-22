@@ -9,6 +9,8 @@ public class Product {
 
     private String name;
 
+    private String spec;
+
     private String barcode;
 
     private String imgUrl;
@@ -41,6 +43,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public String getBarcode() {

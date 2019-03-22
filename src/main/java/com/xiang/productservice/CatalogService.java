@@ -18,4 +18,5 @@ public interface CatalogService extends BaseService<Catalog>{
 	public Catalog getLastChildren(Long parentId);
 	public int updateRight(Long id,Long orignRightId,Long rightId);
 	public int updateLeft(Long id,Long orignLeftId,Long leftId);
+	public List<Long> getTreeIds(Long id);
 }

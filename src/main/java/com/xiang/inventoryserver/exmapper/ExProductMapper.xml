@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiang.inventoryserver.exmapper.ExCatalogMapper">
-  <resultMap id="BaseResultMap" type="com.xiang.bean.po.Catalog">
+<mapper namespace="com.xiang.inventoryserver.exmapper.ExProductMapper">
+  <resultMap id="BaseResultMap" type="com.xiang.bean.po.Product">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
- <result column="parent_id" jdbcType="BIGINT" property="parentId" />
- <result column="left_id" jdbcType="BIGINT" property="leftId" />
- <result column="right_id" jdbcType="BIGINT" property="rightId" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
   </resultMap>
   <sql id="Base_Column_List">
-   id, name, parent_id,left_id,right_id, del, add_time
+  id, code, name, spec, barcode, img_url, catalog_id, del, add_time
   </sql>
    <sql id="Page_Clause">
    limit ${page.cursor},${page.limit}
@@ -45,15 +47,18 @@
       </foreach>
     </where>
   </sql>
-  <insert id="save" parameterType="com.xiang.bean.po.Catalog">
-    insert into catalog (
+  <insert id="save" parameterType="com.xiang.bean.po.Product">
+    insert into product (
      <include refid="Base_Column_List" />
       )
-    values (#{id,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+    values (
+    #{id,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+    #{code,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
     #{name,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
-      #{parentId,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
-      #{leftId,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
-      #{rightId,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+    #{spec,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+   #{barcode,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+   #{imgUrl,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+     #{catalogId,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
       #{del,jdbcType=BIT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
       #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
       )
@@ -64,7 +69,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from catalog
+    from product
     <if test="example != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -76,22 +81,5 @@
      <include refid="Page_Clause" />
      </if>
     </if>
-  </select>
-  <select id="getChilds" resultMap="BaseResultMap" resultType="long">
-  select 
-   <include refid="Base_Column_List" />
-   from catalog where del=#{del,jdbcType=BIT} and parent_id in 
-  <foreach close=")" collection="ids" item="listItem" open="(" separator=",">
-                    ${listItem}
-   </foreach>
-  </select>
-  <update id="updateRight"  parameterType="map">
-  update catalog set right_id=#{rightId,jdbcType=BIGINT} where id=#{id,jdbcType=BIGINT} and right_id=#{orignRightId,jdbcType=BIGINT}
-  </update>
-  <update id="updateLeft"  parameterType="map">
-  update catalog set left_id=#{leftId,jdbcType=BIGINT} where id=#{id,jdbcType=BIGINT} and left_id=#{orignLeftId,jdbcType=BIGINT}
-  </update>
-   <select id="getParentId" resultType="long" parameterType="java.lang.Long">
-  select parent_id from catalog where id=#{id,jdbcType=BIGINT} 
   </select>
 </mapper>

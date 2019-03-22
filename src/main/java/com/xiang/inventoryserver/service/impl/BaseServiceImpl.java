@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.google.common.base.CaseFormat;
-import com.xiang.bean.po.CatalogExample.Criteria;
+import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.inventoryserver.exmapper.ExBaseMapper;
 import com.xiang.inventoryserver.service.BaseService;
 import com.xiang.restserver.APIException;
@@ -77,7 +77,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		try {
 			for (Map.Entry<String, Object> entry : querys.entrySet()) {
 				String key = entry.getKey();
-				if (!Page.LIMIT.equals(key) && !Page.PAGE.equals(key) && !Page.SORT.equals(key)) {
+				if (!CriteriaIgnoreKey.contains(key)) {
 					Object value = entry.getValue();
 					if (Objects.isNull(value)) {
 						MethodUtils.invokeMethod(criteria, key, value);

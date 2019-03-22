@@ -1,8 +1,11 @@
 package com.xiang.productservice.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,5 +106,17 @@ public class CatalogServiceImpl extends BaseServiceImpl<Catalog> implements Cata
 	@Override
 	public int updateLeft(Long id, Long orignLeftId, Long leftId) {
 		return catalogMapper.updateLeft( id,  orignLeftId,  leftId);
+	}
+	@Override
+	public List<Long> getTreeIds(Long id) {
+		List<Long> list=new ArrayList<>();
+		list.add(id);
+		Long parentId=catalogMapper.getParentId(id);
+		while(!Objects.isNull(parentId) && parentId.compareTo(0l)!=0) {
+			list.add(parentId);
+			parentId=catalogMapper.getParentId(parentId);
+		}
+		Collections.reverse(list);
+		return list;
 	}
 }

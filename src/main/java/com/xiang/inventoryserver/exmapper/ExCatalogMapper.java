@@ -14,4 +14,5 @@ public interface ExCatalogMapper {
 	public List<Catalog> getChilds(@Param("ids")Long[] ids,@Param("del")Boolean del);
 	public int updateRight(@Param("id")Long id,@Param("orignRightId")Long orignRightId,@Param("rightId")Long rightId);
 	public int updateLeft(@Param("id")Long id,@Param("orignLeftId")Long orignLeftId,@Param("leftId")Long leftId);
+	public Long getParentId(@Param("id")Long id);
 }

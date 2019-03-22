@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.inventoryserver.exmapper.ExProductExMapper">
+<resultMap id="BaseResultMap" type="com.xiang.bean.po.ProductEx">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="img_url_a" jdbcType="VARCHAR" property="imgUrlA" />
+    <result column="img_url_b" jdbcType="VARCHAR" property="imgUrlB" />
+    <result column="img_url_c" jdbcType="VARCHAR" property="imgUrlC" />
+    <result column="del" jdbcType="BIT" property="del" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+  id, content, img_url_a, img_url_b, img_url_c, del, add_time
+  </sql>
+  <insert id="save" parameterType="com.xiang.bean.po.ProductEx">
+    insert into product_ex (
+     <include refid="Base_Column_List" />
+      )
+    values (
+   #{id,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+   #{content,jdbcType=LONGVARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+   #{imgUrlA,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+   #{imgUrlB,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+   #{imgUrlC,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+   #{del,jdbcType=BIT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+   #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
+      )
+  </insert>
+</mapper>

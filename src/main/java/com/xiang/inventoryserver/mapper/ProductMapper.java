@@ -1,13 +1,15 @@
 package com.xiang.inventoryserver.mapper;
 
-import com.xiang.bean.po.Product;
-import com.xiang.bean.po.ProductExample;
-import com.xiang.inventoryserver.exmapper.ExProductMapper;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.xiang.bean.po.Product;
+import com.xiang.bean.po.ProductExample;
+import com.xiang.inventoryserver.exmapper.ExProductMapper;
 
 public interface ProductMapper extends ExProductMapper {
     long countByExample(ProductExample example);
@@ -16,7 +18,7 @@ public interface ProductMapper extends ExProductMapper {
 
     @Select({
         "select",
-        "id, code, name, barcode, img_url, catalog_id, del, add_time",
+        "id, code, name, spec, barcode, img_url, catalog_id, del, add_time",
         "from product",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -33,6 +35,7 @@ public interface ProductMapper extends ExProductMapper {
         "update product",
         "set code = #{code,jdbcType=VARCHAR},",
           "name = #{name,jdbcType=VARCHAR},",
+          "spec = #{spec,jdbcType=VARCHAR},",
           "barcode = #{barcode,jdbcType=VARCHAR},",
           "img_url = #{imgUrl,jdbcType=VARCHAR},",
           "catalog_id = #{catalogId,jdbcType=BIGINT},",

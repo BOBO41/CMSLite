@@ -47,8 +47,10 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="filterChainDefinitions">
 			<value>
+			    /resources/** = anon
 				/user/login = anon
 				/report/** = anon
+				/upload/** = anon
 				/catalog/** = roles["admin","user"]
 				/user/** = roles["admin","user"]
 				/product/** = roles["admin","user"]

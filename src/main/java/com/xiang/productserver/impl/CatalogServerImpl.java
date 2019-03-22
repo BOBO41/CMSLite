@@ -18,6 +18,7 @@ import org.springframework.util.ObjectUtils;
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.CatalogBo;
 import com.xiang.bean.po.Catalog;
+import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.bean.vo.CatalogVo;
 import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.productserver.CatalogServer;
@@ -39,13 +40,21 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 	@Override
 	public List<CatalogVo> getCatologTree(Map<String, Object> querys) {
 		List<CatalogVo> result = new ArrayList<CatalogVo>();
+		boolean noTop=false;
+		if(!ObjectUtils.isEmpty(querys) && querys.containsKey(CriteriaIgnoreKey.CATALOGNOTOP)) {
+			noTop=(boolean)querys.get(CriteriaIgnoreKey.CATALOGNOTOP);
+		}
+		if(!noTop) {
 		CatalogVo top = new CatalogVo();
 		top.setDel(false);
+		top.setLeftId(0l);
+		top.setRightId(0l);
 		top.setAddTime(new Date());
 		top.setId(0l);
 		top.setName("顶级分类");
 		top.setParentId(0l);
 		result.add(top);
+		}
 		List<Catalog> list = catalogService.getList(querys);
 		if (!ObjectUtils.isEmpty(list)) {
 			Map<Long, CatalogVo> map = new HashMap<>(list.size());
@@ -437,5 +446,13 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 		}
 		catalogService.update(catalog);
 		return this.getVo(catalog);
+	}
+
+	@Override
+	public List<CatalogVo> getCatologTree() {
+		Map<String, Object>  querys=new HashMap<String,Object>();
+		querys.put("andDelEqualTo", false);
+		querys.put(CriteriaIgnoreKey.CATALOGNOTOP, true);
+		return getCatologTree(querys);
 	}
 }

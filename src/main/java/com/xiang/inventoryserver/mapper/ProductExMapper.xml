@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiang.inventoryserver.mapper.ProductMapper">
-  <resultMap id="BaseResultMap" type="com.xiang.bean.po.Product">
+<mapper namespace="com.xiang.inventoryserver.mapper.ProductExMapper">
+  <resultMap id="BaseResultMap" type="com.xiang.bean.po.ProductEx">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="spec" jdbcType="VARCHAR" property="spec" />
-    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
-    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
-    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
+    <result column="img_url_a" jdbcType="VARCHAR" property="imgUrlA" />
+    <result column="img_url_b" jdbcType="VARCHAR" property="imgUrlB" />
+    <result column="img_url_c" jdbcType="VARCHAR" property="imgUrlC" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xiang.bean.po.ProductEx">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,15 +71,20 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, code, name, spec, barcode, img_url, catalog_id, del, add_time
+    id, img_url_a, img_url_b, img_url_c, del, add_time
   </sql>
-  <select id="selectByExample" parameterType="com.xiang.bean.po.ProductExample" resultMap="BaseResultMap">
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.xiang.bean.po.ProductExExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from product
+    ,
+    <include refid="Blob_Column_List" />
+    from product_ex
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,35 +92,40 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="countByExample" parameterType="com.xiang.bean.po.ProductExample" resultType="java.lang.Long">
-    select count(*) from product
+  <select id="selectByExample" parameterType="com.xiang.bean.po.ProductExExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_ex
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="countByExample" parameterType="com.xiang.bean.po.ProductExExample" resultType="java.lang.Long">
+    select count(*) from product_ex
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update product
+    update product_ex
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+      <if test="record.imgUrlA != null">
+        img_url_a = #{record.imgUrlA,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.imgUrlB != null">
+        img_url_b = #{record.imgUrlB,jdbcType=VARCHAR},
       </if>
-      <if test="record.spec != null">
-        spec = #{record.spec,jdbcType=VARCHAR},
-      </if>
-      <if test="record.barcode != null">
-        barcode = #{record.barcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.imgUrl != null">
-        img_url = #{record.imgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.catalogId != null">
-        catalog_id = #{record.catalogId,jdbcType=BIGINT},
+      <if test="record.imgUrlC != null">
+        img_url_c = #{record.imgUrlC,jdbcType=VARCHAR},
       </if>
       <if test="record.del != null">
         del = #{record.del,jdbcType=BIT},
@@ -123,52 +133,59 @@
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
-    update product
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update product_ex
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      spec = #{record.spec,jdbcType=VARCHAR},
-      barcode = #{record.barcode,jdbcType=VARCHAR},
-      img_url = #{record.imgUrl,jdbcType=VARCHAR},
-      catalog_id = #{record.catalogId,jdbcType=BIGINT},
+      img_url_a = #{record.imgUrlA,jdbcType=VARCHAR},
+      img_url_b = #{record.imgUrlB,jdbcType=VARCHAR},
+      img_url_c = #{record.imgUrlC,jdbcType=VARCHAR},
+      del = #{record.del,jdbcType=BIT},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_ex
+    set id = #{record.id,jdbcType=BIGINT},
+      img_url_a = #{record.imgUrlA,jdbcType=VARCHAR},
+      img_url_b = #{record.imgUrlB,jdbcType=VARCHAR},
+      img_url_c = #{record.imgUrlC,jdbcType=VARCHAR},
       del = #{record.del,jdbcType=BIT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xiang.bean.po.Product">
-    update product
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiang.bean.po.ProductEx">
+    update product_ex
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="imgUrlA != null">
+        img_url_a = #{imgUrlA,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="imgUrlB != null">
+        img_url_b = #{imgUrlB,jdbcType=VARCHAR},
       </if>
-      <if test="spec != null">
-        spec = #{spec,jdbcType=VARCHAR},
-      </if>
-      <if test="barcode != null">
-        barcode = #{barcode,jdbcType=VARCHAR},
-      </if>
-      <if test="imgUrl != null">
-        img_url = #{imgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="catalogId != null">
-        catalog_id = #{catalogId,jdbcType=BIGINT},
+      <if test="imgUrlC != null">
+        img_url_c = #{imgUrlC,jdbcType=VARCHAR},
       </if>
       <if test="del != null">
         del = #{del,jdbcType=BIT},
       </if>
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
