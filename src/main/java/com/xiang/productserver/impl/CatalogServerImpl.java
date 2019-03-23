@@ -164,7 +164,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 		for (Long id : ids) {
 			Catalog catalog = catalogService.get(id);
 			if (catalog.getDel().compareTo(del) == 0) {
-				throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+				throw new APIException(ErrorCodes.SORT_ERROR);
 			}
 			if (del) {
 				// 删除操作
@@ -185,12 +185,12 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 		if (!Objects.isNull(id)) {
 			Catalog catalog = catalogService.get(id);
 			if (catalog.getDel()) {
-				throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+				throw new APIException(ErrorCodes.SORT_ERROR);
 			}
 			// 顶部节点
 			if (catalog.getLeftId().compareTo(0l) == 0) {
 				if (catalog.getParentId().compareTo(0l) == 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_TOP);
+					throw new APIException(ErrorCodes.SORT_TOP);
 				}
 				// 往上一层节点排序
 				else {
@@ -204,7 +204,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 						if (catalogService.updateLeft(catalog.getRightId(), catalog.getId(), 0l) == 0) {
 							Catalog node = catalogService.get(catalog.getRightId());
 							if (node.getLeftId().compareTo(0l) != 0) {
-								throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+								throw new APIException(ErrorCodes.SORT_ERROR);
 							}
 						}
 					}
@@ -246,7 +246,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 					leftNode = catalogService.get(middleNode.getLeftId());
 				}
 				if (leftNode.getRightId().compareTo(middleNode.getRightId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		}
@@ -257,7 +257,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 					rightNode = catalogService.get(middleNode.getRightId());
 				}
 				if (rightNode.getLeftId().compareTo(middleNode.getLeftId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		}
@@ -275,20 +275,20 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 			// 将左节点的右指针指到当前节点
 			if (catalogService.updateRight(leftNode.getId(), leftNode.getRightId(), middleNode.getId()) == 0) {
 				if (leftNode.getRightId().compareTo(middleNode.getId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 			// 将节点的左指针指到左节点
 			if (catalogService.updateLeft(middleNode.getId(), middleNode.getLeftId(), leftNode.getId()) == 0) {
 				if (middleNode.getLeftId().compareTo(leftNode.getId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		} else {
 			// 将节点的左指针指到0
 			if (catalogService.updateLeft(middleNode.getId(), middleNode.getLeftId(), 0l) == 0) {
 				if (middleNode.getLeftId().compareTo(0l) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		}
@@ -296,20 +296,20 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 			// 将右节点的左指针指到当前节点
 			if (catalogService.updateLeft(rightNode.getId(), rightNode.getLeftId(), middleNode.getId()) == 0) {
 				if (rightNode.getLeftId().compareTo(middleNode.getId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 			// 将节点的右指针指到右节点
 			if (catalogService.updateRight(middleNode.getId(), middleNode.getRightId(), rightNode.getId()) == 0) {
 				if (middleNode.getRightId().compareTo(rightNode.getId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		} else {
 			// 将节点的右指针指到0
 			if (catalogService.updateRight(middleNode.getId(), middleNode.getRightId(), 0l) == 0) {
 				if (middleNode.getRightId().compareTo(0l) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		}
@@ -328,13 +328,13 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 			// 将左节点的右指针指到当前节点右指针
 			if (catalogService.updateRight(middleNode.getLeftId(), middleNode.getId(), middleNode.getRightId()) == 0) {
 				if (leftNode.getRightId().compareTo(middleNode.getRightId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 			// 将左节点的左指针指到当前节点
 			if (catalogService.updateLeft(middleNode.getLeftId(), leftNode.getLeftId(), middleNode.getId()) == 0) {
 				if (leftNode.getLeftId().compareTo(middleNode.getId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 			// 将左节点的左指针节点的右指针指到当前节点
@@ -342,7 +342,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 				if (catalogService.updateRight(leftNode.getLeftId(), leftNode.getId(), middleNode.getId()) == 0) {
 					Catalog node = catalogService.get(leftNode.getLeftId());
 					if (node.getRightId().compareTo(middleNode.getId()) != 0) {
-						throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+						throw new APIException(ErrorCodes.SORT_ERROR);
 					}
 				}
 			}
@@ -351,20 +351,20 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 				if (catalogService.updateLeft(middleNode.getRightId(), middleNode.getId(),
 						middleNode.getLeftId()) == 0) {
 					if (rightNode.getLeftId().compareTo(middleNode.getLeftId()) != 0) {
-						throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+						throw new APIException(ErrorCodes.SORT_ERROR);
 					}
 				}
 			}
 			// 将当前节点的左指针指到左节点的左指针
 			if (catalogService.updateLeft(middleNode.getId(), middleNode.getLeftId(), leftNode.getLeftId()) == 0) {
 				if (middleNode.getLeftId().compareTo(leftNode.getLeftId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 			// 将当前节点的右指针指到左节点
 			if (catalogService.updateRight(middleNode.getId(), middleNode.getRightId(), middleNode.getLeftId()) == 0) {
 				if (middleNode.getRightId().compareTo(middleNode.getLeftId()) != 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+					throw new APIException(ErrorCodes.SORT_ERROR);
 				}
 			}
 		}
@@ -376,12 +376,12 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 		if (!Objects.isNull(id)) {
 			Catalog catalog = catalogService.get(id);
 			if (catalog.getDel()) {
-				throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+				throw new APIException(ErrorCodes.SORT_ERROR);
 			}
 			// 底部节点
 			if (catalog.getRightId().compareTo(0l) == 0) {
 				if (catalog.getParentId().compareTo(0l) == 0) {
-					throw new APIException(ErrorCodes.CATALOG_SORT_BOTTOM);
+					throw new APIException(ErrorCodes.SORT_BOTTOM);
 				}
 				// 往下一层节点排序
 				else {
@@ -395,7 +395,7 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 						if (catalogService.updateRight(catalog.getLeftId(), catalog.getId(), 0l) == 0) {
 							Catalog node = catalogService.get(catalog.getLeftId());
 							if (node.getRightId().compareTo(0l) != 0) {
-								throw new APIException(ErrorCodes.CATALOG_SORT_ERROR);
+								throw new APIException(ErrorCodes.SORT_ERROR);
 							}
 						}
 					}
