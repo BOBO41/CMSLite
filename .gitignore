@@ -28,3 +28,5 @@ target/
 .classpath
 .settings
 .metadata
+src/main/webapp/resources/
+src/main/webapp/upload/
