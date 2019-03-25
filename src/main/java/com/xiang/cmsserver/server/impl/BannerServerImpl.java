@@ -45,7 +45,6 @@ public class BannerServerImpl extends BaseServerImpl implements BannerServer {
 		Banner po = getPo(bo);
 		long id = idService.genId();
 		po.setId(id);
-		po.setDel(false);
 		po.setAddTime(new Date());
 		Long sort = bannerService.getCount(null);
 		if (Objects.isNull(sort)) {

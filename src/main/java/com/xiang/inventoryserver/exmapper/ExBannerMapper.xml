@@ -54,7 +54,7 @@
     #{title,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
      #{content,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
     #{imgUrl,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
-      #{sort,jdbcType=INT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+      #{sort,jdbcType=INTEGER,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
       #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
       )
   </insert>
@@ -70,7 +70,7 @@
     </if>
     <if test="page != null">
     <if test="page.sort != null">
-      order by ${page.sort}
+      order by del asc,${page.sort}
     </if>
      <if test="page.cursor != null and page.limit != null">
      <include refid="Page_Clause" />
