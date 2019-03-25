@@ -2,6 +2,7 @@ package com.xiang.cmsserver.server.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -15,10 +16,12 @@ import org.springframework.util.ObjectUtils;
 
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.NavBo;
+import com.xiang.bean.po.Catalog;
 import com.xiang.bean.po.Nav;
 import com.xiang.bean.vo.BaseListVo;
 import com.xiang.bean.vo.NavVo;
 import com.xiang.bean.vo.ProductVo;
+import com.xiang.cms.vo.CmsNavVo;
 import com.xiang.cmsserver.server.NavServer;
 import com.xiang.cmsserver.service.NavService;
 import com.xiang.inventoryserver.server.impl.BaseServerImpl;
@@ -93,16 +96,23 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 		if(po.getType()==0) {
 			vo.setLink(po.getPayload());
 		}else {
-			vo.setLink("/cms/catalog/"+po.getPayload());
+			vo.setLink(getCmsCatalogLink(po.getPayload()));
 		}
 		return vo;
+	}
+	private String getCmsCatalogLink(String id) {
+		return "/cms/catalog/"+id;
 	}
 	private NavVo getVo(Nav po) {
 		NavVo vo = new NavVo();
 		BeanUtils.copyProperties(po, vo);
 		return vo;
 	}
-
+	private CmsNavVo getCmsVo(NavVo vo) {
+		CmsNavVo cmsVo = new CmsNavVo();
+		BeanUtils.copyProperties(vo, cmsVo);
+		return cmsVo;
+	}
 	@Override
 	public List<NavVo> getList(Map<String, Object> querys) {
 		List<Nav> poList = navService.getList(querys);
@@ -173,6 +183,35 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 		update.setId(next.getId());
 		update.setSort(po.getSort());
 		navService.update(update);
+	}
+
+	@Override
+	public List<CmsNavVo> getCmsNavs() {
+		List<CmsNavVo> result=new ArrayList<>();
+		Map<String, Object>  querys=new HashMap<String,Object>();
+		querys.put(Page.SORT, "+sort");
+		querys.put("andDelEqualTo", false);
+		List<NavVo> list = getList(querys);
+		if(!ObjectUtils.isEmpty(list)) {
+			for (NavVo vo : list) {
+				CmsNavVo cmsVo=getCmsVo(vo);
+				if(vo.getType()==1) {
+					List<Catalog> childs=catalogService.getChilds(new Long[] {Long.valueOf(vo.getPayload())}, false);
+					if(!ObjectUtils.isEmpty(childs)) {
+						List<CmsNavVo> children=new ArrayList<>();
+						for(Catalog catalog:childs) {
+							CmsNavVo child=new CmsNavVo();
+							child.setLink(getCmsCatalogLink(catalog.getId().toString()));
+							child.setTitle(catalog.getName());
+							children.add(child);
+						}
+						cmsVo.setChildren(children);
+					}
+				}
+				result.add(cmsVo);
+			}
+		}
+		return result;
 	}
 
 }

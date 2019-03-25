@@ -18,6 +18,16 @@ public class NavVo extends BaseVo {
 	private Long[] catalogIds;
 	
 	private String link;
+	
+	private String payload;
+
+	public String getPayload() {
+		return payload;
+	}
+
+	public void setPayload(String payload) {
+		this.payload = payload;
+	}
 
 	public String getLink() {
 		return link;
