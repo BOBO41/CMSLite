@@ -45,7 +45,7 @@
       </foreach>
     </where>
   </sql>
-  <insert id="save" parameterType="com.xiang.bean.po.Catalog">
+  <insert id="save" parameterType="com.xiang.bean.po.Nav">
     insert into banner (
      <include refid="Base_Column_List" />
       )

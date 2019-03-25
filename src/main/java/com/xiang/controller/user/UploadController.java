@@ -39,7 +39,7 @@ public class UploadController {
 		FileExts.add("jpeg");
 		FileExts.add("png");
 	}
-	private static String PRODUCTDIR="/resources/product/";
+	private static String IMAGEDIR="/resources/";
 	@Resource
 	private IdService idService;
 	@RequestMapping("/image")
@@ -63,7 +63,7 @@ public class UploadController {
 					if (FileExts.contains(ext)) {
 						long id = idService.genId();
 						String date=DateFormatUtils.format(new Date(), "yyyyMMdd");
-						String url=PRODUCTDIR +date+"/"+ id + "." + ext;
+						String url=IMAGEDIR +date+"/"+ id + "." + ext;
 						String path = request.getSession().getServletContext().getRealPath(url);
 						File saveFile=new File(path);
 						if(!saveFile.getParentFile().exists()) {
