@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.xiang.bean.bo.BannerBo;
-import com.xiang.bean.vo.BannerVo;
 import com.xiang.bean.vo.BaseListVo;
+import com.xiang.cms.vo.BannerVo;
 import com.xiang.inventoryserver.server.BaseServer;
 
 public interface BannerServer extends BaseServer{

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiang.inventoryserver.exmapper.ExBannerMapper">
-  <resultMap id="BaseResultMap" type="com.xiang.bean.po.Banner">
+<mapper namespace="com.xiang.inventoryserver.exmapper.ExBlockMapper">
+  <resultMap id="BaseResultMap" type="com.xiang.bean.po.Block">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="del" jdbcType="BIT" property="del" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Base_Column_List">
-   id, del, title, content, img_url, sort, add_time
+   id, del, add_time, name, description
   </sql>
    <sql id="Page_Clause">
    limit ${page.cursor},${page.limit}
@@ -45,17 +43,16 @@
       </foreach>
     </where>
   </sql>
-  <insert id="save" parameterType="com.xiang.bean.po.Banner">
-    insert into banner (
-     <include refid="Base_Column_List" />
+  <insert id="save" parameterType="com.xiang.bean.po.Block">
+    insert into block (
+    id, del, add_time, name, description,content
       )
     values (#{id,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
       #{del,jdbcType=BIT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
-    #{title,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
-     #{content,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
-    #{imgUrl,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
-      #{sort,jdbcType=INTEGER,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
-      #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
+       #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+    #{name,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+     #{description,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+       #{content,jdbcType=LONGVARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
       )
   </insert>
     <select id="getList" resultMap="BaseResultMap"  parameterType="map">
@@ -64,13 +61,13 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from banner
+    from  block
     <if test="example != null">
       <include refid="Example_Where_Clause" />
     </if>
     <if test="page != null">
     <if test="page.sort != null">
-      order by del asc,${page.sort}
+      order by ${page.sort}
     </if>
      <if test="page.cursor != null and page.limit != null">
      <include refid="Page_Clause" />

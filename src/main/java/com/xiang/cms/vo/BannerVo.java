@@ -1,4 +1,6 @@
-package com.xiang.bean.vo;
+package com.xiang.cms.vo;
+
+import com.xiang.bean.vo.BaseVo;
 
 /**
  * @author xiang

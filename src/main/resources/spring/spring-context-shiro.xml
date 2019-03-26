@@ -60,6 +60,7 @@
 				/product/** = roles["admin","user"]
 				/banner/** = roles["admin","user"]
 				/nav/** = roles["admin","user"]
+				/block/** = roles["admin","user"]
 				/** = authc
 			</value>
 		</property>

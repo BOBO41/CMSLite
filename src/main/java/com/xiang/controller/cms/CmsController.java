@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xiang.bean.vo.BannerVo;
+import com.xiang.cms.vo.BannerVo;
 import com.xiang.cms.vo.CmsNavVo;
 import com.xiang.cmsserver.server.BannerServer;
 import com.xiang.cmsserver.server.NavServer;

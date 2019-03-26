@@ -12,8 +12,8 @@
     <javaModelGenerator targetPackage="com.xiang.bean.po" targetProject="inventory-server/src/main/java" />
     <sqlMapGenerator targetPackage="com.xiang.inventoryserver.mapper" targetProject="inventory-server/src/main/java" />
     <javaClientGenerator targetPackage="com.xiang.inventoryserver.mapper" targetProject="inventory-server/src/main/java" type="MIXEDMAPPER" />
-    <table schema="wms" tableName="nav" enableInsert="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
-    <property name="rootInterface" value="com.xiang.inventoryserver.exmapper.ExNavMapper"/>
+    <table schema="wms" tableName="block" enableInsert="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
+    <property name="rootInterface" value="com.xiang.inventoryserver.exmapper.ExBlockMapper"/>
     </table>
   </context>
 </generatorConfiguration>

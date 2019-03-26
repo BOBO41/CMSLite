@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.xiang.bean.bo.NavBo;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.bean.vo.NavVo;
 import com.xiang.cms.vo.CmsNavVo;
+import com.xiang.cms.vo.NavVo;
 import com.xiang.inventoryserver.server.BaseServer;
 
 public interface NavServer extends BaseServer{
