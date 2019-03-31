@@ -189,7 +189,7 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 	public List<CmsNavVo> getCmsNavs() {
 		List<CmsNavVo> result=new ArrayList<>();
 		Map<String, Object>  querys=new HashMap<String,Object>();
-		querys.put(Page.SORT, "+sort");
+		querys.put(Page.SORT, "-sort");
 		querys.put("andDelEqualTo", false);
 		List<NavVo> list = getList(querys);
 		if(!ObjectUtils.isEmpty(list)) {

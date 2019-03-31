@@ -147,7 +147,7 @@ public class BannerServerImpl extends BaseServerImpl implements BannerServer {
 	@Override
 	public List<BannerVo> getList() {
 		Map<String, Object>  querys=new HashMap<String,Object>();
-		querys.put(Page.SORT, "+sort");
+		querys.put(Page.SORT, "-sort");
 		querys.put("andDelEqualTo", false);
 		return getList(querys);
 	}

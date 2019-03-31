@@ -2,15 +2,16 @@ package com.xiang.productservice.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import com.github.pagehelper.PageHelper;
 import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
 import com.xiang.bean.po.ProductExample;
-import com.xiang.bean.po.UserExample;
 import com.xiang.bean.po.ProductExample.Criteria;
 import com.xiang.inventoryserver.mapper.ProductExMapper;
 import com.xiang.inventoryserver.mapper.ProductMapper;
@@ -56,9 +57,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		Page page = this.getPage(querys);
 		try {
 			ProductExample example = getExample(querys);
-			return productMapper.getList(example, page);
+			if(!Objects.isNull(page)) {
+				PageHelper.startPage(page.getPage(), page.getLimit(), page.getSort());
+			}
+			return productMapper.selectByExample(example);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

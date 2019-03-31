@@ -48,6 +48,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 			              / = anon
+			    /categories = anon
 			    /resources/** = anon
 			    /css/** = anon
 			    /vendor/** = anon
@@ -61,6 +62,7 @@
 				/banner/** = roles["admin","user"]
 				/nav/** = roles["admin","user"]
 				/block/** = roles["admin","user"]
+				/comproduct/** = roles["admin","user"]
 				/** = authc
 			</value>
 		</property>

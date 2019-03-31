@@ -6,6 +6,9 @@
 <header>
 <#include "banner.ftl"/>
 </header>
+${business}
+<#include "contactform.ftl"/>
+${contect}
 <#include "footer.ftl"/>
 </body>
 </html>
