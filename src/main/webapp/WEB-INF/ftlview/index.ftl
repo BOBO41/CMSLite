@@ -6,6 +6,7 @@
 <header>
 <#include "banner.ftl"/>
 </header>
+<#include "comproducts.ftl"/>
 ${business}
 <#include "contactform.ftl"/>
 ${contect}

@@ -29,7 +29,6 @@ public class JwtAuthFilter extends AuthenticatingFilter {
 		}
 		return null;
 	}
-
 	@Override
 	public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -64,7 +63,6 @@ public class JwtAuthFilter extends AuthenticatingFilter {
 
 	@Override
 	protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
-		System.out.println("jWt postHandle");
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		if (httpServletRequest != null) {
 			String token = httpServletRequest.getHeader(JWTAuth.TOKENHEADER);
@@ -87,14 +85,6 @@ public class JwtAuthFilter extends AuthenticatingFilter {
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-		httpServletResponse.setCharacterEncoding("UTF-8");
-//		httpServletResponse.setContentType("application/json");
-//		Response res = new Response();
-//		ErrorCodes errorCodes = ErrorCodes.FORBIDDEN;
-//		res.setSuccess(false);
-//		res.setErrorCode(errorCodes.getErrorCode());
-//		res.setMessage(errorCodes.getErrorMessage());
-//		httpServletResponse.getWriter().write(JSONObject.toJSON(res).toString());
 		return false;
 	}
 

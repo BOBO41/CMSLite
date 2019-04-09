@@ -9,11 +9,13 @@ import java.util.Objects;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import com.mchange.lang.LongUtils;
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.ComProductBo;
 import com.xiang.bean.po.ComProduct;
@@ -69,12 +71,23 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 	private ComProduct getPo(ComProductBo bo) {
 		ComProduct po = new ComProduct();
 		BeanUtils.copyProperties(bo, po);
+		if(!ObjectUtils.isEmpty(bo.getProductIds())) {
+			po.setContent(StringUtils.join(bo.getProductIds(), ","));
+		}
 		return po;
 	}
 
 	private ComProductVo getVo(ComProduct po) {
 		ComProductVo vo = new ComProductVo();
 		BeanUtils.copyProperties(po, vo);
+		if(StringUtils.isEmpty(po.getContent())) {
+			String[] ids=StringUtils.split(po.getContent(), ",");
+			Long[] productIds=new Long[ids.length];
+			for(int i=0;i<ids.length;i++) {
+				productIds[i]=Long.valueOf(ids[i]);
+			}
+			vo.setProductIds(productIds);
+		}
 		return vo;
 	}
 
@@ -178,6 +191,6 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 				return result;
 			}
 		}
-		return null;
+		return new ArrayList<ProductVo>(0);
 	}
 }

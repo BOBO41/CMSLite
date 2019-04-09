@@ -58,7 +58,13 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 		try {
 			ProductExample example = getExample(querys);
 			if(!Objects.isNull(page)) {
-				PageHelper.startPage(page.getPage(), page.getLimit(), page.getSort());
+				if(!Objects.isNull(page.getSort())) {
+					PageHelper.startPage(page.getPage(), page.getLimit(), page.getSort());
+				}else {
+					if(!Objects.isNull(page.getPage())) {
+					PageHelper.startPage(page.getPage(), page.getLimit());
+					}
+				}
 			}
 			return productMapper.selectByExample(example);
 		} catch (Exception e) {

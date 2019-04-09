@@ -47,7 +47,6 @@ public class JwtRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("user权限doGetAuthorizationInfo");
 		String token = (String) super.getAvailablePrincipal(principals);
 		Map<String, String> claims =JWTAuth.verifyToken(token);
 		String userName=claims.get(JWTAuth.USERNAME);
@@ -57,10 +56,6 @@ public class JwtRealm extends AuthorizingRealm {
 			Set<String> roles = new HashSet<>(Arrays.asList(user.getRoles().split(",")));
 			simpleAuthorizationInfo.setRoles(roles);
 		}
-//		if (!StringUtils.isNullOrEmpty(user.getPermission())) {
-//			Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
-//			simpleAuthorizationInfo.addStringPermissions(permission);
-//		}
 		return simpleAuthorizationInfo;
 	
 	}

@@ -36,14 +36,13 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken principals) {
-		System.out.println("user认证doGetAuthenticationInfo");
 		UsernamePasswordToken token = (UsernamePasswordToken) principals;
 		String userName = token.getUsername();
 		User user = userService.getUser(userName);
 		if (ObjectUtils.isEmpty(user)) {
 			throw new APIException(ErrorCodes.AUTH);
 		}
-		return new SimpleAuthenticationInfo(userName, user.getPassword(), "userRealm");
+		return new SimpleAuthenticationInfo(user, user.getPassword(), "userRealm");
 	}
 
 	@Override
@@ -56,7 +55,6 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("user权限doGetAuthorizationInfo");
 		String userName = (String) super.getAvailablePrincipal(principals);
 		User user = userService.getUser(userName);
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
@@ -64,10 +62,6 @@ public class UserRealm extends AuthorizingRealm {
 			Set<String> roles = new HashSet<>(Arrays.asList(user.getRoles().split(",")));
 			simpleAuthorizationInfo.setRoles(roles);
 		}
-//		if (!StringUtils.isNullOrEmpty(user.getPermission())) {
-//			Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
-//			simpleAuthorizationInfo.addStringPermissions(permission);
-//		}
 		return simpleAuthorizationInfo;
 	}
 }
