@@ -3,13 +3,21 @@
 <#include "head.ftl"/>
 <body>
 <#include "nav.ftl"/>
+<header class="pb-2">
+<div class="banner-area align-self-center">
+<span class="row align-items-center"><h1>Categories</h1></span>
+</div>
+</header>
 <!-- Page Content -->
+
   <div class="container">
   <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
           </li>
-          <li class="breadcrumb-item active">Detail</li>
+          <li class="breadcrumb-item active">
+          <#if currentCatalog??>${currentCatalog.name}<#else>Detail</#if>
+          </li>
         </ol>
    <div class="row">
     <div class="col-lg-3"> 

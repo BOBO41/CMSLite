@@ -25,6 +25,8 @@ import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.vo.UploadVo;
 import com.xiang.restserver.ErrorCodes;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 /**
  * @author xiang
  *
@@ -45,7 +47,7 @@ public class UploadController {
 	@RequestMapping("/image")
 	public Object image(HttpServletRequest request) throws IllegalStateException, IOException {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
+				request.getServletContext());
 		if (multipartResolver.isMultipart(request)) {
 			List<UploadVo> list = new ArrayList<>();
 			MultipartHttpServletRequest multiRequest =null;
@@ -64,12 +66,13 @@ public class UploadController {
 						long id = idService.genId();
 						String date=DateFormatUtils.format(new Date(), "yyyyMMdd");
 						String url=IMAGEDIR +date+"/"+ id + "." + ext;
-						String path = request.getSession().getServletContext().getRealPath(url);
+						String path = request.getServletContext().getRealPath(url);
 						File saveFile=new File(path);
 						if(!saveFile.getParentFile().exists()) {
 							saveFile.getParentFile().mkdirs();
 						}
 						file.transferTo(saveFile);
+						Thumbnails.of(saveFile).size(300, 300).outputFormat("jpg").toFile(saveFile.getAbsolutePath()+".300x300.jpg");
 						UploadVo vo = new UploadVo();
 						vo.setUrl(url);
 						vo.setFileName(file.getOriginalFilename());

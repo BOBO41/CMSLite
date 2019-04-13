@@ -2,6 +2,7 @@ package com.xiang.productserver.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.util.ObjectUtils;
 
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.ProductBo;
+import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
 import com.xiang.bean.vo.BaseListVo;

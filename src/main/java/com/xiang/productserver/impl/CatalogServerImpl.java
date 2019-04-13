@@ -455,4 +455,14 @@ public class CatalogServerImpl extends BaseServerImpl implements CatalogServer {
 		querys.put(CriteriaIgnoreKey.CATALOGNOTOP, true);
 		return getCatologTree(querys);
 	}
+
+	@Override
+	public List<Long> getLeafChilds(Long id) {
+		return catalogService.getLeafChilds(id);
+	}
+
+	@Override
+	public CatalogVo get(Long id) {
+		return this.getVo(catalogService.get(id));
+	}
 }

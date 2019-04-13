@@ -52,7 +52,10 @@
 		<property name="filterChainDefinitions">
 			<value>
 			              / = anon
-			    /categories = anon
+			              /about = anon
+			              /search/** = anon
+			    /detail/** = anon
+			    /categories/** = anon
 			    /resources/** = anon
 			    /css/** = anon
 			    /vendor/** = anon
