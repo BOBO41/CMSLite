@@ -17,14 +17,14 @@
   <title>${default_title}</title>
  </#if>
   <!-- Flag Icons -->
-  <link href="vendor/flag-icon/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/flag-icon/css/flag-icon.min.css" rel="stylesheet" type="text/css">
     <!-- Font Awesome Icons -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
   <!-- Bootstrap core CSS -->
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="assets/styles.min.css">
-  <link href="css/modern-business.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.min.css">
+  <link href="/css/modern-business.css" rel="stylesheet">
 </head>

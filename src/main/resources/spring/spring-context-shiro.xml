@@ -51,8 +51,12 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="filterChainDefinitions">
 			<value>
+			 /cms/api/message/add = anon
 			              / = anon
-			    /categories = anon
+			              /about = anon
+			              /search/** = anon
+			    /detail/** = anon
+			    /categories/** = anon
 			    /resources/** = anon
 			    /css/** = anon
 			    /vendor/** = anon

@@ -101,7 +101,7 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 		return vo;
 	}
 	private String getCmsCatalogLink(String id) {
-		return "/cms/catalog/"+id;
+		return "/categories/"+id;
 	}
 	private NavVo getVo(Nav po) {
 		NavVo vo = new NavVo();

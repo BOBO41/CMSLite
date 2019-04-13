@@ -182,10 +182,9 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 			List<Product> products = productService.getList(querys);
 			if (!ObjectUtils.isEmpty(products)) {
 				List<ProductVo> result = new ArrayList<>(products.size());
-				for (Product product : products) {
+				for (Product productPo : products) {
 					ProductVo vo = new ProductVo();
-					vo.setName(product.getName());
-					vo.setId(product.getId());
+					BeanUtils.copyProperties(productPo, vo);
 					result.add(vo);
 				}
 				return result;

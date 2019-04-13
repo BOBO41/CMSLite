@@ -119,4 +119,20 @@ public class CatalogServiceImpl extends BaseServiceImpl<Catalog> implements Cata
 		Collections.reverse(list);
 		return list;
 	}
+	@Override
+	public List<Long> getLeafChilds(Long id) {
+		List<Long> list=new ArrayList<>();
+		List<Catalog> childs=catalogMapper.getChilds(new Long[] {id},false);
+		if(ObjectUtils.isEmpty(childs)) {
+			list.add(id);
+		}else {
+			for(Catalog catalog:childs) {
+				List<Long> temp=getLeafChilds(catalog.getId());
+				if(!ObjectUtils.isEmpty(temp)) {
+					list.addAll(temp);
+				}
+			}
+		}
+		return list;
+	}
 }

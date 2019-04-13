@@ -15,4 +15,6 @@ public interface CatalogServer extends BaseServer{
 	public void setDelById(Long[] ids, Boolean del);
 	public void up(Long id);
 	public void down(Long id);
+	public List<Long> getLeafChilds(Long id);
+	public CatalogVo get(Long id);
 }

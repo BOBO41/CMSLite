@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.inventoryserver.exmapper.ExMessageMapper">
+<sql id="Base_Column_List">
+    id, del, add_time, name, email, mobile, content, status
+  </sql>
+  <insert id="save" parameterType="com.xiang.bean.po.Message">
+    insert into message (
+     <include refid="Base_Column_List" />
+      )
+    values (#{id,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+      #{del,jdbcType=BIT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+      #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+    #{name,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+     #{email,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+    #{mobile,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+       #{content,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+       #{status,jdbcType=INTEGER,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
+      )
+  </insert>
+</mapper>

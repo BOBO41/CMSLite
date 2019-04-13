@@ -1,4 +1,4 @@
-<!-- Navigation -->
+<!-- Navigation -->   
   <nav class="navbar navbar-expand-lg navbar-light bg-light sb-navbar">
     <div class="container">
       <a class="navbar-brand" href="/">
@@ -42,15 +42,14 @@
         </li>
          </#list>
         </ul>
-         <!--国际化图标-->
-        <ul class="navbar-nav pb-3 pb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="/"><span class="flag-icon flag-icon-cn"></span> </a> 
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="/"><span class="flag-icon flag-icon-gb"></span> </a> 
-        </li>
-        </ul>
+       
+		<form action="/search" method="POST" id="searchform" class="navbar-form navbar-right">
+			<div class="input-group input-group-sm">
+				<input type="text" name="word" class="form-control" placeholder="product name" onkeydown="onKeyDown(event)"/>
+				<div class="input-group-append"><button id="searchbtn" class="btn btn-outline-secondary" type="submit">Search</button></div>
+		</div>
+	</form>
+
       </div>
     </div>
   </nav>
