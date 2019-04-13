@@ -7,7 +7,7 @@
             <property name="suppressAllComments" value="true"/>
             <property name="addRemarkComments" value="true"/>
         </commentGenerator>
-    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1/wms?useUnicode=true&amp;characterEncoding=utf-8" driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1/wms?useUnicode=true&amp;characterEncoding=utf-8" driverClass="com.mysql.jdbc.Driver" password="promise" userId="root" />
     
     <javaModelGenerator targetPackage="com.xiang.bean.po" targetProject="inventory-server/src/main/java" />
     <sqlMapGenerator targetPackage="com.xiang.inventoryserver.mapper" targetProject="inventory-server/src/main/java" />
