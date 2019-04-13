@@ -1,5 +1,5 @@
-<section class="py-5 bg-light">
-<div class="mb-5 sb-nav-tabs-wrapper" style="border-bottom:0px;">
+<section class="py-3 bg-light">
+<div class="sb-nav-tabs-wrapper" style="border-bottom:0px;">
       <div class="container">
         <ul class="nav nav-tabs sb-nav-tabs border-0" id="myTab" role="tablist">
         <#list comproducts as comproduct>
@@ -18,7 +18,7 @@
                 <div class="row">
                 <#list comproduct.products as product>
                 <div class="col-md-3">
-                <div class="item-preview mb-5">
+                <div class="item-preview mb-4">
                 <a class="item-preview-img box-shadow-lg d-block mb-3" href="/detail/${product.id}">
                 <img class="img-fluid" style="width:100%" src="${product.imgUrl}.300x300.jpg" alt="${product.name}"></a>
                 <div class="item-preview-title">${product.name}</div>

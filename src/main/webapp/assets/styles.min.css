@@ -580,7 +580,7 @@ a.btn.disabled,fieldset:disabled a.btn{pointer-events:none}
 .btn-theme.disabled,.btn-theme:disabled{color:#fff;background-color:#dd3d31;border-color:#dd3d31}
 .btn-theme:not(:disabled):not(.disabled).active,.btn-theme:not(:disabled):not(.disabled):active,.show>.btn-theme.dropdown-toggle{color:#fff;background-color:#bc2a1f;border-color:#b1281d}
 .btn-theme:not(:disabled):not(.disabled).active:focus,.btn-theme:not(:disabled):not(.disabled):active:focus,.show>.btn-theme.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(226,90,80,.5)}
-.btn-template{color:#fff;background-color:#2092ed;border-color:#2092ed}
+.btn-template{color:#fff;background-color:#59185c;}
 .btn-template:hover{color:#fff;background-color:#117ed6;border-color:#1077ca}
 .btn-template.focus,.btn-template:focus{box-shadow:0 0 0 .2rem rgba(65,162,240,.5)}
 .btn-template.disabled,.btn-template:disabled{color:#fff;background-color:#2092ed;border-color:#2092ed}
