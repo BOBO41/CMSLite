@@ -12,8 +12,8 @@
     <javaModelGenerator targetPackage="com.xiang.bean.po" targetProject="inventory-server/src/main/java" />
     <sqlMapGenerator targetPackage="com.xiang.inventoryserver.mapper" targetProject="inventory-server/src/main/java" />
     <javaClientGenerator targetPackage="com.xiang.inventoryserver.mapper" targetProject="inventory-server/src/main/java" type="MIXEDMAPPER" />
-    <table schema="wms" tableName="com_product" enableInsert="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
-    <property name="rootInterface" value="com.xiang.inventoryserver.exmapper.ExComProductMapper"/>
+    <table schema="wms" tableName="message" enableInsert="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
+    <property name="rootInterface" value="com.xiang.inventoryserver.exmapper.ExMessageMapper"/>
     </table>
   </context>
 </generatorConfiguration>

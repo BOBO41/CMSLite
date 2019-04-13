@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import com.github.pagehelper.PageHelper;
 import com.google.common.base.CaseFormat;
 import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.inventoryserver.exmapper.ExBaseMapper;
@@ -92,6 +93,20 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			e.printStackTrace();
 			throw new APIException(ErrorCodes.ERROR_PARAM);
 		}
+	}
+
+	@Override
+	public void setPage(Page page) {
+		if(!Objects.isNull(page)) {
+			if(!Objects.isNull(page.getSort())) {
+				PageHelper.startPage(page.getPage(), page.getLimit(), page.getSort());
+			}else {
+				if(!Objects.isNull(page.getPage())) {
+				PageHelper.startPage(page.getPage(), page.getLimit());
+				}
+			}
+		}
+		
 	}
 
 }
