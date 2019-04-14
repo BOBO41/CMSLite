@@ -80,11 +80,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 				String key = entry.getKey();
 				if (!CriteriaIgnoreKey.contains(key)) {
 					Object value = entry.getValue();
-					if (Objects.isNull(value)) {
-						MethodUtils.invokeMethod(criteria, key, value);
-					} else if (value instanceof CharSequence) {
-						MethodUtils.invokeMethod(criteria, key, value);
-					} else if (!ObjectUtils.isEmpty(value)) {
+					if (Objects.isNull(value) || value instanceof CharSequence || !ObjectUtils.isEmpty(value)) {
+						if(key.endsWith("Like") && !ObjectUtils.isEmpty(value)) {
+							value="%"+value+"%";
+						}
 						MethodUtils.invokeMethod(criteria, key, value);
 					}
 				}
@@ -105,6 +104,14 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 				PageHelper.startPage(page.getPage(), page.getLimit());
 				}
 			}
+		}
+		
+	}
+
+	@Override
+	public void setFlag(String table, String field, Long[] ids, Object flag) {
+		if (!ObjectUtils.isEmpty(ids) && !Objects.isNull(flag)) {
+			exBaseMapper.setFlag(table, field,ids, flag);
 		}
 		
 	}

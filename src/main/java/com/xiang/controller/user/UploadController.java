@@ -73,6 +73,7 @@ public class UploadController {
 						}
 						file.transferTo(saveFile);
 						Thumbnails.of(saveFile).size(300, 300).outputFormat("jpg").toFile(saveFile.getAbsolutePath()+".300x300.jpg");
+						Thumbnails.of(saveFile).size(100, 100).outputFormat("jpg").toFile(saveFile.getAbsolutePath()+".100x100.jpg");
 						UploadVo vo = new UploadVo();
 						vo.setUrl(url);
 						vo.setFileName(file.getOriginalFilename());

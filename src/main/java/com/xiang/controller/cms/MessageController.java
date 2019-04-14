@@ -38,6 +38,11 @@ public class MessageController {
 		messageServer.setDelById("message", ids, false);
 		return ErrorCodes.OK;
 	}
+	@RequestMapping(value = "/status", method = RequestMethod.POST)
+	public Object status(@RequestBody Long[] ids) {
+		messageServer.setFlag("message", "status", ids, 1);
+		return ErrorCodes.OK;
+	}
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Object update(@RequestBody MessageBo bo) {
 		messageServer.update(bo);
