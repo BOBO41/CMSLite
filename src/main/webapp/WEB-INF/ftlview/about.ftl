@@ -3,6 +3,11 @@
 <#include "head.ftl"/>
 <body>
 <#include "nav.ftl"/>
+<header class="pb-2">
+<div class="banner-area align-self-center">
+<span class="row align-items-center"><h1>About Us</h1></span>
+</div>
+</header>
 <!-- Page Content -->
 <div class="container">
   <ol class="breadcrumb">
