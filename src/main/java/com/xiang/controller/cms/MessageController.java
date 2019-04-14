@@ -19,8 +19,8 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/cms/api/message")
-public class CmsRestController {
+@RequestMapping(value = "/message")
+public class MessageController {
 	@Resource
 	private MessageServer messageServer;
 	
