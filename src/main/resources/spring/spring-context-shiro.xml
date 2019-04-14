@@ -71,6 +71,7 @@
 				/nav/** = roles["admin","user"]
 				/block/** = roles["admin","user"]
 				/comproduct/** = roles["admin","user"]
+				/message/** = roles["admin","user"]
 				/** = authc
 			</value>
 		</property>
