@@ -59,6 +59,7 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 				dataModel.put("Message", po);
 				template.process(dataModel, writer);
 				String html=writer.toString();
+				emailService.replyMessage(po.getEmail(), html);
 				writer.close();
 			}catch(Exception ex) {
 				ex.printStackTrace();
