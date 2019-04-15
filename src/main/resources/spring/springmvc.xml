@@ -77,29 +77,6 @@
         <property name="suffix" value=".ftl" />
         <property name="order" value="2"/>
     </bean>
-        <!-- 配置freeMarker的模板路径 -->
-    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/ftlview/" />
-        <property name="defaultEncoding" value="utf-8" />
-        <property name="freemarkerVariables">
-            <map>
-                <entry key="xml_escape" value-ref="fmXmlEscape" />
-            </map>
-        </property>
-        <property name="freemarkerSettings">
-            <props>
-                <prop key="template_update_delay">0</prop>
-                <prop key="default_encoding">UTF-8</prop>
-                <prop key="number_format">0.##########</prop>
-                <prop key="date_format">yyyy-MM-dd</prop>
-                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-                <prop key="locale">zh_CN</prop>
-                <prop key="classic_compatible">true</prop>
-                <prop key="template_exception_handler">ignore</prop>
-            </props>
-        </property>
-    </bean>
-    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
 	
 	<!-- 配置jsp视图解析器 -->
 	<!-- jspviewname不可与reportname,freemarkername重名 -->

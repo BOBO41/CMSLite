@@ -1,5 +1,6 @@
 package com.xiang.cmsserver.server.impl;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,9 +10,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.MessageBo;
@@ -21,7 +24,10 @@ import com.xiang.cms.vo.MessageVo;
 import com.xiang.cmsserver.server.MessageServer;
 import com.xiang.cmsserver.service.MessageService;
 import com.xiang.inventoryserver.server.impl.BaseServerImpl;
+import com.xiang.inventoryserver.service.EmailService;
 import com.xiang.restserver.Page;
+
+import freemarker.template.Template;
 
 /**
  * @author xiang
@@ -33,6 +39,10 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 	private IdService idService;
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private EmailService emailService;
+	@Autowired
+	private FreeMarkerConfigurer  freeMarkerConfigurer;
 	@Transactional
 	@Override
 	public MessageVo add(MessageBo bo) {
@@ -41,6 +51,19 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 		po.setId(id);
 		po.setAddTime(new Date());
 		messageService.save(po);
+		if(!ObjectUtils.isEmpty(po.getEmail())) {
+			try {
+				Template template =freeMarkerConfigurer.getConfiguration().getTemplate("email/messagereply.ftl");
+				StringWriter writer=new StringWriter();
+				Map<String, Object> dataModel = new HashMap<>();
+				dataModel.put("Message", po);
+				template.process(dataModel, writer);
+				String html=writer.toString();
+				writer.close();
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
 		return getVo(po);
 	}
 
