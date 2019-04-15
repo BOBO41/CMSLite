@@ -7,7 +7,7 @@
        ">
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="order" value="1" />
+		<property name="order" value="3" />
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="locations"
 			value="classpath:spring/vesta-service.properties" />
