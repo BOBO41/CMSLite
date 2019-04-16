@@ -61,12 +61,6 @@ public class ProductServerImpl extends BaseServerImpl implements ProductServer {
 		productService.updateEx(poEx);
 		return getVo(po);
 	}
-	@Transactional
-	@Override
-	public void setDelById(Long[] ids, Boolean del) {
-		// TODO Auto-generated method stub
-		
-	}
 	private Product getPo(ProductBo bo)
 	{
 		Product po = new Product();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiang.inventoryserver.exmapper.ExArticleMapper">
+<sql id="Base_Column_List">
+    id, del, add_time, title, spec, img_url
+  </sql>
+  <insert id="save" parameterType="com.xiang.bean.po.Article">
+    insert into article (
+     <include refid="Base_Column_List" />
+      )
+    values (#{id,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+      #{del,jdbcType=BIT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+      #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+    #{title,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+     #{spec,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}, 
+    #{img_url,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
+      )
+  </insert>
+</mapper>
