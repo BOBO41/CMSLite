@@ -11,7 +11,6 @@ import com.xiang.inventoryserver.server.BaseServer;
 public interface ProductServer extends BaseServer{
 	public ProductVo add(ProductBo bo);
 	public ProductVo update(ProductBo bo);
-	public void setDelById(Long[] ids, Boolean del);
 	public List<ProductVo> getList(Map<String,Object> querys);
 	public BaseListVo<ProductVo> queryList(Map<String,Object> querys);
 	public ProductVo get(Long id);
