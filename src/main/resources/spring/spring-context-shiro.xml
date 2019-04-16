@@ -72,6 +72,7 @@
 				/block/** = roles["admin","user"]
 				/comproduct/** = roles["admin","user"]
 				/message/** = roles["admin","user"]
+				/cms/file/** = roles["admin","user"]
 				/** = authc
 			</value>
 		</property>

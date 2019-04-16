@@ -1,0 +1,24 @@
+<div>有新的留言</div>
+<div>
+	<div>
+			名称：${message.name}
+		</div>
+		<div>
+			<br>
+		</div>
+		<div>
+			email：${message.email}
+		</div>
+		<div>
+			<br>
+		</div>
+		<div>
+			联系号码：${message.mobile}
+		</div>
+		<div>
+			<br>
+		</div>
+		<div>
+			内容：${message.content}
+		</div>
+</div>
