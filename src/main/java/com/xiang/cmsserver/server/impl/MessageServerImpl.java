@@ -21,6 +21,9 @@ import com.xiang.cms.vo.MessageVo;
 import com.xiang.cmsserver.server.MessageServer;
 import com.xiang.cmsserver.service.MessageService;
 import com.xiang.inventoryserver.server.impl.BaseServerImpl;
+import com.xiang.inventoryserver.service.ConfigService;
+import com.xiang.inventoryserver.service.EmailService;
+import com.xiang.inventoryserver.service.TemplateService;
 import com.xiang.restserver.Page;
 
 /**
@@ -33,6 +36,13 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 	private IdService idService;
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private EmailService emailService;
+	@Resource
+	private TemplateService templateService;
+	@Resource
+	private ConfigService configService;
+
 	@Transactional
 	@Override
 	public MessageVo add(MessageBo bo) {
@@ -41,6 +51,16 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 		po.setId(id);
 		po.setAddTime(new Date());
 		messageService.save(po);
+		Map<String, Object> dataModel = new HashMap<>();
+		dataModel.put("message", po);
+		if (!ObjectUtils.isEmpty(configService.getMailNoiceAddress())) {
+			String html = templateService.getTemplate("email/newmessage.ftl", dataModel);
+			emailService.noiceMessage(configService.getMailNoiceAddress(), html);
+		}
+		if (!ObjectUtils.isEmpty(po.getEmail())) {
+			String html = templateService.getTemplate("email/messagereply.ftl", dataModel);
+			emailService.replyMessage(po.getEmail(), html);
+		}
 		return getVo(po);
 	}
 
@@ -98,7 +118,7 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 
 	@Override
 	public List<MessageVo> getList() {
-		Map<String, Object>  querys=new HashMap<String,Object>();
+		Map<String, Object> querys = new HashMap<String, Object>();
 		querys.put(Page.SORT, "+sort");
 		querys.put("andDelEqualTo", false);
 		return getList(querys);

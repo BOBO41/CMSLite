@@ -51,7 +51,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="filterChainDefinitions">
 			<value>
-			 /cms/api/message/add = anon
+			 /message/add = anon
 			              / = anon
 			              /about = anon
 			              /search/** = anon
@@ -71,6 +71,8 @@
 				/nav/** = roles["admin","user"]
 				/block/** = roles["admin","user"]
 				/comproduct/** = roles["admin","user"]
+				/message/** = roles["admin","user"]
+				/cms/file/** = roles["admin","user"]
 				/** = authc
 			</value>
 		</property>

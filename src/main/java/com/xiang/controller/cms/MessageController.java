@@ -19,8 +19,8 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/cms/api/message")
-public class CmsRestController {
+@RequestMapping(value = "/message")
+public class MessageController {
 	@Resource
 	private MessageServer messageServer;
 	
@@ -36,6 +36,11 @@ public class CmsRestController {
 	@RequestMapping(value = "/undel", method = RequestMethod.POST)
 	public Object unDel(@RequestBody Long[] ids) {
 		messageServer.setDelById("message", ids, false);
+		return ErrorCodes.OK;
+	}
+	@RequestMapping(value = "/status", method = RequestMethod.POST)
+	public Object status(@RequestBody Long[] ids) {
+		messageServer.setFlag("message", "status", ids, 1);
 		return ErrorCodes.OK;
 	}
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

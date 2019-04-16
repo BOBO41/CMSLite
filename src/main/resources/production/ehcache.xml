@@ -21,4 +21,11 @@
         timeToLiveSeconds="4"
         diskPersistent="false"
         />
+        <cache name="replyMessageCache"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="60"
+        diskPersistent="false"
+        />
 </ehcache>

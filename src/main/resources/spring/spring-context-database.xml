@@ -77,8 +77,12 @@
 			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 			<property name="order" value="1" />
 			<property name="ignoreUnresolvablePlaceholders" value="true" />
-			<property name="locations"
-				value="classpath:development/jdbc.properties" />
+				<property name="locations">
+				<list>
+					<value>classpath:development/jdbc.properties</value>
+					<value>classpath:development/email.properties</value>
+				</list>
+			</property>
 		</bean>
 	</beans>
 	<beans profile="production">
@@ -86,8 +90,12 @@
 			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 			<property name="order" value="1" />
 			<property name="ignoreUnresolvablePlaceholders" value="true" />
-			<property name="locations"
-				value="classpath:production/jdbc.properties" />
+				<property name="locations">
+				<list>
+					<value>classpath:production/jdbc.properties</value>
+					<value>classpath:production/email.properties</value>
+				</list>
+			</property>
 		</bean>
 	</beans>
 </beans>

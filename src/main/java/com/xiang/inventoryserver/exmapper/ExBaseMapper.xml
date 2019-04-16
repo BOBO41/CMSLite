@@ -5,7 +5,20 @@
 	<update id="setDel" parameterType="map">
 		update ${table}
 		<set>
-		del = #{del,jdbcType=BIT},
+		del = #{del,jdbcType=BIT}
+		</set>
+		<where>
+		id in
+			<foreach close=")" collection="ids" item="listItem" open="("
+				separator=",">
+				#{listItem,jdbcType=BIGINT}
+			</foreach>
+		</where>
+	</update>
+	<update id="setFlag" parameterType="map">
+		update ${table}
+		<set>
+		${field} = #{flag}
 		</set>
 		<where>
 		id in

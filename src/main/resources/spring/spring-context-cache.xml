@@ -41,11 +41,4 @@
 		<property name="configLocation" value="classpath:production/ehcache.xml"></property>
 	</bean>
 	</beans>
-	
-
-
-	
-	
-	
-	
 </beans>
