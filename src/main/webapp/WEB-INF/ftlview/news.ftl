@@ -14,17 +14,17 @@
           <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item active"><a href="/news">News</a></li>
   </ol>
-<div class="row">
+<div class="card-columns">
 <#list articles.result as article>
-<div class="col-sm-6 mb-3">
+
   <div class="card">
     <a href="/article/${article.id}" target="_blank"><img src="${article.imgUrl}" class="card-img-top"></a>
     <div class="card-body">
      <a href="/article/${article.id}" target="_blank"> <h5 class="card-title">${article.title}</h5></a>
-      <p class="card-text">${article.spec}</p>
-      <p class="card-text"><small class="text-muted">${article.addTime}</small></p>
+      <p class="card-text text-truncate">${article.spec}</p>
+      <p class="card-text"><small class="text-muted">${article.addTime?datetime}</small></p>
     </div>
-  </div>
+  
 </div>
 </#list>
 </div>
