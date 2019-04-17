@@ -46,7 +46,7 @@ public class BannerServerImpl extends BaseServerImpl implements BannerServer {
 		long id = idService.genId();
 		po.setId(id);
 		po.setAddTime(new Date());
-		Long sort = bannerService.getCount(null);
+		Long sort = bannerService.getMax("banner", "sort");
 		if (Objects.isNull(sort)) {
 			sort = 0l;
 		}
@@ -115,6 +115,12 @@ public class BannerServerImpl extends BaseServerImpl implements BannerServer {
 		if (Objects.isNull(pre)) {
 			throw new APIException(ErrorCodes.SORT_TOP);
 		}
+		if (pre.getSort().compareTo(po.getSort()) == 0) {
+			pre.setSort(pre.getSort() - 1);
+			if (pre.getSort() < 1) {
+				throw new APIException(ErrorCodes.SORT_TOP);
+			}
+		}
 		Banner update = new Banner();
 		update.setId(po.getId());
 		update.setSort(pre.getSort());
@@ -134,6 +140,9 @@ public class BannerServerImpl extends BaseServerImpl implements BannerServer {
 		if (Objects.isNull(next)) {
 			throw new APIException(ErrorCodes.SORT_BOTTOM);
 		}
+		if (next.getSort().compareTo(po.getSort()) == 0) {
+			next.setSort(next.getSort() + 1);
+		}
 		Banner update = new Banner();
 		update.setId(po.getId());
 		update.setSort(next.getSort());
@@ -147,7 +156,7 @@ public class BannerServerImpl extends BaseServerImpl implements BannerServer {
 	@Override
 	public List<BannerVo> getList() {
 		Map<String, Object>  querys=new HashMap<String,Object>();
-		querys.put(Page.SORT, "-sort");
+		querys.put(Page.SORT, "+sort");
 		querys.put("andDelEqualTo", false);
 		return getList(querys);
 	}

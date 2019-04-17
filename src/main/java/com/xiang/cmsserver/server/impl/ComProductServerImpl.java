@@ -51,7 +51,7 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 		long id = idService.genId();
 		po.setId(id);
 		po.setAddTime(new Date());
-		Long sort = comProductService.getCount(null);
+		Long sort = comProductService.getMax("com_product", "sort");
 		if (Objects.isNull(sort)) {
 			sort = 0l;
 		}
@@ -139,6 +139,12 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 		if (Objects.isNull(pre)) {
 			throw new APIException(ErrorCodes.SORT_TOP);
 		}
+		if (pre.getSort().compareTo(po.getSort()) == 0) {
+			pre.setSort(pre.getSort() - 1);
+			if (pre.getSort() < 1) {
+				throw new APIException(ErrorCodes.SORT_TOP);
+			}
+		}
 		ComProduct update = new ComProduct();
 		update.setId(po.getId());
 		update.setSort(pre.getSort());
@@ -157,6 +163,9 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 		ComProduct next = comProductService.getNext(po);
 		if (Objects.isNull(next)) {
 			throw new APIException(ErrorCodes.SORT_BOTTOM);
+		}
+		if (next.getSort().compareTo(po.getSort()) == 0) {
+			next.setSort(next.getSort() + 1);
 		}
 		ComProduct update = new ComProduct();
 		update.setId(po.getId());

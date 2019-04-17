@@ -70,9 +70,10 @@ public class BannerServiceImpl extends BaseServiceImpl<Banner> implements Banner
 		Map<String, Object>  querys=new HashMap<String,Object>();
 		querys.put(Page.LIMIT, 1);
 		querys.put(Page.PAGE, 1);
-		querys.put(Page.SORT, "+sort");
+		querys.put(Page.SORT, "-sort");
 		querys.put("andDelEqualTo", false);
-		querys.put("andSortLessThan", record.getSort());
+		querys.put("andIdNotEqualTo", record.getId());
+		querys.put("andSortLessThanOrEqualTo", record.getSort());
 		List<Banner> list=getList(querys);
 		if(!ObjectUtils.isEmpty(list)) {
 			return list.get(0);
@@ -84,9 +85,10 @@ public class BannerServiceImpl extends BaseServiceImpl<Banner> implements Banner
 		Map<String, Object>  querys=new HashMap<String,Object>();
 		querys.put(Page.LIMIT, 1);
 		querys.put(Page.PAGE, 1);
-		querys.put(Page.SORT, "-sort");
+		querys.put(Page.SORT, "+sort");
 		querys.put("andDelEqualTo", false);
-		querys.put("andSortGreaterThan", record.getSort());
+		querys.put("andIdNotEqualTo", record.getId());
+		querys.put("andSortGreaterThanOrEqualTo", record.getSort());
 		List<Banner> list=getList(querys);
 		if(!ObjectUtils.isEmpty(list)) {
 			return list.get(0);
