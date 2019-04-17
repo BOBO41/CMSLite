@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.xiang.bean.vo.BaseListVo;
 import com.xiang.bean.vo.CatalogVo;
 import com.xiang.bean.vo.ProductVo;
+import com.xiang.cms.vo.ArticleVo;
 import com.xiang.cms.vo.BannerVo;
 import com.xiang.cms.vo.BlockVo;
 import com.xiang.cms.vo.CmsNavVo;
 import com.xiang.cms.vo.ComProductVo;
+import com.xiang.cmsserver.server.ArticleServer;
 import com.xiang.cmsserver.server.BannerServer;
 import com.xiang.cmsserver.server.BlockServer;
 import com.xiang.cmsserver.server.ComProductServer;
@@ -49,6 +51,8 @@ public class CmsController {
 	private CatalogServer catalogServer;
 	@Resource
 	private ProductServer productServer;
+	@Resource
+	private ArticleServer articleServer;
 
 	private void include(ModelMap map) {
 		List<CmsNavVo> navs = navServer.getCmsNavs();
@@ -151,5 +155,30 @@ public class CmsController {
 		}
 		map.put("productlist", products);
 		return "categories";
+	}
+	@RequestMapping(value = { "/news", "/news/{page}/{limit}"})
+public String categories(ModelMap map, @PathVariable(name = "page", required = false) Integer page,
+	@PathVariable(name = "limit", required = false) Integer limit) {
+		include(map);
+		if (Objects.isNull(page)) {
+			page = 1;
+		}
+		if (Objects.isNull(limit)) {
+			limit = 12;
+		}
+		Map<String, Object> querys = new HashMap<String, Object>();
+		querys.put("andDelEqualTo", false);
+		querys.put(Page.PAGE, page);
+		querys.put(Page.LIMIT, limit);
+		querys.put(Page.SORT, "+addTime");
+		map.put("articles", articleServer.queryList(querys));
+		return "news";
+	}
+	@RequestMapping(value = { "/article/{id}" })
+	public String article(ModelMap map, @PathVariable(name = "id") Long id) {
+		include(map);
+		ArticleVo vo=articleServer.get(id);
+		map.put("article", vo);
+		return "article";
 	}
 }
