@@ -20,5 +20,10 @@ public class BaseServerImpl implements BaseServer{
 		baseService.setFlag(table, field, ids, flag);
 		
 	}
+	@Override
+	public Long getMax(String table, String field) {
+		// TODO Auto-generated method stub
+		return baseService.getMax(table, field);
+	}
 
 }

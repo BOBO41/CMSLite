@@ -51,7 +51,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			if (querys.containsKey(Page.SORT)) {
 				String sort = (String) querys.get(Page.SORT);
 				String orderBy = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, sort.substring(1));
-				if (sort.startsWith("+")) {
+				if (sort.startsWith("-")) {
 					page.setSort(orderBy + " " + Page.DESC);
 				} else {
 					page.setSort(orderBy + " " + Page.ASC);
@@ -114,6 +114,12 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 			exBaseMapper.setFlag(table, field,ids, flag);
 		}
 		
+	}
+
+	@Override
+	public Long getMax(String table, String field) {
+		// TODO Auto-generated method stub
+		return exBaseMapper.getMax(table, field);
 	}
 
 }

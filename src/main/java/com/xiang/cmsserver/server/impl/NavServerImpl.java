@@ -42,6 +42,7 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 	private NavService navService;
 	@Resource
 	private CatalogService catalogService;
+
 	@Transactional
 	@Override
 	public NavVo add(NavBo bo) {
@@ -49,13 +50,13 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 		long id = idService.genId();
 		po.setId(id);
 		po.setAddTime(new Date());
-		Long sort = navService.getCount(null);
+		Long sort = navService.getMax("nav", "sort");
 		if (Objects.isNull(sort)) {
 			sort = 0l;
 		}
-		po.setSort(sort.intValue()+1);
+		po.setSort(sort.intValue() + 1);
 		navService.save(po);
-		NavVo vo=getVo(po);
+		NavVo vo = getVo(po);
 		vo.setLink(bo.getLink());
 		vo.setCatalogIds(bo.getCatalogIds());
 		return vo;
@@ -66,53 +67,59 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 	public NavVo update(NavBo bo) {
 		Nav po = getPo(bo);
 		navService.update(po);
-		NavVo vo=getVo(po);
-		getVo( po, vo);
+		NavVo vo = getVo(po);
+		getVo(po, vo);
 		return vo;
 	}
 
 	private Nav getPo(NavBo bo) {
 		Nav po = new Nav();
 		BeanUtils.copyProperties(bo, po);
-		if(bo.getType()==0) {
+		if (bo.getType() == 0) {
 			po.setPayload(bo.getLink());
-		}else {
-			po.setPayload(bo.getCatalogIds()[bo.getCatalogIds().length-1].toString());
+		} else {
+			po.setPayload(bo.getCatalogIds()[bo.getCatalogIds().length - 1].toString());
 		}
 		return po;
 	}
-	private NavVo getVo(Nav po,NavVo vo) {
-		if(po.getType()==0) {
+
+	private NavVo getVo(Nav po, NavVo vo) {
+		if (po.getType() == 0) {
 			vo.setLink(po.getPayload());
-		}else {
-			List<Long> ids=catalogService.getTreeIds(Long.valueOf(po.getPayload()));
-			Long[] catalogIds=new Long[ids.size()];
+		} else {
+			List<Long> ids = catalogService.getTreeIds(Long.valueOf(po.getPayload()));
+			Long[] catalogIds = new Long[ids.size()];
 			ids.toArray(catalogIds);
 			vo.setCatalogIds(catalogIds);
 		}
 		return vo;
 	}
-	private NavVo setLinkVo(Nav po,NavVo vo) {
-		if(po.getType()==0) {
+
+	private NavVo setLinkVo(Nav po, NavVo vo) {
+		if (po.getType() == 0) {
 			vo.setLink(po.getPayload());
-		}else {
+		} else {
 			vo.setLink(getCmsCatalogLink(po.getPayload()));
 		}
 		return vo;
 	}
+
 	private String getCmsCatalogLink(String id) {
-		return "/categories/"+id;
+		return "/categories/" + id;
 	}
+
 	private NavVo getVo(Nav po) {
 		NavVo vo = new NavVo();
 		BeanUtils.copyProperties(po, vo);
 		return vo;
 	}
+
 	private CmsNavVo getCmsVo(NavVo vo) {
 		CmsNavVo cmsVo = new CmsNavVo();
 		BeanUtils.copyProperties(vo, cmsVo);
 		return cmsVo;
 	}
+
 	@Override
 	public List<NavVo> getList(Map<String, Object> querys) {
 		List<Nav> poList = navService.getList(querys);
@@ -120,7 +127,7 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 		if (!ObjectUtils.isEmpty(poList)) {
 			for (Nav po : poList) {
 				NavVo vo = this.getVo(po);
-				setLinkVo( po, vo);
+				setLinkVo(po, vo);
 				list.add(vo);
 			}
 		}
@@ -144,7 +151,7 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 	public NavVo get(Long id) {
 		Nav po = navService.get(id);
 		NavVo vo = this.getVo(po);
-		getVo( po, vo);
+		getVo(po, vo);
 		return vo;
 	}
 
@@ -155,6 +162,12 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 		Nav pre = navService.getPre(po);
 		if (Objects.isNull(pre)) {
 			throw new APIException(ErrorCodes.SORT_TOP);
+		}
+		if (pre.getSort().compareTo(po.getSort()) == 0) {
+			pre.setSort(pre.getSort() - 1);
+			if (pre.getSort() < 1) {
+				throw new APIException(ErrorCodes.SORT_TOP);
+			}
 		}
 		Nav update = new Nav();
 		update.setId(po.getId());
@@ -169,11 +182,13 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 	@Transactional
 	@Override
 	public void down(Long id) {
-		// TODO Auto-generated method stub
 		Nav po = navService.get(id);
 		Nav next = navService.getNext(po);
 		if (Objects.isNull(next)) {
 			throw new APIException(ErrorCodes.SORT_BOTTOM);
+		}
+		if (next.getSort().compareTo(po.getSort()) == 0) {
+			next.setSort(next.getSort() + 1);
 		}
 		Nav update = new Nav();
 		update.setId(po.getId());
@@ -187,20 +202,21 @@ public class NavServerImpl extends BaseServerImpl implements NavServer {
 
 	@Override
 	public List<CmsNavVo> getCmsNavs() {
-		List<CmsNavVo> result=new ArrayList<>();
-		Map<String, Object>  querys=new HashMap<String,Object>();
+		List<CmsNavVo> result = new ArrayList<>();
+		Map<String, Object> querys = new HashMap<String, Object>();
 		querys.put(Page.SORT, "-sort");
 		querys.put("andDelEqualTo", false);
 		List<NavVo> list = getList(querys);
-		if(!ObjectUtils.isEmpty(list)) {
+		if (!ObjectUtils.isEmpty(list)) {
 			for (NavVo vo : list) {
-				CmsNavVo cmsVo=getCmsVo(vo);
-				if(vo.getType()==1) {
-					List<Catalog> childs=catalogService.getChilds(new Long[] {Long.valueOf(vo.getPayload())}, false);
-					if(!ObjectUtils.isEmpty(childs)) {
-						List<CmsNavVo> children=new ArrayList<>();
-						for(Catalog catalog:childs) {
-							CmsNavVo child=new CmsNavVo();
+				CmsNavVo cmsVo = getCmsVo(vo);
+				if (vo.getType() == 1) {
+					List<Catalog> childs = catalogService.getChilds(new Long[] { Long.valueOf(vo.getPayload()) },
+							false);
+					if (!ObjectUtils.isEmpty(childs)) {
+						List<CmsNavVo> children = new ArrayList<>();
+						for (Catalog catalog : childs) {
+							CmsNavVo child = new CmsNavVo();
 							child.setLink(getCmsCatalogLink(catalog.getId().toString()));
 							child.setTitle(catalog.getName());
 							children.add(child);

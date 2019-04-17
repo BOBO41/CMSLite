@@ -28,4 +28,7 @@
 			</foreach>
 		</where>
 	</update>
+	<select id="getMax"  resultType="java.lang.Long">
+    select max(${field}) from ${table}
+  </select>
 </mapper>

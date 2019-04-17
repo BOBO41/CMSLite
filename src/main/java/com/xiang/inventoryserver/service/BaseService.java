@@ -13,4 +13,5 @@ public interface BaseService<T> {
 	public void setFlag(String table,String field,Long[] ids,Object flag);
 	public void setCriteria(Object criteria,Map<String, Object> querys);
 	public void setPage(Page page);
+	public Long getMax(String table,String field);
 }
