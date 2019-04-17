@@ -19,7 +19,7 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/message")
+@RequestMapping(value = "/cms/message")
 public class MessageController {
 	@Resource
 	private MessageServer messageServer;

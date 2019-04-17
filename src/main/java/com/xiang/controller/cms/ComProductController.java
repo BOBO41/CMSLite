@@ -15,7 +15,7 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/comproduct")
+@RequestMapping(value = "/cms/comproduct")
 public class ComProductController {
 	@Resource
 	private ComProductServer comProductServer;

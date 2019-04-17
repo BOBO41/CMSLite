@@ -19,7 +19,7 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/nav")
+@RequestMapping(value = "/cms/nav")
 public class NavController {
 	@Resource
 	private NavServer navServer;

@@ -15,7 +15,7 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/block")
+@RequestMapping(value = "/cms/block")
 public class BlockController {
 	@Resource
 	private BlockServer blockServer;

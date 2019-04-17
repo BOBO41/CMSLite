@@ -39,7 +39,7 @@ function postCmsFormData(table,action,json) {
 	$.ajax({
 		contentType : "application/json",
 		type : 'POST',
-		url : "/"+table+"/"+action,
+		url : "/cms/"+table+"/"+action,
 		data : data,
 		dataType : "json",
 		success : function(response) {

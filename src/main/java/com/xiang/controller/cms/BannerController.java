@@ -19,7 +19,7 @@ import com.xiang.restserver.ErrorCodes;
  *
  */
 @RestController
-@RequestMapping(value = "/banner")
+@RequestMapping(value = "/cms/banner")
 public class BannerController {
 	@Resource
 	private BannerServer bannerServer;
