@@ -61,18 +61,19 @@
 </bean>
  <tx:annotation-driven transaction-manager="transactionManager"
         proxy-target-class="true" />
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
-		<property name="typeHandlersPackage" value="com.xiang.mybatis.typehandler"/>
-	</bean>
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage"
 			value="com.xiang.inventoryserver.exmapper,com.xiang.inventoryserver.mapper" />
 	</bean>
 	<!-- 开发生产环境配置 -->
 	<beans profile="development">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:development/mybatis-config.xml"></property>
+		<property name="typeHandlersPackage" value="com.xiang.mybatis.typehandler"/>
+	</bean>
 		<bean
 			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 			<property name="order" value="1" />
@@ -86,6 +87,12 @@
 		</bean>
 	</beans>
 	<beans profile="production">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:production/mybatis-config.xml"></property>
+		<property name="typeHandlersPackage" value="com.xiang.mybatis.typehandler"/>
+	</bean>
 		<bean
 			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 			<property name="order" value="1" />

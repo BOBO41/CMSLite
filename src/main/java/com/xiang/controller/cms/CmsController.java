@@ -117,7 +117,9 @@ public class CmsController {
 	@RequestMapping(value = { "/detail/{id}" })
 	public String detail(ModelMap map, @PathVariable(name = "id") Long id) {
 		include(map);
-		map.put("product", productServer.get(id));
+		ProductVo productVo=productServer.get(id);
+		map.put("product", productVo);
+		map.put("catalog", catalogServer.get(productVo.getCatalogId()));
 		return "detail";
 	}
 
@@ -170,7 +172,7 @@ public String categories(ModelMap map, @PathVariable(name = "page", required = f
 		querys.put("andDelEqualTo", false);
 		querys.put(Page.PAGE, page);
 		querys.put(Page.LIMIT, limit);
-		querys.put(Page.SORT, "+addTime");
+		querys.put(Page.SORT, "-addTime");
 		map.put("articles", articleServer.queryList(querys));
 		return "news";
 	}

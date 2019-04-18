@@ -19,7 +19,7 @@
                 <#list comproduct.products as product>
                 <div class="col-md-3">
                 <div class="item-preview mb-4">
-                <a class="item-preview-img box-shadow-lg d-block mb-3" href="/detail/${product.id}">
+                <a class="item-preview-img box-shadow-lg d-block mb-3" href="/detail/${product.id}" target="_blank">
                 <img class="img-fluid" style="width:100%" src="${product.imgUrl}.300x300.jpg" alt="${product.name}"></a>
                 <div class="item-preview-title">${product.name}</div>
                 <div class="item-preview-description">${product.code}</div>

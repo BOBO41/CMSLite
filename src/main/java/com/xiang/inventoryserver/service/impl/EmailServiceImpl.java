@@ -29,7 +29,7 @@ public class EmailServiceImpl implements EmailService{
 	public void noiceMessage(String email, String content) {
 		sendMessage("CCHCCH有新的留言",email,  content);
 	}
-	private void sendMessage(String title,String content,String to) {
+	private void sendMessage(String title,String to,String content) {
 		try {
 			Email emailBuilder = EmailBuilder.startingBlank().to(to).withSubject(title).withHTMLText(content).buildEmail();
 			mailer.sendMail(emailBuilder);

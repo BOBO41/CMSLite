@@ -9,6 +9,9 @@
           <li class="breadcrumb-item">
             <a href="/">Home</a>
           </li>
+          <li class="breadcrumb-item">
+            <a href="/categories/${catalog.id}">${catalog.name}</a>
+          </li>
           <li class="breadcrumb-item active">
          ${product.name}
           </li>
