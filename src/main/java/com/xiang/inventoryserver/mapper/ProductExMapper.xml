@@ -3,11 +3,13 @@
 <mapper namespace="com.xiang.inventoryserver.mapper.ProductExMapper">
   <resultMap id="BaseResultMap" type="com.xiang.bean.po.ProductEx">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="del" jdbcType="BIT" property="del" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="img_url_a" jdbcType="VARCHAR" property="imgUrlA" />
     <result column="img_url_b" jdbcType="VARCHAR" property="imgUrlB" />
     <result column="img_url_c" jdbcType="VARCHAR" property="imgUrlC" />
-    <result column="del" jdbcType="BIT" property="del" />
-    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xiang.bean.po.ProductEx">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -71,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, img_url_a, img_url_b, img_url_c, del, add_time
+    id, del, add_time, img_url_a, img_url_b, img_url_c, keyword, description
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -118,6 +120,12 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.del != null">
+        del = #{record.del,jdbcType=BIT},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.imgUrlA != null">
         img_url_a = #{record.imgUrlA,jdbcType=VARCHAR},
       </if>
@@ -127,11 +135,11 @@
       <if test="record.imgUrlC != null">
         img_url_c = #{record.imgUrlC,jdbcType=VARCHAR},
       </if>
-      <if test="record.del != null">
-        del = #{record.del,jdbcType=BIT},
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
       </if>
-      <if test="record.addTime != null">
-        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -144,11 +152,13 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update product_ex
     set id = #{record.id,jdbcType=BIGINT},
+      del = #{record.del,jdbcType=BIT},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
       img_url_a = #{record.imgUrlA,jdbcType=VARCHAR},
       img_url_b = #{record.imgUrlB,jdbcType=VARCHAR},
       img_url_c = #{record.imgUrlC,jdbcType=VARCHAR},
-      del = #{record.del,jdbcType=BIT},
-      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -157,11 +167,13 @@
   <update id="updateByExample" parameterType="map">
     update product_ex
     set id = #{record.id,jdbcType=BIGINT},
+      del = #{record.del,jdbcType=BIT},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
       img_url_a = #{record.imgUrlA,jdbcType=VARCHAR},
       img_url_b = #{record.imgUrlB,jdbcType=VARCHAR},
       img_url_c = #{record.imgUrlC,jdbcType=VARCHAR},
-      del = #{record.del,jdbcType=BIT},
-      add_time = #{record.addTime,jdbcType=TIMESTAMP}
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,6 +181,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.xiang.bean.po.ProductEx">
     update product_ex
     <set>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="imgUrlA != null">
         img_url_a = #{imgUrlA,jdbcType=VARCHAR},
       </if>
@@ -178,11 +196,11 @@
       <if test="imgUrlC != null">
         img_url_c = #{imgUrlC,jdbcType=VARCHAR},
       </if>
-      <if test="del != null">
-        del = #{del,jdbcType=BIT},
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="addTime != null">
-        add_time = #{addTime,jdbcType=TIMESTAMP},
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},

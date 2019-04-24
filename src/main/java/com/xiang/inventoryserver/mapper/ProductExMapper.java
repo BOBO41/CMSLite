@@ -18,7 +18,7 @@ public interface ProductExMapper extends ExProductExMapper {
 
     @Select({
         "select",
-        "id, img_url_a, img_url_b, img_url_c, del, add_time, content",
+        "id, del, add_time, img_url_a, img_url_b, img_url_c, keyword, description, content",
         "from product_ex",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -35,11 +35,13 @@ public interface ProductExMapper extends ExProductExMapper {
 
     @Update({
         "update product_ex",
-        "set img_url_a = #{imgUrlA,jdbcType=VARCHAR},",
+        "set del = #{del,jdbcType=BIT},",
+          "add_time = #{addTime,jdbcType=TIMESTAMP},",
+          "img_url_a = #{imgUrlA,jdbcType=VARCHAR},",
           "img_url_b = #{imgUrlB,jdbcType=VARCHAR},",
           "img_url_c = #{imgUrlC,jdbcType=VARCHAR},",
-          "del = #{del,jdbcType=BIT},",
-          "add_time = #{addTime,jdbcType=TIMESTAMP},",
+          "keyword = #{keyword,jdbcType=VARCHAR},",
+          "description = #{description,jdbcType=VARCHAR},",
           "content = #{content,jdbcType=LONGVARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -47,11 +49,13 @@ public interface ProductExMapper extends ExProductExMapper {
 
     @Update({
         "update product_ex",
-        "set img_url_a = #{imgUrlA,jdbcType=VARCHAR},",
+        "set del = #{del,jdbcType=BIT},",
+          "add_time = #{addTime,jdbcType=TIMESTAMP},",
+          "img_url_a = #{imgUrlA,jdbcType=VARCHAR},",
           "img_url_b = #{imgUrlB,jdbcType=VARCHAR},",
           "img_url_c = #{imgUrlC,jdbcType=VARCHAR},",
-          "del = #{del,jdbcType=BIT},",
-          "add_time = #{addTime,jdbcType=TIMESTAMP}",
+          "keyword = #{keyword,jdbcType=VARCHAR},",
+          "description = #{description,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ProductEx record);

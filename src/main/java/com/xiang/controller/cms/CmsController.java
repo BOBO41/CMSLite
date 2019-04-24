@@ -125,6 +125,10 @@ public class CmsController {
 		ProductVo productVo=productServer.get(id);
 		map.put("product", productVo);
 		map.put("catalog", catalogServer.get(productVo.getCatalogId()));
+		map.put("product", productVo);
+		map.put("head_title", productVo.getName());
+		map.put("head_keywords", productVo.getKeyword());
+		map.put("head_description", productVo.getDescription());
 		return "detail";
 	}
 

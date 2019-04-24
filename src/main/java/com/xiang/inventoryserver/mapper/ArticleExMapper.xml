@@ -5,6 +5,8 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xiang.bean.po.ArticleEx">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, del, add_time
+    id, del, add_time, keyword, description
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -121,6 +123,12 @@
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.keyword != null">
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -134,6 +142,8 @@
     set id = #{record.id,jdbcType=BIGINT},
       del = #{record.del,jdbcType=BIT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -143,7 +153,9 @@
     update article_ex
     set id = #{record.id,jdbcType=BIGINT},
       del = #{record.del,jdbcType=BIT},
-      add_time = #{record.addTime,jdbcType=TIMESTAMP}
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -156,6 +168,12 @@
       </if>
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},

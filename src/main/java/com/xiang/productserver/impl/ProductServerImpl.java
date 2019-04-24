@@ -73,7 +73,7 @@ public class ProductServerImpl extends BaseServerImpl implements ProductServer {
 	private ProductEx getPoEx(ProductBo bo)
 	{
 		ProductEx po = new ProductEx();
-		BeanUtils.copyProperties(bo, po);
+		BeanUtils.copyProperties(bo, po,"del","addTime");
 		return po;
 	}
 	private ProductVo getVo(Product po)

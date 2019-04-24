@@ -1,17 +1,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <#if head_keywords??>
+ <#if head_keywords?? && head_keywords?has_content>
  <meta name="keywords" content="${head_keywords}">
  <#else>
   <meta name="keywords" content="${siteinfo.keyword}">
  </#if>
- <#if head_description??>
+ <#if head_description?? && head_description?has_content>
  <meta name="description" content="${head_description}">
  <#else>
   <meta name="description" content="${siteinfo.description}">
  </#if>
-  <#if head_title??>
+  <#if head_title?? && head_title?has_content>
   <title>${head_title}</title>
  <#else>
   <title>${siteinfo.title}</title>

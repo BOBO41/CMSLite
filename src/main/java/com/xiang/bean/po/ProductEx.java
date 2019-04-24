@@ -5,15 +5,19 @@ import java.util.Date;
 public class ProductEx {
     private Long id;
 
+    private Boolean del;
+
+    private Date addTime;
+
     private String imgUrlA;
 
     private String imgUrlB;
 
     private String imgUrlC;
 
-    private Boolean del;
+    private String keyword;
 
-    private Date addTime;
+    private String description;
 
     private String content;
 
@@ -23,6 +27,22 @@ public class ProductEx {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getDel() {
+        return del;
+    }
+
+    public void setDel(Boolean del) {
+        this.del = del;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
     public String getImgUrlA() {
@@ -49,20 +69,20 @@ public class ProductEx {
         this.imgUrlC = imgUrlC;
     }
 
-    public Boolean getDel() {
-        return del;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setDel(Boolean del) {
-        this.del = del;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
-    public Date getAddTime() {
-        return addTime;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getContent() {

@@ -65,7 +65,7 @@ public class ArticleServerImpl extends BaseServerImpl implements ArticleServer {
 	private ArticleEx getPoEx(ArticleBo bo)
 	{
 		ArticleEx po = new ArticleEx();
-		BeanUtils.copyProperties(bo, po);
+		BeanUtils.copyProperties(bo, po,"del","addTime");
 		return po;
 	}
 	private ArticleVo getVo(Article po)

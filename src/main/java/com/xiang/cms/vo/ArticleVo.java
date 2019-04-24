@@ -13,9 +13,28 @@ public class ArticleVo extends BaseVo {
 	private String spec;
 
 	private String imgUrl;
-	
+
 	private String content;
 
+	private String keyword;
+
+	private String description;
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public String getTitle() {
 		return title;
 	}

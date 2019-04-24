@@ -18,7 +18,7 @@ public interface ArticleExMapper extends ExArticleExMapper {
 
     @Select({
         "select",
-        "id, del, add_time, content",
+        "id, del, add_time, keyword, description, content",
         "from article_ex",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -37,6 +37,8 @@ public interface ArticleExMapper extends ExArticleExMapper {
         "update article_ex",
         "set del = #{del,jdbcType=BIT},",
           "add_time = #{addTime,jdbcType=TIMESTAMP},",
+          "keyword = #{keyword,jdbcType=VARCHAR},",
+          "description = #{description,jdbcType=VARCHAR},",
           "content = #{content,jdbcType=LONGVARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -45,7 +47,9 @@ public interface ArticleExMapper extends ExArticleExMapper {
     @Update({
         "update article_ex",
         "set del = #{del,jdbcType=BIT},",
-          "add_time = #{addTime,jdbcType=TIMESTAMP}",
+          "add_time = #{addTime,jdbcType=TIMESTAMP},",
+          "keyword = #{keyword,jdbcType=VARCHAR},",
+          "description = #{description,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(ArticleEx record);
