@@ -4,17 +4,17 @@
  <#if head_keywords??>
  <meta name="keywords" content="${head_keywords}">
  <#else>
-  <meta name="keywords" content="${default_keywords}">
+  <meta name="keywords" content="${siteinfo.keyword}">
  </#if>
  <#if head_description??>
  <meta name="description" content="${head_description}">
  <#else>
-  <meta name="description" content="${default_description}">
+  <meta name="description" content="${siteinfo.description}">
  </#if>
   <#if head_title??>
   <title>${head_title}</title>
  <#else>
-  <title>${default_title}</title>
+  <title>${siteinfo.title}</title>
  </#if>
   <!-- Flag Icons -->
   <link href="/vendor/flag-icon/css/flag-icon.min.css" rel="stylesheet" type="text/css">

@@ -76,6 +76,7 @@
 				/cms/message/** = roles["admin","user"]
 				/cms/file/** = roles["admin","user"]
 				/cms/article/** = roles["admin","user"]
+				/cms/siteinfo/** = roles["admin"]
 				/** = authc
 			</value>
 		</property>

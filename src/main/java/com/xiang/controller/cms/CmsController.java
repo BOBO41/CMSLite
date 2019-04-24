@@ -29,6 +29,7 @@ import com.xiang.cmsserver.server.BannerServer;
 import com.xiang.cmsserver.server.BlockServer;
 import com.xiang.cmsserver.server.ComProductServer;
 import com.xiang.cmsserver.server.NavServer;
+import com.xiang.cmsserver.server.SiteInfoServer;
 import com.xiang.productserver.CatalogServer;
 import com.xiang.productserver.ProductServer;
 import com.xiang.restserver.Page;
@@ -53,12 +54,16 @@ public class CmsController {
 	private ProductServer productServer;
 	@Resource
 	private ArticleServer articleServer;
+	@Resource
+	private SiteInfoServer siteInfoServer;
 
 	private void include(ModelMap map) {
 		List<CmsNavVo> navs = navServer.getCmsNavs();
 		map.put("navs", navs);
 		BlockVo footer = blockServer.get(41787146645798913l);
 		map.put("footer", footer.getContent());
+		siteInfoServer.get(1l);
+		map.put("siteinfo", siteInfoServer.get(1l));
 	}
 
 	@RequestMapping(value = "/")

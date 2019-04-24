@@ -80,7 +80,7 @@ public class ComProductServerImpl extends BaseServerImpl implements ComProductSe
 	private ComProductVo getVo(ComProduct po) {
 		ComProductVo vo = new ComProductVo();
 		BeanUtils.copyProperties(po, vo);
-		if(StringUtils.isEmpty(po.getContent())) {
+		if(!StringUtils.isEmpty(po.getContent())) {
 			String[] ids=StringUtils.split(po.getContent(), ",");
 			Long[] productIds=new Long[ids.length];
 			for(int i=0;i<ids.length;i++) {
