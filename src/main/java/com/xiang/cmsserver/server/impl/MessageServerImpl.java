@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,10 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 	@Transactional
 	@Override
 	public MessageVo add(MessageBo bo) {
+		bo.setContent(StringEscapeUtils.escapeJavaScript(bo.getContent()));
+		bo.setEmail(StringEscapeUtils.escapeJavaScript(bo.getEmail()));
+		bo.setMobile(StringEscapeUtils.escapeJavaScript(bo.getMobile()));
+		bo.setName(StringEscapeUtils.escapeJavaScript(bo.getName()));
 		Message po = getPo(bo);
 		long id = idService.genId();
 		po.setId(id);

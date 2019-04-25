@@ -28,17 +28,30 @@
 		class="org.springframework.cache.ehcache.EhCacheCacheManager">
 		<property name="cacheManager" ref="ehcache"></property>
 	</bean>
+	<bean class="com.xiang.cmsserver.server.impl.CacheServerImpl">
+		<property name="mapping">
+			<list>
+				<value>/article/**</value>
+				<value>/about</value>
+				<value>/news/**</value>
+				<value>/detail/**</value>
+				<value>/</value>
+			</list>
+		</property>
+	</bean>
 	<!-- 开发生产环境配置 -->
 	<beans profile="development">
 		<bean id="ehcache"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<property name="configLocation" value="classpath:development/ehcache.xml"></property>
-	</bean>
+			class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+			<property name="configLocation"
+				value="classpath:development/ehcache.xml"></property>
+		</bean>
 	</beans>
 	<beans profile="production">
-			<bean id="ehcache"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<property name="configLocation" value="classpath:production/ehcache.xml"></property>
-	</bean>
+		<bean id="ehcache"
+			class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+			<property name="configLocation"
+				value="classpath:production/ehcache.xml"></property>
+		</bean>
 	</beans>
 </beans>

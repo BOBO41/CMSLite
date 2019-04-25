@@ -66,7 +66,7 @@
 	<!-- freemarkername不可与reportname重名 -->
 	<!-- 配置freeMarker视图解析器 -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="viewClass" value="com.xiang.cmsserver.CacheFreeMarkerView"/>
         <property name="contentType" value="text/html;charset=UTF-8"></property>
         <property name="requestContextAttribute" value="request" />
         <property name="exposeSpringMacroHelpers" value="true" />
@@ -87,6 +87,13 @@
        <property name="suffix" value=".jsp" />
        <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>
     </bean>
+    <mvc:interceptors> 
+           <mvc:interceptor>
+                   <mvc:mapping path="/**" /> 
+                   <bean id="cacheInterceptor" class="com.xiang.cmsserver.CacheInterceptor"></bean>
+          </mvc:interceptor> 
+    </mvc:interceptors>
+    
 	 <mvc:resources location="/resources/" mapping="/resources/**"/>
 	 <mvc:resources location="/css/" mapping="/css/**"/>
 	 <mvc:resources location="/vendor/" mapping="/vendor/**"/>

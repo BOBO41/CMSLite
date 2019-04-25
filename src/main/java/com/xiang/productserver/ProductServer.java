@@ -14,4 +14,5 @@ public interface ProductServer extends BaseServer{
 	public List<ProductVo> getList(Map<String,Object> querys);
 	public BaseListVo<ProductVo> queryList(Map<String,Object> querys);
 	public ProductVo get(Long id);
+	public ProductBo getBo(ProductVo vo);
 }

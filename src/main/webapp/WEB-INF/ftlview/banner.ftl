@@ -9,7 +9,7 @@
           <#list banners as banner>
         <div class="carousel-item <#if banner_index == 0>active</#if>" style="background-image: url('${banner.imgUrl}')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>${banner.title}</h3>
+            <h6>${banner.title}</h6>
             <p>${banner.content}</p>
           </div>
         </div>

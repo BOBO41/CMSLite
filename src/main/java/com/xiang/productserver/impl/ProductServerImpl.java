@@ -123,5 +123,11 @@ public class ProductServerImpl extends BaseServerImpl implements ProductServer {
 		setVoEx(poEx,vo);
 		return vo;
 	}
+	@Override
+	public ProductBo getBo(ProductVo vo) {
+		ProductBo bo = new ProductBo();
+		BeanUtils.copyProperties(vo, bo);
+		return bo;
+	}
 	
 }

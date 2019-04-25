@@ -1455,7 +1455,7 @@ a.close.disabled{pointer-events:none}
 .carousel-indicators li{transition:none}
 }
 .carousel-indicators .active{opacity:1}
-.carousel-caption{position:absolute;right:15%;bottom:20px;left:15%;z-index:10;padding-top:20px;padding-bottom:20px;color:#fff;text-align:center}
+.carousel-caption{position:absolute;right:15%;bottom:20px;left:15%;z-index:10;padding-top:20px;padding-bottom:5px;color:#fff;text-align:center}
 @keyframes spinner-border{
 to{transform:rotate(360deg)}
 }

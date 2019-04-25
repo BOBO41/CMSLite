@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xiang.bean.bo.ProductBo;
-import com.xiang.bean.bo.UserBo;
 import com.xiang.bean.vo.ProductPropsVo;
+import com.xiang.bean.vo.ProductVo;
 import com.xiang.productserver.CatalogServer;
 import com.xiang.productserver.ProductServer;
 import com.xiang.restserver.ErrorCodes;

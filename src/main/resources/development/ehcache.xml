@@ -28,4 +28,10 @@
         timeToLiveSeconds="60"
         diskPersistent="false"
         />
+        <cache name="pageCache"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        diskPersistent="false"
+        />
 </ehcache>
