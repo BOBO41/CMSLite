@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.xiang</groupId>
-	<artifactId>inventory-server</artifactId>
+	<artifactId>CMSLite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>InventoryServer</name>
+	<name>CMSLite</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.springframework.version>4.3.19.RELEASE</org.springframework.version>
@@ -152,7 +152,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>InventoryServer</finalName>
+		<finalName>CMSLite</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -162,7 +162,7 @@
 					<excludeDefaultDirectories>true</excludeDefaultDirectories>
 					<filesets>
 						<fileset>
-							<directory>F:/99bin/inventoryserver/WEB-INF/lib</directory>
+							<directory>F:/99bin/CMSLite/WEB-INF/lib</directory>
 						</fileset>
 					</filesets>
 				</configuration>
@@ -183,7 +183,7 @@
 				<configuration>
 					<version>3.0</version>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<webappDirectory>F:/99bin/inventoryserver</webappDirectory>
+					<webappDirectory>F:/99bin/CMSLite</webappDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
