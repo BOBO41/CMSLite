@@ -70,6 +70,7 @@
 				/user/login = anon
 				/report/** = anon
 				/upload/** = anon
+				/demodata/** = anon
 				/catalog/** = roles["admin","user"]
 				/user/** = roles["admin","user"]
 				/product/** = roles["admin","user"]
