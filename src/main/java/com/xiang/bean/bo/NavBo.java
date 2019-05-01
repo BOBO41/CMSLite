@@ -1,6 +1,6 @@
 package com.xiang.bean.bo;
 
-import com.xiang.cms.vo.NavVo;
+import com.xiang.bean.vo.NavVo;
 
 public class NavBo extends NavVo{
 

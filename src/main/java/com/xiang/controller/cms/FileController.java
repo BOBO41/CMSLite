@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.io.Files;
-import com.xiang.cms.vo.FileDirVo;
-import com.xiang.cms.vo.FileInfoVo;
-import com.xiang.controller.user.UploadController;
+import com.xiang.bean.vo.FileDirVo;
+import com.xiang.bean.vo.FileInfoVo;
+import com.xiang.controller.core.UploadController;
 
 /**
  * @author xiang

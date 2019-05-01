@@ -13,11 +13,11 @@ import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
 import com.xiang.bean.po.ProductExample;
 import com.xiang.bean.po.ProductExample.Criteria;
-import com.xiang.inventoryserver.mapper.ProductExMapper;
-import com.xiang.inventoryserver.mapper.ProductMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.ProductExMapper;
+import com.xiang.mapper.ProductMapper;
 import com.xiang.productservice.ProductService;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

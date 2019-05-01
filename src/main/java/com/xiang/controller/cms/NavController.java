@@ -51,12 +51,12 @@ public class NavController {
 	public Object get(@RequestParam("id") Long id) {
 		return navServer.get(id);
 	}
-	@RequestMapping(value = "/up", method = RequestMethod.POST)
+	@RequestMapping(value = "/up", method = RequestMethod.GET)
 	public Object up(@RequestParam("id") Long id) {
 		navServer.up(id);
 		return ErrorCodes.OK;
 	}
-	@RequestMapping(value = "/down", method = RequestMethod.POST)
+	@RequestMapping(value = "/down", method = RequestMethod.GET)
 	public Object down(@RequestParam("id") Long id) {
 		navServer.down(id);
 		return ErrorCodes.OK;

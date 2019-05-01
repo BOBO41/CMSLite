@@ -5,13 +5,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+
+import com.xiang.mapper.SiteInfoMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 import com.xiang.bean.po.SiteInfo;
 import com.xiang.bean.po.SiteInfoExample;
 import com.xiang.bean.po.SiteInfoExample.Criteria;
 import com.xiang.cmsserver.service.SiteInfoService;
-import com.xiang.inventoryserver.mapper.SiteInfoMapper;
 
 @Service("siteInfoService")
 public class SiteInfoServiceImpl extends BaseServiceImpl<SiteInfo> implements SiteInfoService {

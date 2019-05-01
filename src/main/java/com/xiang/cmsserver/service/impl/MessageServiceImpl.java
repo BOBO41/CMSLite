@@ -11,9 +11,9 @@ import com.xiang.bean.po.Message;
 import com.xiang.bean.po.MessageExample;
 import com.xiang.bean.po.MessageExample.Criteria;
 import com.xiang.cmsserver.service.MessageService;
-import com.xiang.inventoryserver.mapper.MessageMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.MessageMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

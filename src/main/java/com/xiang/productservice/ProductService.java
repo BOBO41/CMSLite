@@ -2,7 +2,7 @@ package com.xiang.productservice;
 
 import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
-import com.xiang.inventoryserver.service.BaseService;
+import com.xiang.service.BaseService;
 
 /**
 * @author xiang

@@ -12,9 +12,9 @@ import com.xiang.bean.po.Banner;
 import com.xiang.bean.po.BannerExample;
 import com.xiang.bean.po.BannerExample.Criteria;
 import com.xiang.cmsserver.service.BannerService;
-import com.xiang.inventoryserver.mapper.BannerMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.BannerMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

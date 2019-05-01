@@ -11,7 +11,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.xiang.bean.vo.XAuthToken;
-import com.xiang.userserver.JWTAuth;
+import com.xiang.shiro.JWTAuth;
 
 public class LoginTokenArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override

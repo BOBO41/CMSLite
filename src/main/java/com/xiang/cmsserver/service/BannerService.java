@@ -3,7 +3,7 @@ package com.xiang.cmsserver.service;
 import java.util.Map;
 
 import com.xiang.bean.po.Banner;
-import com.xiang.inventoryserver.service.BaseService;
+import com.xiang.service.BaseService;
 
 /**
 * @author xiang

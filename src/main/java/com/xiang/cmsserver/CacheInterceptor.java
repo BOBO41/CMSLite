@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import com.xiang.cmsserver.server.CacheServer;
 

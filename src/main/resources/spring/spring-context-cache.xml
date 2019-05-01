@@ -29,6 +29,8 @@
 		<property name="cacheManager" ref="ehcache"></property>
 	</bean>
 	<bean class="com.xiang.cmsserver.server.impl.CacheServerImpl">
+	<!-- 是否开启页面缓存-->
+	<property name="cache" value="true"/>
 		<property name="mapping">
 			<list>
 				<value>/article/**</value>

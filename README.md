@@ -1,7 +1,8 @@
 # CMSLite
 
 #### 项目介绍
-CMSLite是本人的一个前端练手项目的后端API加网站展示，同时作者也是在这个框架基础上搭建了几套企业网站。
+CMSLite是一套极简的创建内容管理系统，可用于创建企业网站，个人blog，目前只提供一套模板。
+CMSLite是本人的一个前端练手项目的后端API加网站展示，同时本人也是在这个框架基础上搭建了几套企业网站。
 ##### 项目功能
 1. 用户管理
 2. 文章管理
@@ -17,25 +18,25 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 #### 项目github
 1. 系统总共包括2个项目
 2. [CMSLite 后端服务 api加网站](https://github.com/liudexiang3218/CMSLite)
-3. CMSLite_vue 前端管理页面（即将开源）
+3. [CMSLite_vue 前端管理](https://github.com/liudexiang3218/CMSLite_vue)
 
 #### 软件架构
-
-
-
+<img src="https://github.com/liudexiang3218/CMSLite/blob/master/ScreenShots/flow.jpg?raw=true">
 #### 安装教程
 
 1. 下载项目 git clone https://github.com/liudexiang3218/CMSLite.git
 2. 导入eclipse
 3. mysql数据库导入cmslite.sql
 4. 修改配置文件jdbc.properties
-4. jetty:run项目 
-5. http://127.0.0.1:8088/
+5. 修改配置文件jwt.properties
+6. 修改配置文件email.properties
+7. jetty:run项目 
+8. http://127.0.0.1:8088/
 
 #### 使用说明
 
-1. [管理后台在线demo](http://demo.cchcch.com)
-2. [网站在线demo](http://demo.cchcch.com:8080)
+1. 管理后台在线demo(暂未开放)
+2. [企业网站在线demo](http://www.cchcch.com)
 
 #### email.properties配置说明
 邮箱设置，客户有留言将自动回复一份邮件给到对方，同时发送一个提醒邮箱到需要通知的邮箱地址
@@ -47,6 +48,10 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 5.  ``simplejavamail.defaults.from.address ``: 邮箱账号
 6.  ``simplejavamail.defaults.from.name ``: 邮箱显示名称
 7.  ``mail.noice.address ``: 订阅通知邮箱地址
+
+#### jwt.properties配置说明
+密钥设置，前端权限验证token由此密钥生成
+1.  ``jwt.secret ``:密钥，任意字符串
 
 #### 开发环境
 
@@ -62,11 +67,7 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 4. java-jwt 3.4.1
 5. shiro 1.4.0
 6. mybatis 3.4.6
-
-#### Donation
-If you find Element useful, you can buy us a cup of coffee
-
-<img width="650" src="https://github.com/liudexiang3218/OkexQuant/blob/master/ScreenShots/qrcode.png?raw=true" alt="donation">
+6. freemarker 2.3.28
 
 #### 作者微信
-<img src="https://github.com/liudexiang3218/OkexQuant/blob/master/ScreenShots/wechatqr.png?raw=true">
+<img src="https://github.com/liudexiang3218/CMSLite/blob/master/ScreenShots/wechatqr.png?raw=true">

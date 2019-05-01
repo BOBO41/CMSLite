@@ -15,7 +15,7 @@
                 <i class="fas fa-fw fa-folder"></i>
                 <span>${catalog.name}</span>
               </a>
-              <#assign selectedId="show">
+              <#assign selectedId="">
               <#list catalog.children as catalogchild>
                   <#if (id!"0")== catalogchild.id>
                    <#assign selectedId="show">

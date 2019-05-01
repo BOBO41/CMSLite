@@ -1,6 +1,6 @@
 package com.xiang.bean.bo;
 
-import com.xiang.cms.vo.BannerVo;
+import com.xiang.bean.vo.BannerVo;
 
 public class BannerBo extends BannerVo{
 

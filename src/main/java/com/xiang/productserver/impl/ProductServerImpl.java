@@ -20,11 +20,11 @@ import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
 import com.xiang.bean.vo.BaseListVo;
 import com.xiang.bean.vo.ProductVo;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.productserver.ProductServer;
 import com.xiang.productservice.CatalogService;
 import com.xiang.productservice.ProductService;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 
 /**
  * @author xiang

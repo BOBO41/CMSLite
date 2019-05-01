@@ -12,10 +12,10 @@ import com.xiang.bean.po.ArticleEx;
 import com.xiang.bean.po.ArticleExample;
 import com.xiang.bean.po.ArticleExample.Criteria;
 import com.xiang.cmsserver.service.ArticleService;
-import com.xiang.inventoryserver.mapper.ArticleExMapper;
-import com.xiang.inventoryserver.mapper.ArticleMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.ArticleExMapper;
+import com.xiang.mapper.ArticleMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

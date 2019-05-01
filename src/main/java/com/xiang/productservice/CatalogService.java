@@ -3,7 +3,7 @@ package com.xiang.productservice;
 import java.util.List;
 
 import com.xiang.bean.po.Catalog;
-import com.xiang.inventoryserver.service.BaseService;
+import com.xiang.service.BaseService;
 
 /**
 * @author xiang

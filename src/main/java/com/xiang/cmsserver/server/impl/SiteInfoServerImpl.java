@@ -16,11 +16,11 @@ import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.SiteInfoBo;
 import com.xiang.bean.po.SiteInfo;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.cms.vo.SiteInfoVo;
+import com.xiang.bean.vo.SiteInfoVo;
 import com.xiang.cmsserver.server.SiteInfoServer;
 import com.xiang.cmsserver.service.SiteInfoService;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 /**
  * @author xiang
  * @createDate 2019-04-22 18:02:08

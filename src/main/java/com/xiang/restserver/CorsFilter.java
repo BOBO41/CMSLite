@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xiang.userserver.JWTAuth;
+import com.xiang.shiro.JWTAuth;
 
 public class CorsFilter implements Filter{
 	@Override

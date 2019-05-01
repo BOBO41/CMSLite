@@ -1,7 +1,7 @@
 package com.xiang.userservice;
 
 import com.xiang.bean.po.User;
-import com.xiang.inventoryserver.service.BaseService;
+import com.xiang.service.BaseService;
 
 /**
 * @author xiang

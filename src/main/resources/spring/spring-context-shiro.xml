@@ -8,7 +8,11 @@
 						http://www.springframework.org/schema/context/spring-context.xsd"
 	default-lazy-init="true">
 	<description>Shiro Configuration</description>
-	<bean id="userRealm" class="com.xiang.userserver.UserRealm">
+	    <bean id="jwtAuth"
+		class="com.xiang.shiro.JWTAuth">
+			<property name="secret" value="${jwt.secret}" />
+	</bean>
+	<bean id="userRealm" class="com.xiang.shiro.UserRealm">
 		<property name="credentialsMatcher">
 			<bean
 				class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
@@ -16,9 +20,9 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="jwtRealm" class="com.xiang.userserver.JwtRealm">
+	<bean id="jwtRealm" class="com.xiang.shiro.JwtRealm">
 		<property name="credentialsMatcher">
-			<bean class="com.xiang.userserver.JWTCredentialsMatcher" />
+			<bean class="com.xiang.shiro.JWTCredentialsMatcher" />
 		</property>
 	</bean>
 	<bean id="securityManager"
@@ -88,7 +92,32 @@
 		</property>
 	</bean>
 	<bean id="userFormAuthenticationFilter"
-		class="com.xiang.userserver.UserFormAuthenticationFilter" />
+		class="com.xiang.shiro.UserFormAuthenticationFilter" />
 	<bean id="jwtAuthFilter"
-		class="com.xiang.userserver.JwtAuthFilter" />
+		class="com.xiang.shiro.JwtAuthFilter" />
+		    	<!-- 开发生产环境配置 -->
+	<beans profile="development">
+			<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="order" value="1" />
+			<property name="ignoreUnresolvablePlaceholders" value="true" />
+				<property name="locations">
+				<list>
+					<value>classpath:development/jwt.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
+	<beans profile="production">
+			<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="order" value="1" />
+			<property name="ignoreUnresolvablePlaceholders" value="true" />
+				<property name="locations">
+				<list>
+					<value>classpath:production/jwt.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
 </beans>

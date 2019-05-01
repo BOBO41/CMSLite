@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +19,10 @@ import com.xiang.bean.bo.UserBo;
 import com.xiang.bean.po.User;
 import com.xiang.bean.vo.BaseListVo;
 import com.xiang.bean.vo.UserVo;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 import com.xiang.userserver.UserServer;
 import com.xiang.userservice.UserService;
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.xiang.bean.bo.UserBo;
 import com.xiang.bean.vo.BaseListVo;
 import com.xiang.bean.vo.UserVo;
-import com.xiang.inventoryserver.server.BaseServer;
+import com.xiang.server.BaseServer;
 
 public interface UserServer extends BaseServer{
 	public UserVo addUser(UserBo userBo);

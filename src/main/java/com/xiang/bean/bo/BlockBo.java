@@ -1,6 +1,6 @@
 package com.xiang.bean.bo;
 
-import com.xiang.cms.vo.BlockVo;
+import com.xiang.bean.vo.BlockVo;
 
 public class BlockBo extends BlockVo{
 

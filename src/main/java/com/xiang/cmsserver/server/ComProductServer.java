@@ -5,9 +5,9 @@ import java.util.Map;
 
 import com.xiang.bean.bo.ComProductBo;
 import com.xiang.bean.vo.BaseListVo;
+import com.xiang.bean.vo.ComProductVo;
 import com.xiang.bean.vo.ProductVo;
-import com.xiang.cms.vo.ComProductVo;
-import com.xiang.inventoryserver.server.BaseServer;
+import com.xiang.server.BaseServer;
 
 public interface ComProductServer extends BaseServer{
 	public ComProductVo add(ComProductBo bo);

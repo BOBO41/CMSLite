@@ -2,7 +2,7 @@ package com.xiang.cmsserver.service;
 
 import com.xiang.bean.po.Banner;
 import com.xiang.bean.po.Block;
-import com.xiang.inventoryserver.service.BaseService;
+import com.xiang.service.BaseService;
 
 /**
 * @author xiang

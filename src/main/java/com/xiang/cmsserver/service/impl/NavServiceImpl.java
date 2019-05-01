@@ -12,9 +12,9 @@ import com.xiang.bean.po.Nav;
 import com.xiang.bean.po.NavExample;
 import com.xiang.bean.po.NavExample.Criteria;
 import com.xiang.cmsserver.service.NavService;
-import com.xiang.inventoryserver.mapper.NavMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.NavMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

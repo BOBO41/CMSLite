@@ -20,14 +20,14 @@ import com.xiang.bean.po.Banner;
 import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
+import com.xiang.bean.vo.BannerVo;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.cms.vo.BannerVo;
 import com.xiang.cmsserver.server.BannerServer;
 import com.xiang.cmsserver.service.BannerService;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 
 /**
  * @author xiang

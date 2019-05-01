@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.xiang.bean.bo.BlockBo;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.cms.vo.BlockVo;
-import com.xiang.inventoryserver.server.BaseServer;
+import com.xiang.bean.vo.BlockVo;
+import com.xiang.server.BaseServer;
 
 public interface BlockServer extends BaseServer{
 	public BlockVo add(BlockBo bo);

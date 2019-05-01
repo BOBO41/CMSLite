@@ -16,12 +16,12 @@ import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.ArticleBo;
 import com.xiang.bean.po.Article;
 import com.xiang.bean.po.ArticleEx;
+import com.xiang.bean.vo.ArticleVo;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.cms.vo.ArticleVo;
 import com.xiang.cmsserver.server.ArticleServer;
 import com.xiang.cmsserver.service.ArticleService;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 
 /**
  * @author xiang

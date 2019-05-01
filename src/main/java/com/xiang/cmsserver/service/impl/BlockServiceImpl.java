@@ -11,9 +11,9 @@ import com.xiang.bean.po.Block;
 import com.xiang.bean.po.BlockExample;
 import com.xiang.bean.po.BlockExample.Criteria;
 import com.xiang.cmsserver.service.BlockService;
-import com.xiang.inventoryserver.mapper.BlockMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.BlockMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

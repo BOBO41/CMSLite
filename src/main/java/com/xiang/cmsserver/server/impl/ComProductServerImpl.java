@@ -9,27 +9,26 @@ import java.util.Objects;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import com.mchange.lang.LongUtils;
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.ComProductBo;
 import com.xiang.bean.po.ComProduct;
 import com.xiang.bean.po.Product;
 import com.xiang.bean.vo.BaseListVo;
+import com.xiang.bean.vo.ComProductVo;
 import com.xiang.bean.vo.ProductVo;
-import com.xiang.cms.vo.ComProductVo;
 import com.xiang.cmsserver.server.ComProductServer;
 import com.xiang.cmsserver.service.ComProductService;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.productservice.ProductService;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 
 /**
  * @author xiang

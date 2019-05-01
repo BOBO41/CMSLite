@@ -20,11 +20,11 @@ import com.xiang.bean.bo.CatalogBo;
 import com.xiang.bean.po.Catalog;
 import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.bean.vo.CatalogVo;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.productserver.CatalogServer;
 import com.xiang.productservice.CatalogService;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
+import com.xiang.server.impl.BaseServerImpl;
 
 /**
  * @author xiang

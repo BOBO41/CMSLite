@@ -12,11 +12,11 @@ import org.springframework.util.ObjectUtils;
 import com.xiang.bean.po.User;
 import com.xiang.bean.po.UserExample;
 import com.xiang.bean.po.UserExample.Criteria;
-import com.xiang.inventoryserver.mapper.UserMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.UserMapper;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 import com.xiang.userservice.UserService;
 
 /**

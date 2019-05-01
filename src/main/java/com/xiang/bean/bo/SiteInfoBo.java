@@ -1,5 +1,5 @@
 package com.xiang.bean.bo;
-import com.xiang.cms.vo.SiteInfoVo;
+import com.xiang.bean.vo.SiteInfoVo;
 public class SiteInfoBo extends SiteInfoVo{
 
 }

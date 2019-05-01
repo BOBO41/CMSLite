@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.xiang.bean.bo.CatalogBo;
 import com.xiang.bean.vo.CatalogVo;
-import com.xiang.inventoryserver.server.BaseServer;
+import com.xiang.server.BaseServer;
 
 public interface CatalogServer extends BaseServer{
 	public List<CatalogVo> getCatologTree(Map<String,Object> querys);

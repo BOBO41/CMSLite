@@ -848,7 +848,6 @@ section#team h3.section-subheading {
 }
 
 .sidebar .nav-item .collapse {
-  position: absolute;
   left: calc(6.5rem + 1.5rem / 2);
   z-index: 1;
   top: 2px;
@@ -1232,4 +1231,10 @@ section#team h3.section-subheading {
 .banner-area h1{
 	color:#fff;
 	font-size: 3rem;
+}
+.card-body img {
+    max-width: 100%;
+}
+.row img {
+    max-width: 100%;
 }

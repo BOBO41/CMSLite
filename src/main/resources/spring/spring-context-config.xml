@@ -41,4 +41,29 @@
         </property>
     </bean>
     <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+    	<!-- 开发生产环境配置 -->
+	<beans profile="development">
+			<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="order" value="1" />
+			<property name="ignoreUnresolvablePlaceholders" value="true" />
+				<property name="locations">
+				<list>
+					<value>classpath:development/email.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
+	<beans profile="production">
+			<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="order" value="1" />
+			<property name="ignoreUnresolvablePlaceholders" value="true" />
+				<property name="locations">
+				<list>
+					<value>classpath:production/email.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
 </beans>

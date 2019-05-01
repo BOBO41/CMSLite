@@ -1,6 +1,6 @@
 package com.xiang.bean.bo;
 
-import com.xiang.cms.vo.ComProductVo;
+import com.xiang.bean.vo.ComProductVo;
 
 public class ComProductBo extends ComProductVo{
 

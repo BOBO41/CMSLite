@@ -19,16 +19,16 @@ import com.xiang.bean.bo.NavBo;
 import com.xiang.bean.po.Catalog;
 import com.xiang.bean.po.Nav;
 import com.xiang.bean.vo.BaseListVo;
+import com.xiang.bean.vo.CmsNavVo;
+import com.xiang.bean.vo.NavVo;
 import com.xiang.bean.vo.ProductVo;
-import com.xiang.cms.vo.CmsNavVo;
-import com.xiang.cms.vo.NavVo;
 import com.xiang.cmsserver.server.NavServer;
 import com.xiang.cmsserver.service.NavService;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
 import com.xiang.productservice.CatalogService;
 import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
 
 /**
  * @author xiang

@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +18,14 @@ import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.MessageBo;
 import com.xiang.bean.po.Message;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.cms.vo.MessageVo;
+import com.xiang.bean.vo.MessageVo;
 import com.xiang.cmsserver.server.MessageServer;
 import com.xiang.cmsserver.service.MessageService;
-import com.xiang.inventoryserver.server.impl.BaseServerImpl;
-import com.xiang.inventoryserver.service.ConfigService;
-import com.xiang.inventoryserver.service.EmailService;
-import com.xiang.inventoryserver.service.TemplateService;
 import com.xiang.restserver.Page;
+import com.xiang.server.impl.BaseServerImpl;
+import com.xiang.service.ConfigService;
+import com.xiang.service.EmailService;
+import com.xiang.service.TemplateService;
 
 /**
  * @author xiang
@@ -47,10 +47,6 @@ public class MessageServerImpl extends BaseServerImpl implements MessageServer {
 	@Transactional
 	@Override
 	public MessageVo add(MessageBo bo) {
-		bo.setContent(StringEscapeUtils.escapeJavaScript(bo.getContent()));
-		bo.setEmail(StringEscapeUtils.escapeJavaScript(bo.getEmail()));
-		bo.setMobile(StringEscapeUtils.escapeJavaScript(bo.getMobile()));
-		bo.setName(StringEscapeUtils.escapeJavaScript(bo.getName()));
 		Message po = getPo(bo);
 		long id = idService.genId();
 		po.setId(id);

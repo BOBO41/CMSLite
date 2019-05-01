@@ -58,11 +58,11 @@
       </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<!-- 配置jasper report视图解析器 -->
-	<bean id="reportViewResolver"
+	<!-- <bean id="reportViewResolver"
 		class="org.springframework.web.servlet.view.XmlViewResolver">
 		<property name="order" value="1" />
 		<property name="location" value="/WEB-INF/reportview.xml" />
-	</bean>
+	</bean> -->
 	<!-- freemarkername不可与reportname重名 -->
 	<!-- 配置freeMarker视图解析器 -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

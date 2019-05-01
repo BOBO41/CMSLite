@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xiang.bean.vo.ArticleVo;
+import com.xiang.bean.vo.BannerVo;
 import com.xiang.bean.vo.BaseListVo;
+import com.xiang.bean.vo.BlockVo;
 import com.xiang.bean.vo.CatalogVo;
+import com.xiang.bean.vo.CmsNavVo;
+import com.xiang.bean.vo.ComProductVo;
 import com.xiang.bean.vo.ProductVo;
-import com.xiang.cms.vo.ArticleVo;
-import com.xiang.cms.vo.BannerVo;
-import com.xiang.cms.vo.BlockVo;
-import com.xiang.cms.vo.CmsNavVo;
-import com.xiang.cms.vo.ComProductVo;
 import com.xiang.cmsserver.server.ArticleServer;
 import com.xiang.cmsserver.server.BannerServer;
 import com.xiang.cmsserver.server.BlockServer;
@@ -143,6 +143,13 @@ public class CmsController {
 		map.put("team", content.getContent());
 		content = blockServer.get(43268769702739969l);
 		map.put("customer", content.getContent());
+		
+		Map<String, Object> querys = new HashMap<String, Object>();
+		querys.put("andDelEqualTo", false);
+		querys.put(Page.PAGE, 1);
+		querys.put(Page.LIMIT, 6);
+		querys.put(Page.SORT, "-addTime");
+		map.put("articles", articleServer.queryList(querys));
 		return "about";
 	}
 

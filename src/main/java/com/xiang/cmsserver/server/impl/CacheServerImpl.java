@@ -20,6 +20,13 @@ import net.sf.ehcache.Element;
 public class CacheServerImpl implements CacheServer {
 	private final static String CACHENAME="pageCache";
 	private PatternMatcher pathMatcher = new AntPathMatcher();
+	private boolean cache=false;
+	public boolean isCache() {
+		return cache;
+	}
+	public void setCache(boolean cache) {
+		this.cache = cache;
+	}
 	private String[] mapping;
 	public String[] getMapping() {
 		return mapping;
@@ -29,7 +36,7 @@ public class CacheServerImpl implements CacheServer {
 	}
 	@Override
 	public void setCache(Locale locale,String url, Object data) {
-		if(!ObjectUtils.isEmpty(mapping)) {
+		if(cache && !ObjectUtils.isEmpty(mapping)) {
 			for(String pattern:mapping) {
 				boolean isMatch = pathMatcher.matches(pattern, url);
 				if(isMatch) {
@@ -60,6 +67,8 @@ public class CacheServerImpl implements CacheServer {
 	}
 	@Override
 	public Object getCache(Locale locale, String url) {
+		if(!cache)
+			return null;
 		String key=getKey( locale, url);
 		CacheManager manager = CacheManager.getInstance();
 		Cache cache = manager.getCache(CACHENAME);

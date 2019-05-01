@@ -13,9 +13,9 @@ import com.xiang.bean.po.ComProduct;
 import com.xiang.bean.po.ComProductExample;
 import com.xiang.bean.po.ComProductExample.Criteria;
 import com.xiang.cmsserver.service.ComProductService;
-import com.xiang.inventoryserver.mapper.ComProductMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.ComProductMapper;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

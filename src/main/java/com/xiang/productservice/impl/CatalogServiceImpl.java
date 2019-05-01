@@ -14,10 +14,10 @@ import org.springframework.util.ObjectUtils;
 import com.xiang.bean.po.Catalog;
 import com.xiang.bean.po.CatalogExample;
 import com.xiang.bean.po.CatalogExample.Criteria;
-import com.xiang.inventoryserver.mapper.CatalogMapper;
-import com.xiang.inventoryserver.service.impl.BaseServiceImpl;
+import com.xiang.mapper.CatalogMapper;
 import com.xiang.productservice.CatalogService;
 import com.xiang.restserver.Page;
+import com.xiang.service.impl.BaseServiceImpl;
 
 /**
  * @author xiang

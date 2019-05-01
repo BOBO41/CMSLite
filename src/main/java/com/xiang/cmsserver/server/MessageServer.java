@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.xiang.bean.bo.MessageBo;
 import com.xiang.bean.vo.BaseListVo;
-import com.xiang.cms.vo.MessageVo;
-import com.xiang.inventoryserver.server.BaseServer;
+import com.xiang.bean.vo.MessageVo;
+import com.xiang.server.BaseServer;
 
 public interface MessageServer extends BaseServer{
 	public MessageVo add(MessageBo bo);

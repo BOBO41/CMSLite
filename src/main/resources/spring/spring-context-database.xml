@@ -64,7 +64,7 @@
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage"
-			value="com.xiang.inventoryserver.exmapper,com.xiang.inventoryserver.mapper" />
+			value="com.xiang.exmapper,com.xiang.mapper" />
 	</bean>
 	<!-- 开发生产环境配置 -->
 	<beans profile="development">
@@ -81,7 +81,6 @@
 				<property name="locations">
 				<list>
 					<value>classpath:development/jdbc.properties</value>
-					<value>classpath:development/email.properties</value>
 				</list>
 			</property>
 		</bean>
@@ -100,7 +99,6 @@
 				<property name="locations">
 				<list>
 					<value>classpath:production/jdbc.properties</value>
-					<value>classpath:production/email.properties</value>
 				</list>
 			</property>
 		</bean>
