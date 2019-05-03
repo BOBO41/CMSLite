@@ -14,7 +14,7 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 8. 留言管理
 9. banner管理
 10. 区块管理
-
+11. 页面缓存（支持ehcache或者redis）
 #### 项目github
 1. 系统总共包括2个项目
 2. [CMSLite 后端服务 api加网站](https://github.com/liudexiang3218/CMSLite)
@@ -60,6 +60,7 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 3. git
 4. jetty
 5. mysql 5.7
+6. redis 5.0.4
 
 #### 技术栈
 1. springmvc 4.3.19
@@ -67,7 +68,8 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 4. java-jwt 3.4.1
 5. shiro 1.4.0
 6. mybatis 3.4.6
-6. freemarker 2.3.28
+7. freemarker 2.3.28
+8. jedis 2.9.3
 
 #### 作者微信
 <img src="https://github.com/liudexiang3218/CMSLite/blob/master/ScreenShots/wechatqr.png?raw=true">
