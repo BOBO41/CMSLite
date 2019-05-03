@@ -12,8 +12,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 
-import com.xiang.cmsserver.server.CacheServer;
 import com.xiang.restserver.SpringContextHolder;
+import com.xiang.server.HtmlCacheServer;
+import com.xiang.server.impl.HtmlCacheServerImpl;
 
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
@@ -32,8 +33,8 @@ public class CacheFreeMarkerView extends FreeMarkerView{
 			if(requestAttrs!=null) {
 				HttpServletRequest request=requestAttrs.getRequest();
 				Locale locale = RequestContextUtils.getLocale(request);
-				CacheServer cacheServer=SpringContextHolder.applicationContext.getBean(CacheServer.class);
-				cacheServer.setCache(locale,request.getRequestURI(), data);
+				HtmlCacheServer cacheServer=SpringContextHolder.applicationContext.getBean(HtmlCacheServer.class);
+				cacheServer.setCache(locale,request.getRequestURI(), data,25200);//缓存7天
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

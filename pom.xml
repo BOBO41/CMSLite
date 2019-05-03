@@ -119,6 +119,16 @@
 			<artifactId>simple-java-mail</artifactId>
 			<version>5.1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-redis</artifactId>
+     <version>1.8.20.RELEASE</version>
+</dependency>
 	</dependencies>
 	<build>
 		<finalName>CMSLite</finalName>

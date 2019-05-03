@@ -41,6 +41,21 @@
         </property>
     </bean>
     <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+    
+    <bean id="htmlCacheServer" class="com.xiang.server.impl.HtmlCacheServerImpl">
+    <property name="cacheServer" ref="${system.cache.name}"/>
+	<property name="cache" value="true"/>
+		<property name="mapping">
+			<list>
+				<value>/article/**</value>
+				<value>/about</value>
+				<value>/news/**</value>
+				<value>/detail/**</value>
+				<value>/</value>
+			</list>
+		</property>
+	</bean>
+	
     	<!-- 开发生产环境配置 -->
 	<beans profile="development">
 			<bean
@@ -50,6 +65,7 @@
 				<property name="locations">
 				<list>
 					<value>classpath:development/email.properties</value>
+					<value>classpath:production/system.properties</value>
 				</list>
 			</property>
 		</bean>
@@ -62,6 +78,7 @@
 				<property name="locations">
 				<list>
 					<value>classpath:production/email.properties</value>
+					<value>classpath:production/system.properties</value>
 				</list>
 			</property>
 		</bean>

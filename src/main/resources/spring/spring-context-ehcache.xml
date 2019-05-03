@@ -28,19 +28,7 @@
 		class="org.springframework.cache.ehcache.EhCacheCacheManager">
 		<property name="cacheManager" ref="ehcache"></property>
 	</bean>
-	<bean class="com.xiang.cmsserver.server.impl.CacheServerImpl">
-	<!-- 是否开启页面缓存-->
-	<property name="cache" value="false"/>
-		<property name="mapping">
-			<list>
-				<value>/article/**</value>
-				<value>/about</value>
-				<value>/news/**</value>
-				<value>/detail/**</value>
-				<value>/</value>
-			</list>
-		</property>
-	</bean>
+	<bean id="ehCacheServer" class="com.xiang.server.impl.EhCacheServerImpl"></bean>
 	<!-- 开发生产环境配置 -->
 	<beans profile="development">
 		<bean id="ehcache"

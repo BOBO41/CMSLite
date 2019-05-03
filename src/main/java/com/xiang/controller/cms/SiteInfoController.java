@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xiang.bean.bo.SiteInfoBo;
-import com.xiang.cmsserver.server.CacheServer;
 import com.xiang.cmsserver.server.SiteInfoServer;
 import com.xiang.restserver.ErrorCodes;
+import com.xiang.server.HtmlCacheServer;
 
 @RestController
 @RequestMapping(value = "/cms/siteinfo")
@@ -21,7 +21,7 @@ public class SiteInfoController {
 	@Resource
 	private SiteInfoServer siteInfoServer;
 	@Resource
-	private CacheServer cacheServer;
+	private HtmlCacheServer htmlCacheServer;
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Object add(@RequestBody SiteInfoBo bo) {
 		return siteInfoServer.add(bo);
@@ -51,7 +51,7 @@ public class SiteInfoController {
 	}
 	@RequestMapping(value = "/clearcache",method =RequestMethod.GET)
 	public Object clearCache() {
-		cacheServer.clearAll();
+		htmlCacheServer.clearAll();
 		return ErrorCodes.OK;
 	}
 }
