@@ -1,17 +1,13 @@
 package com.robert.vesta.service.factory;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.robert.vesta.service.impl.IdServiceImpl;
-import com.robert.vesta.service.impl.provider.DbMachineIdProvider;
-import com.robert.vesta.service.impl.provider.IpConfigurableMachineIdProvider;
-import com.robert.vesta.service.impl.provider.PropertyMachineIdProvider;
-import com.robert.vesta.service.intf.IdService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.beans.PropertyVetoException;
+import com.robert.vesta.service.impl.IdServiceImpl;
+import com.robert.vesta.service.impl.provider.IpConfigurableMachineIdProvider;
+import com.robert.vesta.service.impl.provider.PropertyMachineIdProvider;
+import com.robert.vesta.service.intf.IdService;
 
 public class IdServiceFactoryBean implements FactoryBean<IdService> {
     protected final Logger log = LoggerFactory
@@ -55,7 +51,7 @@ public class IdServiceFactoryBean implements FactoryBean<IdService> {
                 idService = constructIpConfigurableIdService(ips);
                 break;
             case DB:
-                idService = constructDbIdService(dbUrl, dbName, dbUser, dbPassword);
+//                idService = constructDbIdService(dbUrl, dbName, dbUser, dbPassword);
                 break;
         }
     }
@@ -108,63 +104,63 @@ public class IdServiceFactoryBean implements FactoryBean<IdService> {
         return idServiceImpl;
     }
 
-    private IdService constructDbIdService(String dbUrl, String dbName,
-                                           String dbUser, String dbPassword) {
-        log.info(
-                "Construct Db IdService dbUrl {} dbName {} dbUser {} dbPassword {}",
-                dbUrl, dbName, dbUser, dbPassword);
-
-        ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-
-        String jdbcDriver = "com.mysql.jdbc.Driver";
-        try {
-            comboPooledDataSource.setDriverClass(jdbcDriver);
-        } catch (PropertyVetoException e) {
-            log.error("Wrong JDBC driver {}", jdbcDriver);
-            log.error("Wrong JDBC driver error: ", e);
-            throw new IllegalStateException("Wrong JDBC driver ", e);
-        }
-
-        comboPooledDataSource.setMinPoolSize(5);
-        comboPooledDataSource.setMaxPoolSize(30);
-        comboPooledDataSource.setIdleConnectionTestPeriod(20);
-        comboPooledDataSource.setMaxIdleTime(25);
-        comboPooledDataSource.setBreakAfterAcquireFailure(false);
-        comboPooledDataSource.setCheckoutTimeout(3000);
-        comboPooledDataSource.setAcquireRetryAttempts(50);
-        comboPooledDataSource.setAcquireRetryDelay(1000);
-
-        String url = String
-                .format("jdbc:mysql://%s/%s?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true",
-                        dbUrl, dbName);
-
-        comboPooledDataSource.setJdbcUrl(url);
-        comboPooledDataSource.setUser(dbUser);
-        comboPooledDataSource.setPassword(dbPassword);
-
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setLazyInit(false);
-        jdbcTemplate.setDataSource(comboPooledDataSource);
-
-        DbMachineIdProvider dbMachineIdProvider = new DbMachineIdProvider();
-        dbMachineIdProvider.setJdbcTemplate(jdbcTemplate);
-        dbMachineIdProvider.init();
-
-        IdServiceImpl idServiceImpl;
-        if (type != -1)
-            idServiceImpl = new IdServiceImpl(type);
-        else
-            idServiceImpl = new IdServiceImpl();
-
-        idServiceImpl.setMachineIdProvider(dbMachineIdProvider);
-        if (genMethod != -1)
-            idServiceImpl.setGenMethod(genMethod);
-        if (version != -1)
-            idServiceImpl.setVersion(version);
-        idServiceImpl.init();
-
-        return idServiceImpl;
-    }
+//    private IdService constructDbIdService(String dbUrl, String dbName,
+//                                           String dbUser, String dbPassword) {
+//        log.info(
+//                "Construct Db IdService dbUrl {} dbName {} dbUser {} dbPassword {}",
+//                dbUrl, dbName, dbUser, dbPassword);
+//
+//        ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
+//
+//        String jdbcDriver = "com.mysql.jdbc.Driver";
+//        try {
+//            comboPooledDataSource.setDriverClass(jdbcDriver);
+//        } catch (PropertyVetoException e) {
+//            log.error("Wrong JDBC driver {}", jdbcDriver);
+//            log.error("Wrong JDBC driver error: ", e);
+//            throw new IllegalStateException("Wrong JDBC driver ", e);
+//        }
+//
+//        comboPooledDataSource.setMinPoolSize(5);
+//        comboPooledDataSource.setMaxPoolSize(30);
+//        comboPooledDataSource.setIdleConnectionTestPeriod(20);
+//        comboPooledDataSource.setMaxIdleTime(25);
+//        comboPooledDataSource.setBreakAfterAcquireFailure(false);
+//        comboPooledDataSource.setCheckoutTimeout(3000);
+//        comboPooledDataSource.setAcquireRetryAttempts(50);
+//        comboPooledDataSource.setAcquireRetryDelay(1000);
+//
+//        String url = String
+//                .format("jdbc:mysql://%s/%s?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true",
+//                        dbUrl, dbName);
+//
+//        comboPooledDataSource.setJdbcUrl(url);
+//        comboPooledDataSource.setUser(dbUser);
+//        comboPooledDataSource.setPassword(dbPassword);
+//
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+//        jdbcTemplate.setLazyInit(false);
+//        jdbcTemplate.setDataSource(comboPooledDataSource);
+//
+//        DbMachineIdProvider dbMachineIdProvider = new DbMachineIdProvider();
+//        dbMachineIdProvider.setJdbcTemplate(jdbcTemplate);
+//        dbMachineIdProvider.init();
+//
+//        IdServiceImpl idServiceImpl;
+//        if (type != -1)
+//            idServiceImpl = new IdServiceImpl(type);
+//        else
+//            idServiceImpl = new IdServiceImpl();
+//
+//        idServiceImpl.setMachineIdProvider(dbMachineIdProvider);
+//        if (genMethod != -1)
+//            idServiceImpl.setGenMethod(genMethod);
+//        if (version != -1)
+//            idServiceImpl.setVersion(version);
+//        idServiceImpl.init();
+//
+//        return idServiceImpl;
+//    }
 
     public Class<?> getObjectType() {
         return IdService.class;
