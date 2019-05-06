@@ -3,6 +3,7 @@
 #### 项目介绍
 CMSLite是一套极简的创建内容管理系统，可用于创建企业网站，个人blog，目前只提供一套模板。
 CMSLite是本人的一个前端练手项目的后端API加网站展示，同时本人也是在这个框架基础上搭建了几套企业网站。
+
 ##### 项目功能
 1. 用户管理
 2. 文章管理
@@ -15,6 +16,8 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 9. banner管理
 10. 区块管理
 11. 页面缓存（支持ehcache或者redis）
+12. 支持国际化，动态数据国际化
+
 #### 项目github
 1. 系统总共包括2个项目
 2. [CMSLite 后端服务 api加网站](https://github.com/liudexiang3218/CMSLite)
@@ -22,6 +25,7 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 
 #### 软件架构
 <img src="https://github.com/liudexiang3218/CMSLite/blob/master/ScreenShots/flow.jpg?raw=true">
+
 #### 安装教程
 
 1. 下载项目 git clone https://github.com/liudexiang3218/CMSLite.git
@@ -52,6 +56,15 @@ CMSLite是本人的一个前端练手项目的后端API加网站展示，同时�
 #### jwt.properties配置说明
 密钥设置，前端权限验证token由此密钥生成
 1.  ``jwt.secret ``:密钥，任意字符串
+
+#### 国际化配置system.properties说明
+- 1. ``system.locale.supports ``:配置支持的国际化语言 例如：en_US,zh_CN
+- 2. ``system.locale.default ``:一种默认国际化语言例如：en_US
+- 3. 支持三种国际化策略：
+     - a. FIELD策略：小文本，无需任何关联查询要求，将单表所有需要国际化的字段都以json格式存放在translate_field表
+     - b. SEARCH策略：小文本字段，有关联查询要求，可以关联查询，将单表需要国际化的字段，每一个字段存储在一行放在translate_search表
+    - c. TEXT策略：无需任何关联查询要求，大文本字段，为了不影响索引查询速度，独立存放。将单表需要国际化的字段，每一个字段存储在一行放在translate_text表
+- 4. 需要国际化的字段，在表的PO类上加上对应策略的注解即可。
 
 #### 开发环境
 
