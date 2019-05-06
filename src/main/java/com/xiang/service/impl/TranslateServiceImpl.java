@@ -485,7 +485,7 @@ public class TranslateServiceImpl implements TranslateService {
 			List<TranslateSearch> result = getTranslateSearchs(refererIds, new ArrayList<>(fields), cacheKey, language);//注意此处如果查询id多的时候，注意是否会超出mysql单次查询size
 			if (result != null) {
 				for (TranslateSearch translate : result) {
-					PolicyNode node = textMap.get(translate.getField());
+					PolicyNode node = searchMap.get(translate.getField());
 					if (node != null) {
 						Object value = translate.getContent();
 						try {
