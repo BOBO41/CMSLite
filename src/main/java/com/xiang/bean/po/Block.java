@@ -2,6 +2,9 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class Block {
     private Long id;
 
@@ -13,6 +16,7 @@ public class Block {
 
     private String description;
 
+    @Translate(policy=TranslatePolicy.TEXT)
     private String content;
 
     public Long getId() {

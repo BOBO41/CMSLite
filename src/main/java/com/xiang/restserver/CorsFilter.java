@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import com.xiang.cmsserver.LocaleInterceptor;
 import com.xiang.shiro.JWTAuth;
 
 public class CorsFilter implements Filter{
@@ -18,8 +19,8 @@ public class CorsFilter implements Filter{
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PUT,HEAD,PATCH");
-        response.setHeader("Access-Control-Allow-Headers", "content-type,"+JWTAuth.TOKENHEADER);
-        response.setHeader("Access-Control-Expose-Headers", JWTAuth.TOKENHEADER);
+        response.setHeader("Access-Control-Allow-Headers", "content-type,"+JWTAuth.TOKENHEADER+","+LocaleInterceptor.LANGUAGEPARAM);
+        response.setHeader("Access-Control-Expose-Headers", JWTAuth.TOKENHEADER+","+LocaleInterceptor.LANGUAGEPARAM);
         response.setHeader("Access-Control-Allow-Credentials", "true");
         filterChain.doFilter(servletRequest, servletResponse);
     }

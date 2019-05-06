@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.BlockBo;
+import com.xiang.bean.po.Article;
 import com.xiang.bean.po.Block;
 import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.bean.po.Product;
@@ -28,6 +31,7 @@ import com.xiang.restserver.APIException;
 import com.xiang.restserver.ErrorCodes;
 import com.xiang.restserver.Page;
 import com.xiang.server.impl.BaseServerImpl;
+import com.xiang.service.TranslateService;
 
 /**
  * @author xiang
@@ -39,6 +43,8 @@ public class BlockServerImpl extends BaseServerImpl implements BlockServer {
 	private IdService idService;
 	@Resource
 	private BlockService blockService;
+	@Resource
+	private TranslateService translateService;
 	@Transactional
 	@Override
 	public BlockVo add(BlockBo bo) {
@@ -47,6 +53,9 @@ public class BlockServerImpl extends BaseServerImpl implements BlockServer {
 		po.setId(id);
 		po.setAddTime(new Date());
 		blockService.save(po);
+		// 添加国际化
+				Locale locale = LocaleContextHolder.getLocale();
+				translateService.save(po, locale.toString());
 		return getVo(po);
 	}
 
@@ -55,7 +64,11 @@ public class BlockServerImpl extends BaseServerImpl implements BlockServer {
 	public BlockVo update(BlockBo bo) {
 		Block po = getPo(bo);
 		blockService.update(po);
-		return getVo(po);
+		// 必须先调用国际化，再调用原表更新
+		// 更新国际化,会擦拭掉已国际化的字段为null。为null的字段代表不需要再更新，如果不擦拭掉后续的更新将导致其他语言覆盖掉原表的默认语言
+		Locale locale = LocaleContextHolder.getLocale();
+		translateService.update(po, locale.toString());
+		return bo;
 	}
 
 	private Block getPo(BlockBo bo) {
@@ -73,6 +86,7 @@ public class BlockServerImpl extends BaseServerImpl implements BlockServer {
 	@Override
 	public List<BlockVo> getList(Map<String, Object> querys) {
 		List<Block> poList = blockService.getList(querys);
+		poList = translateService.translateList(poList, LocaleContextHolder.getLocale().toString());
 		List<BlockVo> list = new ArrayList<>();
 		if (!ObjectUtils.isEmpty(poList)) {
 			for (Block po : poList) {
@@ -98,6 +112,7 @@ public class BlockServerImpl extends BaseServerImpl implements BlockServer {
 	@Override
 	public BlockVo get(Long id) {
 		Block po = blockService.get(id);
+		po = (Block) translateService.translate(po, LocaleContextHolder.getLocale().toString());
 		BlockVo vo = this.getVo(po);
 		return vo;
 	}
