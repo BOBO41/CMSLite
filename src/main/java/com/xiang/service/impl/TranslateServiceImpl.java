@@ -261,15 +261,15 @@ public class TranslateServiceImpl implements TranslateService {
 	 * @param language
 	 */
 	@Override
-	public Object update(Object po, String language) {
+	public void update(Object po, String language) {
 		if (systemConfig.isDefaultLocale(language) || po == null) {
 			// 默认语言无需修改记录
-			return null;
+			return;
 		}
 		String cacheKey = po.getClass().getSimpleName();
 		ObjectPolicy objectPolicy = getPolicies(cacheKey, po);
 		if (objectPolicy == null) {
-			return null;
+			return;
 		}
 		Long refererId = getRefererId(cacheKey, po);
 
@@ -291,6 +291,7 @@ public class TranslateServiceImpl implements TranslateService {
 				Object value = null;
 				try {
 					value = node.getField().get(po);
+					node.getField().set(po, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new APIException(ErrorCodes.TRANSALE_ERROR);
@@ -328,6 +329,7 @@ public class TranslateServiceImpl implements TranslateService {
 				Object value = null;
 				try {
 					value = node.getField().get(po);
+					node.getField().set(po, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new APIException(ErrorCodes.TRANSALE_ERROR);
@@ -374,6 +376,7 @@ public class TranslateServiceImpl implements TranslateService {
 				Object value = null;
 				try {
 					value = node.getField().get(po);
+					node.getField().set(po, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new APIException(ErrorCodes.TRANSALE_ERROR);
@@ -412,7 +415,6 @@ public class TranslateServiceImpl implements TranslateService {
 				}
 			}
 		}
-		return null;
 	}
 	@Override
 	public List translateList(List pos, String language) {

@@ -69,14 +69,14 @@ public class ProductServerImpl extends BaseServerImpl implements ProductServer {
 	public ProductVo update(ProductBo bo) {
 		Product po = getPo(bo);
 		ProductEx poEx = getPoEx(bo);
-		// 更新国际化
+		//必须先调用国际化，再调用原表更新
+		// 更新国际化,会擦拭掉已国际化的字段为null。为null的字段代表不需要再更新，如果不擦拭掉后续的更新将导致其他语言覆盖掉原表的默认语言
 		Locale locale = LocaleContextHolder.getLocale();
-			translateService.update(po, locale.toString());
-			translateService.update(poEx, locale.toString());
-			productService.update(po);
-			productService.updateEx(poEx);
-			
-		return getVo(po);
+		translateService.update(po, locale.toString());
+		translateService.update(poEx, locale.toString());
+		productService.update(po);
+		productService.updateEx(poEx);
+		return bo;
 	}
 	
 	@Override

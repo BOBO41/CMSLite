@@ -20,7 +20,8 @@ public class Nav {
     private String imgUrl;
 
     private Integer sort;
-
+    
+    @Translate(policy=TranslatePolicy.FIELD)
     private String content;
 
     private Integer type;
