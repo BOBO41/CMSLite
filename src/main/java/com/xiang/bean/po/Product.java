@@ -2,11 +2,15 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class Product {
     private Long id;
 
     private String code;
 
+    @Translate(policy=TranslatePolicy.SEARCH)
     private String name;
 
     private String spec;

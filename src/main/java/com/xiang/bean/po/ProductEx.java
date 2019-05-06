@@ -2,6 +2,9 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class ProductEx {
     private Long id;
 
@@ -14,11 +17,14 @@ public class ProductEx {
     private String imgUrlB;
 
     private String imgUrlC;
-
+    
+    @Translate(policy=TranslatePolicy.FIELD)
     private String keyword;
-
+    
+    @Translate(policy=TranslatePolicy.FIELD)
     private String description;
 
+    @Translate(policy=TranslatePolicy.TEXT)
     private String content;
 
     public Long getId() {

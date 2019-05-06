@@ -2,6 +2,9 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class Article {
     private Long id;
 
@@ -9,8 +12,10 @@ public class Article {
 
     private Date addTime;
 
+    @Translate(policy=TranslatePolicy.FIELD)
     private String title;
 
+    @Translate(policy=TranslatePolicy.FIELD)
     private String spec;
 
     private String imgUrl;

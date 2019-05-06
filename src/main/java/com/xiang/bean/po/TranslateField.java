@@ -2,24 +2,20 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
-import com.xiang.translate.Translate;
-import com.xiang.translate.TranslatePolicy;
-
-public class ArticleEx {
+public class TranslateField {
     private Long id;
 
     private Boolean del;
 
     private Date addTime;
 
-    @Translate(policy=TranslatePolicy.FIELD)
-    private String keyword;
+    private Long refererId;
 
-    @Translate(policy=TranslatePolicy.FIELD)
-    private String description;
-
-    @Translate(policy=TranslatePolicy.TEXT)
     private String content;
+
+    private String type;
+
+    private String language;
 
     public Long getId() {
         return id;
@@ -45,20 +41,12 @@ public class ArticleEx {
         this.addTime = addTime;
     }
 
-    public String getKeyword() {
-        return keyword;
+    public Long getRefererId() {
+        return refererId;
     }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRefererId(Long refererId) {
+        this.refererId = refererId;
     }
 
     public String getContent() {
@@ -67,5 +55,21 @@ public class ArticleEx {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

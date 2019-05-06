@@ -2,6 +2,9 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class ComProduct {
     private Long id;
 
@@ -11,6 +14,7 @@ public class ComProduct {
 
     private String content;
 
+    @Translate(policy=TranslatePolicy.FIELD)
     private String name;
 
     private Integer sort;

@@ -89,6 +89,10 @@
     </bean>
 
     <mvc:interceptors> 
+    <mvc:interceptor>
+                   <mvc:mapping path="/**" /> 
+                   <bean id="localeInterceptor" class="com.xiang.cmsserver.LocaleInterceptor"></bean>
+          </mvc:interceptor> 
            <mvc:interceptor>
                    <mvc:mapping path="/**" /> 
                    <bean id="cacheInterceptor" class="com.xiang.cmsserver.CacheInterceptor"></bean>

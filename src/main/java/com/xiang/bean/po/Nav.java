@@ -2,6 +2,9 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class Nav {
     private Long id;
 
@@ -9,6 +12,7 @@ public class Nav {
 
     private Date addTime;
 
+    @Translate(policy=TranslatePolicy.FIELD)
     private String title;
 
     private String payload;

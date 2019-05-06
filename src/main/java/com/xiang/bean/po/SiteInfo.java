@@ -2,17 +2,23 @@ package com.xiang.bean.po;
 
 import java.util.Date;
 
+import com.xiang.translate.Translate;
+import com.xiang.translate.TranslatePolicy;
+
 public class SiteInfo {
     private Long id;
 
     private Boolean del;
 
     private Date addTime;
-
+    
+    @Translate(policy=TranslatePolicy.FIELD)
     private String title;
-
+    
+    @Translate(policy=TranslatePolicy.FIELD)
     private String keyword;
 
+    @Translate(policy=TranslatePolicy.FIELD)
     private String description;
 
     public Long getId() {

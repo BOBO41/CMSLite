@@ -2,20 +2,21 @@ package com.xiang.productserver.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.bo.ProductBo;
-import com.xiang.bean.po.CriteriaIgnoreKey;
 import com.xiang.bean.po.Product;
 import com.xiang.bean.po.ProductEx;
 import com.xiang.bean.vo.BaseListVo;
@@ -24,7 +25,9 @@ import com.xiang.productserver.ProductServer;
 import com.xiang.productservice.CatalogService;
 import com.xiang.productservice.ProductService;
 import com.xiang.restserver.Page;
+import com.xiang.server.SystemConfig;
 import com.xiang.server.impl.BaseServerImpl;
+import com.xiang.service.TranslateService;
 
 /**
  * @author xiang
@@ -38,6 +41,9 @@ public class ProductServerImpl extends BaseServerImpl implements ProductServer {
 	private ProductService productService;
 	@Resource
 	private CatalogService catalogService;
+	@Resource
+	private TranslateService translateService;
+
 	@Transactional
 	@Override
 	public ProductVo add(ProductBo bo) {
@@ -50,6 +56,10 @@ public class ProductServerImpl extends BaseServerImpl implements ProductServer {
 		poEx.setAddTime(po.getAddTime());
 		productService.save(po);
 		productService.saveEx(poEx);
+		//添加国际化
+		Locale locale = LocaleContextHolder.getLocale();
+		translateService.save(po, po.getId(), locale.toString());
+		translateService.save(poEx, poEx.getId(), locale.toString());
 		return getVo(po);
 	}
 	@Transactional
