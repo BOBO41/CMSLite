@@ -19,8 +19,8 @@ public class CorsFilter implements Filter{
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PUT,HEAD,PATCH");
-        response.setHeader("Access-Control-Allow-Headers", "content-type,"+JWTAuth.TOKENHEADER+","+LocaleInterceptor.HEADER_LANGUAGE);
-        response.setHeader("Access-Control-Expose-Headers", JWTAuth.TOKENHEADER+","+LocaleInterceptor.HEADER_LANGUAGE);
+        response.setHeader("Access-Control-Allow-Headers", "content-type,"+JWTAuth.TOKENHEADER+","+LocaleInterceptor.LANGUAGEPARAM);
+        response.setHeader("Access-Control-Expose-Headers", JWTAuth.TOKENHEADER+","+LocaleInterceptor.LANGUAGEPARAM);
         response.setHeader("Access-Control-Allow-Credentials", "true");
         filterChain.doFilter(servletRequest, servletResponse);
     }

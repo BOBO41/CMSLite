@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiang.exmapper.ExTranslateFieldMapper">
+<mapper namespace="com.xiang.exmapper.ExTranslateSearchMapper">
 <sql id="Base_Column_List">
     id,
     del,
     add_time,
     referer_id,
+    field,
     content,
     type,
     language
 </sql>
-  <insert id="save" parameterType="com.xiang.bean.po.TranslateField">
-    insert into translate_field (
+  <insert id="save" parameterType="com.xiang.bean.po.TranslateSearch">
+    insert into translate_search (
      <include refid="Base_Column_List" />
       )
     values (
@@ -19,12 +20,13 @@
     #{del,jdbcType=BIT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
     #{addTime,jdbcType=TIMESTAMP,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
     #{refererId,jdbcType=BIGINT,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
+    #{field,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
     #{content,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
     #{type,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler},
     #{language,jdbcType=VARCHAR,typeHandler=com.xiang.mybatis.typehandler.SaveTypeHandler}
       )
   </insert>
-   <select id="count" parameterType="map" resultType="java.lang.Long">
-    select count(*) from translate_field where referer_id=#{refererId} and type=#{type} and language=#{language}
+      <select id="count" parameterType="map" resultType="java.lang.Long">
+    select count(*) from translate_search where referer_id=#{refererId} and field=#{field} and type=#{type} and language=#{language}
   </select>
 </mapper>

@@ -55,7 +55,14 @@
 			</list>
 		</property>
 	</bean>
-	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message/message</value>
+			</list>
+		</property>
+	</bean>
     	<!-- 开发生产环境配置 -->
 	<beans profile="development">
 			<bean
@@ -65,7 +72,7 @@
 				<property name="locations">
 				<list>
 					<value>classpath:development/email.properties</value>
-					<value>classpath:production/system.properties</value>
+					<value>classpath:development/system.properties</value>
 				</list>
 			</property>
 		</bean>

@@ -53,7 +53,7 @@ public class RedisServerImpl implements CacheServer {
 		redisTemplate.execute(new RedisCallback<String>() {
 			@Override
 			public String doInRedis(RedisConnection connection) throws DataAccessException {
-				connection.flushAll();
+				connection.flushDb();
 				return null;
 			}
 		});

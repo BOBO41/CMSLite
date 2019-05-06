@@ -2,11 +2,8 @@ package com.xiang.server.impl;
 
 import java.util.Locale;
 
-import javax.annotation.Resource;
-
 import org.apache.shiro.util.AntPathMatcher;
 import org.apache.shiro.util.PatternMatcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 
 import com.xiang.server.CacheNameSpace;
@@ -46,17 +43,17 @@ public class HtmlCacheServerImpl implements HtmlCacheServer {
 		}
 		return CacheNameSpace.HTMLNAMESPACE+key;
 	}
-	@Override
-	public void setCache(Locale locale,String url, Object data,long seconds) {
+	
+	private boolean isMatch(String url) {
 		if(cache && !ObjectUtils.isEmpty(mapping)) {
 			for(String pattern:mapping) {
 				boolean isMatch = pathMatcher.matches(pattern, url);
 				if(isMatch) {
-					cacheServer.setCache(getKey(locale,url),data,seconds);
-					return;
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 	@Override
 	public void clear(Locale locale, String url) {
@@ -68,12 +65,19 @@ public class HtmlCacheServerImpl implements HtmlCacheServer {
 	}
 	@Override
 	public Object getCache(Locale locale, String url) {
-		if(!cache)
-			return null;
-		return cacheServer.getCache(getKey(locale,url));
+		if(isMatch(url)) {
+			return cacheServer.getCache(getKey(locale,url));
+		}
+		return null;
+	}
+	@Override
+	public void setCache(Locale locale,String url, Object data,long seconds) {
+				if(isMatch(url)) {
+					cacheServer.setCache(getKey(locale,url),data,seconds);
+				}
 	}
 	@Override
 	public void setCache(Locale locale, String url, Object data) {
-		cacheServer.setCache(getKey(locale,url), data);
+		setCache(locale,url,data,0);
 	}
 }

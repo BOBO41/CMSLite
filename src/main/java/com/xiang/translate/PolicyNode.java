@@ -4,10 +4,12 @@ import java.lang.reflect.Field;
 
 public class PolicyNode {
 	
-	public PolicyNode(TranslatePolicy policy, Field field) {
+	public PolicyNode(String name,TranslatePolicy policy, Field field) {
+		this.name = name;
 		this.policy = policy;
 		this.field = field;
 	}
+	private String name;
 	private TranslatePolicy policy;
 	private Field field;
 	public TranslatePolicy getPolicy() {
@@ -21,6 +23,12 @@ public class PolicyNode {
 	}
 	public void setField(Field field) {
 		this.field = field;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

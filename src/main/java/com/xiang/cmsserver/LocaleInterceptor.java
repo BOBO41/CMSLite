@@ -16,13 +16,16 @@ import com.xiang.server.SystemConfig;
 public class LocaleInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	SystemConfig systemConfig;
-	public final static String HEADER_LANGUAGE = "lang";
+	public final static String LANGUAGEPARAM = "lang";
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
-		String lang = response.getHeader(HEADER_LANGUAGE);
+		String lang = request.getHeader(LANGUAGEPARAM);
+		if(ObjectUtils.isEmpty(lang)) {
+			lang = request.getParameter(LANGUAGEPARAM);
+		}
 		if (!ObjectUtils.isEmpty(lang) && systemConfig.isSupport(lang)) {
 			if (localeResolver != null) {
 				localeResolver.setLocale(request, response, systemConfig.getLocale(lang));
