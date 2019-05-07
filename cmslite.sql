@@ -145,7 +145,7 @@ CREATE TABLE `catalog` (
   `left_id` bigint(11) unsigned NOT NULL DEFAULT '0' COMMENT '左节点',
   `right_id` bigint(11) unsigned NOT NULL DEFAULT '0' COMMENT '右节点',
   PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`)
+  KEY `idx_parent_id` (`parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -265,7 +265,7 @@ CREATE TABLE `product` (
   `img_url` varchar(100) NOT NULL DEFAULT '' COMMENT '主图',
   `catalog_id` bigint(11) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID',
   PRIMARY KEY (`id`),
-  KEY `code` (`code`)
+  KEY `idx_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -354,7 +354,7 @@ CREATE TABLE `translate_field` (
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '表名',
   `language` varchar(10) NOT NULL DEFAULT '' COMMENT '国际locale',
   PRIMARY KEY (`id`),
-  KEY `referer_id` (`referer_id`,`type`,`language`)
+  UNIQUE KEY `uk_referer` (`referer_id`,`type`,`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -384,7 +384,7 @@ CREATE TABLE `translate_search` (
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '表名',
   `language` varchar(10) NOT NULL DEFAULT '' COMMENT '国际locale',
   PRIMARY KEY (`id`),
-  KEY `referer_id` (`referer_id`,`field`,`type`,`language`)
+  UNIQUE KEY `uk_referer` (`referer_id`,`field`,`type`,`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -414,7 +414,7 @@ CREATE TABLE `translate_text` (
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '表名',
   `language` varchar(10) NOT NULL DEFAULT '' COMMENT '国际locale',
   PRIMARY KEY (`id`),
-  KEY `referer_id` (`referer_id`,`field`,`type`,`language`)
+  UNIQUE KEY `uk_referer` (`referer_id`,`field`,`type`,`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -466,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-06 11:36:19
+-- Dump completed on 2019-05-07  9:08:18
