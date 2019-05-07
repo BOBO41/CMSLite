@@ -66,7 +66,6 @@ public class TranslateServiceImpl implements TranslateService {
 	}
 	private List<TranslateField> getTranslateFields(List<Long> refererIds, String type, String language) {
 		TranslateFieldExample example = new TranslateFieldExample();
-		PageHelper.offsetPage(0, 1);
 		example.createCriteria().andRefererIdIn(refererIds).andTypeEqualTo(type).andLanguageEqualTo(language);
 		return translateFieldMapper.selectByExample(example);
 	}
