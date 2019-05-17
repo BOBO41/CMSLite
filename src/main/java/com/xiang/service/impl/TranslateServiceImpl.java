@@ -443,10 +443,9 @@ public class TranslateServiceImpl implements TranslateService {
 				String content = translateField.getContent();
 				if (!ObjectUtils.isEmpty(content)) {
 					JSONObject jsonObject = JSONObject.parseObject(content);
-					for (String key : jsonObject.keySet()) {
+					jsonObject.forEach((key,value)->{
 						PolicyNode node = fieldMap.get(key);
 						if (node != null) {
-							Object value = jsonObject.get(key);
 							try {
 								node.getField().set(posMap.get(translateField.getRefererId()), value);
 							} catch (Exception e) {
@@ -454,7 +453,7 @@ public class TranslateServiceImpl implements TranslateService {
 								throw new APIException(ErrorCodes.TRANSALE_ERROR);
 							}
 						}
-					}
+					});
 				}
 				}
 			}
