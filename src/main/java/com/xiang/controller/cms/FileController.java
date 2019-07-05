@@ -17,6 +17,8 @@ import com.google.common.io.Files;
 import com.xiang.bean.vo.FileDirVo;
 import com.xiang.bean.vo.FileInfoVo;
 import com.xiang.controller.core.UploadController;
+import com.xiang.restserver.ErrorCodes;
+import com.xiang.utils.Handle;
 
 /**
  * @author xiang
@@ -36,6 +38,9 @@ public class FileController {
 		List<FileInfoVo> list=new ArrayList<FileInfoVo>();
 		String path = request.getServletContext().getRealPath(url);
 		File file=new File(path);
+		if(!Handle.vaildateFile(path)) {
+			return ErrorCodes.ERROR_PARAM;
+		}
 		if(file.isDirectory()) {
 			File[] fs=file.listFiles();
 			if(!ObjectUtils.isEmpty(fs)) {
@@ -66,6 +71,9 @@ public class FileController {
 			 url=UploadController.FILEDIR;
 		}
 		String createPath = request.getServletContext().getRealPath(url+"/"+createDir);
+		if(!Handle.vaildateFile(createPath)) {
+			return ErrorCodes.ERROR_PARAM;
+		}
 		File create=new File(createPath);
 		if(!create.exists()) {
 			if(!create.mkdirs()) {
@@ -73,8 +81,6 @@ public class FileController {
 			}
 		}
 		String path = request.getServletContext().getRealPath(url);
-		
-		
 		List<FileInfoVo> list=new ArrayList<FileInfoVo>();
 		File file=new File(path);
 		if(file.isDirectory()) {

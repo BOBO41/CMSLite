@@ -26,6 +26,7 @@ import com.google.common.io.Files;
 import com.robert.vesta.service.intf.IdService;
 import com.xiang.bean.vo.UploadVo;
 import com.xiang.restserver.ErrorCodes;
+import com.xiang.utils.Handle;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -75,6 +76,9 @@ public class UploadController {
 						String date=DateFormatUtils.format(new Date(), "yyyyMMdd");
 						String url=IMAGEDIR +date+"/"+ id + "." + ext;
 						String path = request.getServletContext().getRealPath(url);
+						if(!Handle.vaildateFile(path)) {
+							return ErrorCodes.UPLOAD_ERROR;
+						}
 						File saveFile=new File(path);
 						if(!saveFile.getParentFile().exists()) {
 							saveFile.getParentFile().mkdirs();
@@ -122,6 +126,9 @@ public class UploadController {
 						}
 						String path = request.getServletContext().getRealPath(url);
 						File saveFile=new File(path);
+						if(!Handle.vaildateFile(path)) {
+							return ErrorCodes.UPLOAD_ERROR;
+						}
 						if(!saveFile.getParentFile().exists()) {
 							saveFile.getParentFile().mkdirs();
 						}
